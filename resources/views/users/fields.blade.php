@@ -20,20 +20,41 @@
     <input name="password_confirmation" type="password" value="" id="password_cofirmation" class="form-control required">
 </div>
 
-<div class="form-group col-12 row">
-    <div class="col-12">
-        <label for="roles">Roles</label>
-    </div>
-    @foreach ($roles as $item)
-        <div class="col-6">
-            <input type="checkbox" name="roles[]" value={{$item->id}}
-                @if (in_array($item->id, $role))
-                    {{ 'checked=checked' }}
+<div class="form-group col-sm-6">
+    <label for="role">Role</label>
+    <select class="custom-select" id="inputGroupSelect02" name="role">
+        <option 
+            @if (count($role) == 0)
+                selected
+            @endif style="color: gray;">
+            Pilih
+        </option>
+        @foreach ($roles as $item)
+            <option 
+            @if (count($role) > 0)
+                @if ($role[0] == $item->name)
+                    selected
                 @endif
-            >
-                {{ucfirst($item->name)}}
-            </input>
-        </div>
-    @endforeach
+            @endif value="{{$item->id}}">{{ucwords($item->name)}}</option>
+        @endforeach
+    </select>
+</div>
+
+<div class="form-group col-sm-6">
+    <label for="verification">Verifikasi</label>
+    <select class="custom-select" id="inputGroupSelect02" name="verification">
+        @if (isset($user))
+            <option @if ($user->verification == 1)
+                selected
+            @endif value="1">Terverifikasi</option>
+            <option @if ($user->verification == 0)
+                selected
+            @endif value="0">Belum diverifikasi</option>
+        @else
+            <option selected style="color: gray;">Pilih</option>
+            <option value="1">Benar</option>
+            <option value="0">Salah</option>
+        @endif
+    </select>
 </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,22 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('users',  App\Http\Controllers\UserController::class);
+Route::middleware('auth')->group(function(){
+    Route::prefix('/admin/users')->name('users.')->group(function(){
+        Route::controller(UserController::class)->group(function(){
+            Route::get('/', 'index')->name('index')->middleware(['role:administrator|manajer']);
+            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
+            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
+            Route::get('/{user}', "show")->name("show");
+            Route::get('/{user}/edit', "edit")->name("edit");
+            Route::patch('/{user}', "update")->name("update");
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
+            Route::get('/edit/profil', "profil")->name('profil');
+            Route::put('/edit/profil', "profil_update")->name('profil_update');
+        });
+    });
+});
+
+// Route::resource('users',  App\Http\Controllers\UserController::class);
 
 Auth::routes();

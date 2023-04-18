@@ -16,30 +16,24 @@
     <p>{{ $user->email }}</p>
 </div>
 
-<div class="col-sm-12">
-    <label for="roles">Roles</label>
-    @foreach ($roles as $item)
-        <div class="col-6">
-            <input type="checkbox" name="roles[]" value={{$item->id}} disabled
-                @if (in_array($item->id, $role))
-                    {{ 'checked=checked' }}
-                @endif
+<div class="form-group col-sm-6">
+    <label for="role">Role</label>
+    <p>{{ucwords($role[0])}}</p>
+</div>
 
-            >
-                {{ucfirst($item->name)}}
-            </input>
-        </div>
-    @endforeach
+<div class="form-group col-sm-6">
+    <label for="verification">Verifikasi</label>
+    <p>{{$user->verification == 1 ? "Terverifikasi" : "Belum Terverifikasi atau Terblokir"}}</p>
 </div>
 
 <!-- Created At Field -->
-<div class="col-sm-12">
+<div class="col-sm-6">
     {!! Form::label('created_at', 'Created At:') !!}
     <p>{{ $user->created_at }}</p>
 </div>
 
 <!-- Updated At Field -->
-<div class="col-sm-12">
+<div class="col-sm-6">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $user->updated_at }}</p>
 </div>
