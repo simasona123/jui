@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -44,7 +45,17 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $roles = Role::all();
+        $user = Auth::user();
+        if($user == null){
+            $roles = [Role::find(2)]; // Klien
+        }else{
+            if($user->hasRole('administrator') || $user->hasRole('manajer')){
+                $roles = Role::all();
+            }else{
+                $roles = [Role::find(2), Role::find(4)]; // Dokter Hewan
+            }
+        }
+
         return view('auth.register', ['roles' => $roles]);
     }
     /**
@@ -75,6 +86,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verification' => false,
         ]);
 
         $user->assignRole($data['role']);

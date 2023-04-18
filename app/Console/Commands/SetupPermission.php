@@ -12,7 +12,7 @@ class SetupPermission extends Command
      *
      * @var string
      */
-    protected $signature = 'spatie:setup-permission {model}';
+    protected $signature = 'spatie:setup-permission {model=1}';
 
     /**
      * The console command description.
@@ -28,14 +28,15 @@ class SetupPermission extends Command
     {   
         $model = $this->argument('model');
 
-        $x = [
-            'index', 'create', 'update', 'delete'
-        ];
-
-        foreach ($x as $item){
-            $permission = Permission::create(['name' => $model."-".$item]);
-        }
-
+        if($model != 1){
+            $x = [
+                'index', 'create', 'update', 'delete'
+            ];
+    
+            foreach ($x as $item){
+                $permission = Permission::firstOrCreate(['name' => $model."-".$item]);
+            }
+        }   
 
     }
 }
