@@ -63,10 +63,14 @@
                         
                         <div class="input-group mb-3">
                             <select class="custom-select" id="inputGroupSelect02" name="role">
-                              <option selected style="color: gray;">Pilih</option>
-                              @foreach ($roles as $item)
-                                <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
-                              @endforeach
+                                @if (count($roles) == 1)
+                                    <option selected style="color: gray;" value="{{$roles[0]->id}}">{{ucwords($roles[0]->name)}}</option>
+                                @else
+                                    <option selected style="color: gray;">Pilih</option>
+                                    @foreach ($roles as $item)
+                                        <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
+                                    @endforeach
+                                @endif
                             </select>
                             <div class="input-group-append">
                               <label class="input-group-text" for="inputGroupSelect02">Role</label>

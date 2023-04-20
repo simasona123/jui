@@ -22,11 +22,13 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'full_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required', 'confirmed', 'string', 'size:8'],
             'role' => ['required', 'numeric'],
             'verification' => ['required', 'numeric'],
+            'address' => ['nullable',],
+            'phone' => ['nullable', 'regex:/(^[0-9]+$)/i'],
         ];
        
     }

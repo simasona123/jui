@@ -12,7 +12,7 @@ class SetupPermission extends Command
      *
      * @var string
      */
-    protected $signature = 'spatie:setup-permission {model=1}';
+    protected $signature = 'app:setup-permission {model=1}';
 
     /**
      * The console command description.

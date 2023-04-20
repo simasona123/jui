@@ -25,11 +25,13 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'full_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['nullable', 'confirmed', 'size:8'],
-            'role' => ['required', 'numeric'],
-            'verification' => ['required', 'numeric']
+            'password' => ['nullable', 'confirmed', 'string', 'size:8'],
+            'verification' => ['required', 'numeric'],
+            'blocked' => ['required'],
+            'address' => ['nullable',],
+            'phone' => ['nullable', 'regex:/(^[0-9]+$)/i'],
         ];
     }
 }

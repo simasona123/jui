@@ -12,7 +12,7 @@ class SetupRole extends Command
      *
      * @var string
      */
-    protected $signature = 'spatie:setup-role';
+    protected $signature = 'app:setup-role';
 
     /**
      * The console command description.

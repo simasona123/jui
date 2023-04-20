@@ -14,7 +14,7 @@ class CreateTestUser extends Command
      *
      * @var string
      */
-    protected $signature = 'setup:create-test-user';
+    protected $signature = 'app:create-test-user';
 
     /**
      * The console command description.
@@ -29,7 +29,7 @@ class CreateTestUser extends Command
     public function handle()
     {
         $user = User::firstOrCreate([
-            'name' => 'admin',
+            'full_name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin123'),
             'verification' => true,
@@ -38,7 +38,7 @@ class CreateTestUser extends Command
         $user->assignRole('administrator');
 
         $user = User::firstOrCreate([
-            'name' => 'manajer',
+            'full_name' => 'manajer',
             'email' => 'manajer@manajer.com',
             'password' => Hash::make('admin123'),
             'verification' => true,
@@ -47,7 +47,7 @@ class CreateTestUser extends Command
         $user->assignRole('manajer');
 
         $user = User::firstOrCreate([
-            'name' => 'klien',
+            'full_name' => 'klien',
             'email' => 'klien@klien.com',
             'password' => Hash::make('admin123'),
             'verification' => true,
@@ -56,16 +56,12 @@ class CreateTestUser extends Command
         $user->assignRole('klien');
 
         $user = User::firstOrCreate([
-            'name' => 'dokter',
+            'full_name' => 'dokter',
             'email' => 'dokter@dokter.com',
             'password' => Hash::make('admin123'),
             'verification' => true,
         ]);
 
         $user->assignRole('dokter-hewan');
-
-        Permission::firstOrCreate([
-            "name" => 'user.verification'
-        ]);
     }
 }

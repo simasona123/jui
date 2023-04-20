@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use App\Models\UserRole;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
@@ -29,9 +28,8 @@ class UserRepository extends BaseRepository
     {
         $input['password'] = Hash::make($input['password']);
         $model = $this->model->newInstance($input);
-
+        $model->assignRole($input['role']);
         $model->save();
-
         return $model;
     }
 
@@ -40,12 +38,12 @@ class UserRepository extends BaseRepository
         $query = $this->model->newQuery();
 
         $model = $query->findOrFail($id);
-        
-        $model->fill(array_filter($input));
 
-        $model->roles()->detach();
-        
-        $model->assignRole($input['role']);
+        $array = array_filter($input, function($value){
+            return !is_null($value);
+        });
+
+        $model->fill($array);
 
         $model->save();
 

@@ -1,6 +1,11 @@
 <x-laravel-ui-adminlte::adminlte-layout>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    @livewireScripts
+    @php
+        $media = Auth::user()->getMedia();
+        $url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+    @endphp
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    {{-- @stack('third_party_scripts') --}}
+
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
             <!-- Main Header -->
@@ -12,18 +17,17 @@
                                 class="fas fa-bars"></i></a>
                     </li>
                 </ul>
-
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{Auth::user()->getMedia()[0]->getUrl('preview')}}"
+                            <img src="{{$url}}"
                                 class="user-image img-circle elevation-2" alt="User Image">
                             <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
                             <li class="user-header bg-primary">
-                                <img src="{{Auth::user()->getMedia()[0]->getUrl('preview')}}"
+                                <img src="{{$url}}"
                                     class="img-circle elevation-2" alt="User Image">
                                 <p>
                                     {{ Auth::user()->name }}

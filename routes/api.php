@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/klien', function(Request $request){
+    $klien = User::role('klien')->where('full_name', 'like', $request->full_name . "%")->take(10)->get();
+    return response()->json([
+        'data' => $klien
+    ]);
 });

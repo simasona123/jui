@@ -12,6 +12,7 @@
                 @include('layouts.menu')
             </ul>
         </nav>
+        @role('administrator|manajer')
         <nav>
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
@@ -22,6 +23,7 @@
                 </li>
             </ul>
         </nav>
+        @endrole
     </div>
 
 </aside>

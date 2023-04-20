@@ -1,22 +1,29 @@
 <div class="card-body p-0">
     <div class="table-responsive">
-        <table class="table" id="users-table">
+        <table class="table" id="users-table" style="width: 100%;">
             <thead>
             <tr>
-                <th>User Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Created at</th>
-                <th colspan="3">Action</th>
+                <th class="td-min text-center">Nomor</th>
+                <th class="">Name</th>
+                <th class="">Email</th>
+                <th class="">Role</th>
+                <th class="td-min text-center">Verifikasi</th>
+                <th class="td-min text-center">Status</th>
+                <th class="">Action</th>
             </tr>
             </thead>
             <tbody>
+                @php
+                    $i = 1;
+                @endphp
             @foreach($users as $user)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
+                    <td class="text-center">{{$i}}</td>
+                    <td>{{ $user->full_name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->getRoleNames()[0] }}</td>
+                    <td class="text-center">{{$user->verification == 1 ? "Terverifikasi" : "Belum Terverifikasi"}}</td>
+                    <td class="text-center">{{$user->blocked == 0 ? "Aktif" : "Terblokir"}}</td>
                     <td  style="width: 120px">
                         {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
@@ -33,6 +40,9 @@
                         {!! Form::close() !!}
                     </td>
                 </tr>
+                @php
+                    $i += 1
+                @endphp
             @endforeach
             </tbody>
         </table>
@@ -44,3 +54,15 @@
         </div>
     </div>
 </div>
+
+<style>
+    .absorbing-column{
+        width: 100%;
+    }
+    .td-min{
+        width: 1%;
+    }
+    .text-center{
+        text-align: center;
+    }
+</style>

@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function(){
             Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
             Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit");
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer']);
             Route::patch('/{user}', "update")->name("update");
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
             Route::get('/edit/profil', "profil")->name('profil');
@@ -39,3 +39,7 @@ Route::middleware('auth')->group(function(){
 // Route::resource('users',  App\Http\Controllers\UserController::class);
 
 Auth::routes();
+
+
+Route::resource('pasien', App\Http\Controllers\PasienController::class);
+Route::resource('dokter', App\Http\Controllers\DokterController::class);

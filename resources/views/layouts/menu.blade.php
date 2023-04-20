@@ -5,3 +5,20 @@
         <p>Home</p>
     </a>
 </li>
+
+
+<li class="nav-item">
+    <a href="{{ route('pasien.index') }}" class="nav-link {{ Request::is('pasiens*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Pasien</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{ route('dokter.index') }}" class="nav-link {{ Request::is('dokters*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Dokters</p>
+    </a>
+</li>
+
+

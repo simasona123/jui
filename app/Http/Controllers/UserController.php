@@ -50,9 +50,7 @@ class UserController extends AppBaseController
     {
         $input = $request->all();
 
-        $user = $this->userRepository->create($input);
-
-        $user->assignRole($input['role']);
+        $this->userRepository->create($input);
 
         Flash::success('User saved successfully.');
 
@@ -88,8 +86,6 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
         $role = $user->getRoleNames();
 
-        $roles = Role::all();
-
         if (empty($user)) {
             Flash::error('User not found');
             return redirect(route('users.index'));
@@ -98,7 +94,6 @@ class UserController extends AppBaseController
         return view('users.edit', [
             'user' => $user,
             'role' => $role,
-            'roles' => $roles,
         ]);
     }
 
@@ -114,8 +109,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $user = $this->userRepository->update($request->all(), $id);
-
+        $this->userRepository->update($request->all(), $id);
 
         Flash::success('User updated successfully.');
 
@@ -173,5 +167,7 @@ class UserController extends AppBaseController
         $user->addMedia(storage_path('app/profil/') . $image_name)->toMediaCollection();
 
         $user->save();
+
+        return redirect('/home');
     }
 }
