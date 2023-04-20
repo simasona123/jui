@@ -6,6 +6,7 @@ use App\DataTables\PasienDataTable;
 use App\Http\Requests\CreatePasienRequest;
 use App\Http\Requests\UpdatePasienRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\User;
 use App\Repositories\PasienRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -41,9 +42,9 @@ class PasienController extends AppBaseController
      */
     public function store(CreatePasienRequest $request)
     {
-        $input = $request->all();
+        $input = $request;
 
-        $pasien = $this->pasienRepository->create($input);
+        $pasien = $this->pasienRepository->create_with_image($input);
 
         Flash::success('Pasien saved successfully.');
 
@@ -57,13 +58,19 @@ class PasienController extends AppBaseController
     {
         $pasien = $this->pasienRepository->find($id);
 
+        $klien = User::find($pasien->user_id);
+
+
         if (empty($pasien)) {
             Flash::error('Pasien not found');
 
             return redirect(route('pasien.index'));
         }
 
-        return view('pasien.show')->with('pasien', $pasien);
+        return view('pasien.show', [
+            "pasien" => $pasien,
+            "klien" => $klien,
+        ]);
     }
 
     /**
@@ -73,13 +80,18 @@ class PasienController extends AppBaseController
     {
         $pasien = $this->pasienRepository->find($id);
 
+        $klien = User::find($pasien->user_id);
+
         if (empty($pasien)) {
             Flash::error('Pasien not found');
 
             return redirect(route('pasien.index'));
         }
 
-        return view('pasien.edit')->with('pasien', $pasien);
+        return view('pasien.edit', [
+            "pasien" => $pasien,
+            "klien" => $klien,
+        ]);
     }
 
     /**

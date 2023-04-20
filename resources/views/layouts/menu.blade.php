@@ -7,6 +7,7 @@
 </li>
 
 
+@role('administrator|manajer')
 <li class="nav-item">
     <a href="{{ route('pasien.index') }}" class="nav-link {{ Request::is('pasiens*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
@@ -20,5 +21,6 @@
         <p>Dokters</p>
     </a>
 </li>
+@endrole
 
 

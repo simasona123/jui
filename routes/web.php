@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,10 +37,24 @@ Route::middleware('auth')->group(function(){
     });
 });
 
-// Route::resource('users',  App\Http\Controllers\UserController::class);
+Route::middleware('auth')->group(function(){
+    Route::prefix('/admin/pasien')->name('pasien.')->group(function(){
+        Route::controller(PasienController::class)->group(function(){
+            Route::get('/', 'index')->name('index')->middleware(['role:administrator|manajer']);
+            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
+            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
+            Route::get('/{user}', "show")->name("show");
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer']);
+            Route::patch('/{user}', "update")->name("update");
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
+            Route::get('/edit/profil', "profil")->name('profil');
+            Route::put('/edit/profil', "profil_update")->name('profil_update');
+        });
+    });
+});
+
 
 Auth::routes();
 
 
-Route::resource('pasien', App\Http\Controllers\PasienController::class);
 Route::resource('dokter', App\Http\Controllers\DokterController::class);

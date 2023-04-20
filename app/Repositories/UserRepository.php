@@ -49,4 +49,18 @@ class UserRepository extends BaseRepository
 
         return $model;
     }
+
+    public function profil_update($user, $validated){
+        
+        $user->fill(array_filter($validated));
+
+        $image_name = $user->name.".".$validated['image']->extension();
+
+        $validated['image']->move(storage_path('app/profil'), $image_name);
+
+        $user->addMedia(storage_path('app/profil/') . $image_name)->toMediaCollection();
+
+        $user->save();
+
+    }
 }

@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Pasien;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class PasienDataTable extends DataTable
 {
@@ -65,13 +66,23 @@ class PasienDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $tanggal_lahir = Column::make('tanggal_lahir')
+            ->title('Tanggal Lahir')
+            ->searchable(false)
+            ->orderable(false)
+            ->render("function(){
+                data = new Date(data);
+
+                return `\${data.getDate()}-\${data.getMonth()+1}-\${data.getFullYear()}`;
+            }");
+
         return [
             'user_id',
             'nama_hewan',
             'jenis_hewan',
             'jenis_kelamin',
             'ras',
-            'tanggal_lahir'
+            $tanggal_lahir,
         ];
     }
 

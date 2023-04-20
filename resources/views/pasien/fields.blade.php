@@ -1,13 +1,18 @@
 <!-- User Id Field -->
-<div x-data="{
-    search: '',
-    url: '',
-    value: '',
+<div x-data="
+{
+    @if(isset($klien))
+        search: '{{$klien->full_name}}',
+        value: {{$klien->id}},
+    @else
+        {{"search: '',"}}
+        {{"value: '',"}}
+    @endif
     klien: [],
 
     async getUser(){
-        this.url = '/api/klien?full_name=' + this.search;
-        const resp = await fetch(this.url);
+        let url = '/api/klien?full_name=' + this.search;
+        const resp = await fetch(url);
         const json = await resp.json();
         this.klien = json['data']
     },
@@ -42,7 +47,7 @@
 <!-- Jenis Kelamin Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!}
-    {!! Form::select('jenis_kelamin', ["jantan", "betina"], null, ['class' => 'form-control custom-select']) !!}
+    {!! Form::select('jenis_kelamin', ["jantan"=>'Jantan', "betina"=>'Betina'], null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 <!-- Ras Field -->
@@ -54,5 +59,10 @@
 <!-- Umur Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
-    {!! Form::date('tanggal_lahir', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::date('tanggal_lahir', $pasien->tanggal_lahir, ['class' => 'form-control', 'required']) !!}
 </div>
+
+<div class="form-group col-sm-6">
+    <label for="image">Foto Pasien</label> <br>
+    <input type="file" name="image">
+</div> 

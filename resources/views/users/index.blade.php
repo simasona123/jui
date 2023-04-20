@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+    
+</script>
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">

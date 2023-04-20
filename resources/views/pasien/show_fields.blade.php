@@ -1,7 +1,7 @@
 <!-- User Id Field -->
 <div class="col-sm-12">
-    {!! Form::label('user_id', 'User Id:') !!}
-    <p>{{ $pasien->user_id }}</p>
+    {!! Form::label('user_id', 'Klien:') !!}
+    <p>{{$klien->full_name}} ({{ $pasien->user_id }})</p>
 </div>
 
 <!-- Nama Hewan Field -->
@@ -19,7 +19,7 @@
 <!-- Jenis Kelamin Field -->
 <div class="col-sm-12">
     {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!}
-    <p>{{ $pasien->jenis_kelamin }}</p>
+    <p>{{ ucwords($pasien->jenis_kelamin) }}</p>
 </div>
 
 <!-- Ras Field -->
@@ -30,8 +30,8 @@
 
 <!-- Umur Field -->
 <div class="col-sm-12">
-    {!! Form::label('umur', 'Umur:') !!}
-    <p>{{ $pasien->umur }}</p>
+    {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
+    <p>{{date_format(date_create($pasien->tanggal_lahir), "d-m-Y") }}</p>
 </div>
 
 <!-- Created At Field -->

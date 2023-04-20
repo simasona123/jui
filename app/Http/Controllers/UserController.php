@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\UserDataTable;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Controllers\AppBaseController;
@@ -25,12 +26,9 @@ class UserController extends AppBaseController
     /**
      * Display a listing of the User.
      */
-    public function index(Request $request)
+    public function index(UserDataTable $userDataTable)
     {
-        $users = $this->userRepository->paginate(10);
-
-        return view('users.index')
-            ->with('users', $users);
+        return $userDataTable->render('users.index');
     }
 
     /**
@@ -158,15 +156,7 @@ class UserController extends AppBaseController
             'image' => ["nullable", "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
         ]);
 
-        $user->fill(array_filter($validated));
-
-        $image_name = $user->name.".".$validated['image']->extension();
-
-        $validated['image']->move(storage_path('app/profil'), $image_name);
-
-        $user->addMedia(storage_path('app/profil/') . $image_name)->toMediaCollection();
-
-        $user->save();
+        $this->userRepository->profil_update($user, $validated);
 
         return redirect('/home');
     }
