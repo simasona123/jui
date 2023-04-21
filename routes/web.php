@@ -75,3 +75,5 @@ Route::middleware('auth')->group(function(){
 
 Auth::routes();
 
+
+Route::resource('jadwal-praktik', App\Http\Controllers\JadwalPraktikController::class);
