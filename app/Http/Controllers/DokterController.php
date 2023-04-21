@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\DokterDataTable;
 use App\Http\Requests\CreateDokterRequest;
 use App\Http\Requests\UpdateDokterRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\User;
 use App\Repositories\DokterRepository;
-use Illuminate\Http\Request;
 use Flash;
 
 class DokterController extends AppBaseController
@@ -22,9 +23,9 @@ class DokterController extends AppBaseController
     /**
      * Display a listing of the Dokter.
      */
-    public function index(Request $request)
+    public function index(DokterDataTable $dokterDataTable)
     {
-        return view('dokters.index');
+        return $dokterDataTable->render('dokter.index');
     }
 
     /**
@@ -32,7 +33,7 @@ class DokterController extends AppBaseController
      */
     public function create()
     {
-        return view('dokters.create');
+        return view('dokter.create');
     }
 
     /**
@@ -40,13 +41,11 @@ class DokterController extends AppBaseController
      */
     public function store(CreateDokterRequest $request)
     {
-        $input = $request->all();
-
-        $dokter = $this->dokterRepository->create($input);
+        $dokter = $this->dokterRepository->create_with_image($request);
 
         Flash::success('Dokter saved successfully.');
 
-        return redirect(route('dokters.index'));
+        return redirect(route('dokter.index'));
     }
 
     /**
@@ -59,10 +58,10 @@ class DokterController extends AppBaseController
         if (empty($dokter)) {
             Flash::error('Dokter not found');
 
-            return redirect(route('dokters.index'));
+            return redirect(route('dokter.index'));
         }
 
-        return view('dokters.show')->with('dokter', $dokter);
+        return view('dokter.show')->with('dokter', $dokter);
     }
 
     /**
@@ -72,13 +71,18 @@ class DokterController extends AppBaseController
     {
         $dokter = $this->dokterRepository->find($id);
 
+        $user = User::find($dokter->user_id);
+
         if (empty($dokter)) {
             Flash::error('Dokter not found');
 
-            return redirect(route('dokters.index'));
+            return redirect(route('dokter.index'));
         }
 
-        return view('dokters.edit')->with('dokter', $dokter);
+        return view('dokter.edit', [
+            "dokter" => $dokter,
+            "user" => $user,
+        ]);
     }
 
     /**
@@ -91,14 +95,14 @@ class DokterController extends AppBaseController
         if (empty($dokter)) {
             Flash::error('Dokter not found');
 
-            return redirect(route('dokters.index'));
+            return redirect(route('dokter.index'));
         }
 
         $dokter = $this->dokterRepository->update($request->all(), $id);
 
         Flash::success('Dokter updated successfully.');
 
-        return redirect(route('dokters.index'));
+        return redirect(route('dokter.index'));
     }
 
     /**
@@ -113,13 +117,13 @@ class DokterController extends AppBaseController
         if (empty($dokter)) {
             Flash::error('Dokter not found');
 
-            return redirect(route('dokters.index'));
+            return redirect(route('dokter.index'));
         }
 
         $this->dokterRepository->delete($id);
 
         Flash::success('Dokter deleted successfully.');
 
-        return redirect(route('dokters.index'));
+        return redirect(route('dokter.index'));
     }
 }

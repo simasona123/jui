@@ -2,11 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Dokter;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
-class UserDataTable extends DataTable
+class DokterDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,7 +18,7 @@ class UserDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'users.datatables_actions');
+        return $dataTable->addColumn('action', 'dokter.datatables_actions');
     }
 
     /**
@@ -27,7 +27,7 @@ class UserDataTable extends DataTable
      * @param \App\Models\Patient $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Dokter $model)
     {
         return $model->newQuery();
     }
@@ -65,13 +65,12 @@ class UserDataTable extends DataTable
      */
     protected function getColumns()
     {
+
         return [
-            'full_name',
-            'email',
-            'address',
-            'phone',
-            'verification',
-            'blocked',
+            'user_id',
+            'spesialis',
+            'nip',
+            'jenis_kelamin',
         ];
     }
 
@@ -82,6 +81,6 @@ class UserDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'user_datatable_' . time();
+        return 'dokter_datatable_' . time();
     }
 }

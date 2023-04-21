@@ -8,7 +8,6 @@ use App\Http\Requests\UpdatePasienRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\User;
 use App\Repositories\PasienRepository;
-use Illuminate\Http\Request;
 use Flash;
 
 class PasienController extends AppBaseController

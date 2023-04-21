@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('spesialis');
-            $table->enum('jenis_kelamin',["pria", "perempuan"]);
+            $table->string('spesialis')->nullable();
+            $table->enum('jenis_kelamin', ["pria", "perempuan"]);
             $table->string('nip');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

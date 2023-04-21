@@ -5,29 +5,27 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Dokters</h1>
+                    <h1>
+Dokter Details
+                    </h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('dokters.create') }}">
-                        Add New
-                    </a>
+                    <a class="btn btn-default float-right"
+                       href="{{ route('dokter.index') }}">
+                                                    Back
+                                            </a>
                 </div>
             </div>
         </div>
     </section>
 
     <div class="content px-3">
-
-        @include('flash::message')
-
-        <div class="clearfix"></div>
-
         <div class="card">
             <div class="card-body">
-                @livewire('dokters-table', [])
+                <div class="row">
+                    @include('dokter.show_fields')
+                </div>
             </div>
         </div>
     </div>
-
 @endsection

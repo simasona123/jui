@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -32,16 +33,7 @@ class Pasien extends Model implements HasMedia
         'ras' => 'string',
         'tanggal_lahir' => 'date'
     ];
-
-    public static array $rules = [
-        'user_id' => 'required',
-        'nama_hewan' => 'required',
-        'jenis_hewan' => 'required',
-        'jenis_kelamin' => 'required',
-        'ras' => 'required',
-        'tanggal_lahir' => 'required',
-        'image' => ['nullable', "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
-    ];
+    
 
     public function registerMediaConversions(Media $media = null): void
     {

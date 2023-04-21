@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Pasien;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreatePasienRequest extends FormRequest
 {
@@ -24,6 +24,14 @@ class CreatePasienRequest extends FormRequest
      */
     public function rules()
     {
-        return Pasien::$rules;
+        return [
+            'user_id' => 'required',
+            'nama_hewan' => 'required',
+            'jenis_hewan' => 'required',
+            'jenis_kelamin' => ['required', Rule::in(['jantan', 'betina'])],
+            'ras' => 'required',
+            'tanggal_lahir' => 'required',
+            'image' => ['nullable', "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
+        ];
     }
 }

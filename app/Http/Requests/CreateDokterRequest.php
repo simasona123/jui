@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Dokter;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateDokterRequest extends FormRequest
 {
@@ -24,6 +25,12 @@ class CreateDokterRequest extends FormRequest
      */
     public function rules()
     {
-        return Dokter::$rules;
+        return [
+            'user_id' => 'required',
+            'spesialis' => 'nullable',
+            'nip' => 'nullable',
+            'jenis_kelamin' => ['required', Rule::in(['pria', 'wanita'])],
+            'image' => ['nullable', "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
+        ];
     }
 }
