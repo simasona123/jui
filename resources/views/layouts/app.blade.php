@@ -1,7 +1,7 @@
 <x-laravel-ui-adminlte::adminlte-layout>
     @php
         $media = Auth::user()->getMedia();
-        $url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+        $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
     @endphp
     <script src="https://unpkg.com/alpinejs" defer></script>
     {{-- @stack('third_party_scripts') --}}
@@ -20,23 +20,23 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{$url}}"
+                            <img src="{{$image_url}}"
                                 class="user-image img-circle elevation-2" alt="User Image">
-                            <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                            <span class="d-none d-md-inline">{{ ucwords(Auth::user()->full_name) }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
                             <li class="user-header bg-primary">
-                                <img src="{{$url}}"
+                                <img src="{{$image_url}}"
                                     class="img-circle elevation-2" alt="User Image">
                                 <p>
-                                    {{ Auth::user()->name }}
+                                    {{ ucwords(Auth::user()->full_name) }}
                                     <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <a href={{route('users.profil')}} class="btn btn-default btn-flat">Profile</a>
+                                <a href={{route('home.profil')}} class="btn btn-default btn-flat">Profile</a>
                                 <a href="#" class="btn btn-default btn-flat float-right"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Sign out

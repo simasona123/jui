@@ -137,10 +137,8 @@ class UserController extends AppBaseController
     }
 
     public function profil(){
-        
         $user = Auth::user();
-
-        return view('users.update', [
+        return view('users.profil', [
             'user' => $user,
         ]);
     }
@@ -150,9 +148,11 @@ class UserController extends AppBaseController
         $user = Auth::user();
 
         $validated = $request->validate([
-            'name' => ['required'],
+            'full_name' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['nullable', 'confirmed'],
+            'address' => ['nullable',],
+            'phone' => ['nullable', 'regex:/(^[0-9]+$)/i'],
             'image' => ["nullable", "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
         ]);
 

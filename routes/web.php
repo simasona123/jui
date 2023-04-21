@@ -22,6 +22,13 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::middleware('auth')->group(function (){
+    Route::prefix('/home')->name('home.')->group(function (){
+        Route::get('/profil', [UserController::class, "profil"])->name('profil');
+        Route::put('/profil', [UserController::class, "profil_update"])->name('profil_update');
+    });
+});
+
 Route::middleware('auth')->group(function(){
     Route::prefix('/admin/users')->name('users.')->group(function(){
         Route::controller(UserController::class)->group(function(){
@@ -32,8 +39,6 @@ Route::middleware('auth')->group(function(){
             Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer']);
             Route::patch('/{user}', "update")->name("update");
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
-            Route::get('/edit/profil', "profil")->name('profil');
-            Route::put('/edit/profil', "profil_update")->name('profil_update');
         });
     });
 });

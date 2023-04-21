@@ -54,13 +54,11 @@ class UserRepository extends BaseRepository
         
         $user->fill(array_filter($validated));
 
-        $image_name = $user->name.".".$validated['image']->extension();
-
-        $validated['image']->move(storage_path('app/profil'), $image_name);
-
-        $user->addMedia(storage_path('app/profil/') . $image_name)->toMediaCollection();
-
+        if(isset($validated['image'])){
+            $image_name = $user->name.".".$validated['image']->extension();
+            $validated['image']->move(storage_path('app/profil'), $image_name);
+            $user->addMedia(storage_path('app/profil/') . $image_name)->toMediaCollection();
+        }
         $user->save();
-
     }
 }

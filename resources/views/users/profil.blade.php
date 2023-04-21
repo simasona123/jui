@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                        Edit User
+                        Edit Profil 
                     </h1>
                 </div>
             </div>
@@ -27,13 +27,24 @@
                 <div class="row">
                     <!-- Name Field -->
                     <div class="form-group col-sm-6">
-                        <label for="name">Name:</label>
-                        <input class="form-control" required="" name="name" type="text" id="name" value="{{$user->name}}">
+                        <label for="full_name">Nama Lengkap:</label>
+                        <input class="form-control" required="" name="full_name" type="text" id="full_name" value="{{$user->full_name}}">
                     </div>
                     <!-- Email Field -->
                     <div class="form-group col-sm-6">
                         <label for="email">Email:</label>
                         <input class="form-control" required="" name="email" type="email" id="email" value="{{$user->email}}">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="phone">Nomor HP:</label>
+                        <input class="form-control" required="" name="phone" type="phone" id="phone" value="{{$user->phone}}">
+                    </div>
+
+                    <div class="form-group col-sm-6">
+                        <label for="address">Alamat Rumah:</label>
+                        <input class="form-control" required="" name="address" type="address" id="address" value="{{$user->address}}">
+                        <div class="warning" style="">Ket: Alamat yang akan dituju saat pemeriksaan</div>
                     </div>
 
                     <div class="form-group col-sm-6">
@@ -62,4 +73,16 @@
 
         </div>
     </div>
+    <style>
+        .warning{
+            color: #856404;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            position: relative;
+            padding: .2rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            margin-top: 5px;
+        }
+    </style>
 @endsection
