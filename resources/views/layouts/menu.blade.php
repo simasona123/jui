@@ -7,14 +7,16 @@
 </li>
 
 
-@role('administrator|manajer')
+@role('administrator|manajer|dokter-hewan')
 <li class="nav-item">
     <a href="{{ route('pasien.index') }}" class="nav-link {{ Request::is('pasien*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Pasien</p>
     </a>
 </li>
+@endrole
 
+@role('administrator|manajer')
 <li class="nav-item">
     <a href="{{ route('dokter.index') }}" class="nav-link {{ Request::is('dokter*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>

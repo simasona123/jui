@@ -10,11 +10,12 @@
             @else
                 class="badge badge-warning"
         @endif>{{$user->verification == 1 ? "Terverifikasi" : "Belum Terverifikasi"}}</p>
-        <p style="margin-left: 5px;" @if ($user->blocked == 0)
+        <p style="margin-left: 5px;" 
+        @if ($user->blocked == 0)
             class="badge badge-success" 
         @else
             class="badge badge-danger"
-    @endif>{{$user->blocked == 1 ? "Terblokir" : "Aktif"}}</p>
+        @endif>{{$user->blocked == 1 ? "Terblokir" : "Aktif"}}</p>
     </div>
 </div>
 

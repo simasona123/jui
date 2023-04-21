@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -28,6 +29,10 @@ class Dokter extends Model implements HasMedia
         'jenis_kelamin' => 'string',
         'nip' => 'string'
     ];
+
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class);
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

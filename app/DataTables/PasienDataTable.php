@@ -18,8 +18,11 @@ class PasienDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'pasien.datatables_actions');
+        $dataTable->addColumn('user', function(Pasien $pasien){
+            return $pasien->user->full_name . " (" . $pasien->user_id .")";
+        });
+        $dataTable->addColumn('action', 'pasien.datatables_actions');
+        return $dataTable;
     }
 
     /**
@@ -29,8 +32,8 @@ class PasienDataTable extends DataTable
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Pasien $model)
-    {
-        return $model->newQuery();
+    {   
+        return $model::with('user');
     }
 
     /**
@@ -72,16 +75,28 @@ class PasienDataTable extends DataTable
             ->orderable(false)
             ->render("function(){
                 data = new Date(data);
-
-                return `\${data.getDate()}-\${data.getMonth()+1}-\${data.getFullYear()}`;
+                return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()}`;
             }");
+        
+        $user = Column::make('user')->searchable(true)->name('user.full_name');
+        
+        $jenis_kelamin = Column::make('jenis_kelamin')
+            ->title('Jenis Kelamin')
+            ->searchable(false)
+            ->orderable(false);
+
+        $ras = Column::make('ras')
+            ->title('Ras')
+            ->searchable(false)
+            ->orderable(false);
 
         return [
-            'user_id',
+            'id',
+            $user,
             'nama_hewan',
             'jenis_hewan',
-            'jenis_kelamin',
-            'ras',
+            $jenis_kelamin,
+            $ras,
             $tanggal_lahir,
         ];
     }

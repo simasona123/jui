@@ -38,12 +38,12 @@
 
                     <div class="form-group col-sm-6">
                         <label for="phone">Nomor HP:</label>
-                        <input class="form-control" required="" name="phone" type="phone" id="phone" value="{{$user->phone}}">
+                        <input class="form-control" name="phone" type="phone" id="phone" value="{{$user->phone}}">
                     </div>
 
                     <div class="form-group col-sm-6">
                         <label for="address">Alamat Rumah:</label>
-                        <input class="form-control" required="" name="address" type="address" id="address" value="{{$user->address}}">
+                        <input class="form-control" name="address" type="address" id="address" value="{{$user->address}}">
                         <div class="warning" style="">Ket: Alamat yang akan dituju saat pemeriksaan</div>
                     </div>
 

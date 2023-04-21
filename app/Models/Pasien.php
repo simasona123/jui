@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Validation\Rule;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -34,6 +35,9 @@ class Pasien extends Model implements HasMedia
         'tanggal_lahir' => 'date'
     ];
     
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class);
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

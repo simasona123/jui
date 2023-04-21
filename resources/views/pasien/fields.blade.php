@@ -59,7 +59,7 @@
 <!-- Umur Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
-    {!! Form::date('tanggal_lahir', $pasien->tanggal_lahir, ['class' => 'form-control', 'required']) !!}
+    {!! Form::date('tanggal_lahir', isset($pasien) ? $pasien->tanggal_lahir : null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group col-sm-6">

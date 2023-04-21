@@ -5,6 +5,8 @@ namespace App\DataTables;
 use App\Models\User;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Facades\DataTables;
+use Yajra\DataTables\Html\Column;
 
 class UserDataTable extends DataTable
 {
@@ -16,9 +18,12 @@ class UserDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $dataTable = new EloquentDataTable($query);
-
-        return $dataTable->addColumn('action', 'users.datatables_actions');
+        $dataTable = DataTables::eloquent($query);
+        $dataTable->addColumn('status', 'users.datatables_status')
+            ->addColumn('action', 'users.datatables_actions')
+            ->rawColumns(['status', 'action'])
+            ->make(true);
+        return $dataTable;
     }
 
     /**
@@ -65,13 +70,17 @@ class UserDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $status = Column::make('status')
+                ->searchable(false)
+                ->orderable(false);
+        $phone = Column::make('phone')
+                ->searchable(false)
+                ->orderable(false);
         return [
             'full_name',
             'email',
-            'address',
-            'phone',
-            'verification',
-            'blocked',
+            $phone,
+            $status,
         ];
     }
 

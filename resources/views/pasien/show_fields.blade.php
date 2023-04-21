@@ -1,4 +1,9 @@
 <!-- User Id Field -->
+@php
+    $media = Auth::user()->getMedia();
+    $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+@endphp
+
 <div class="col-sm-12">
     {!! Form::label('user_id', 'Klien:') !!}
     <p>{{$klien->full_name}} ({{ $pasien->user_id }})</p>
@@ -44,5 +49,7 @@
 <div class="col-sm-12">
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $pasien->updated_at }}</p>
+    <img src="{{$image_url}}" alt="" srcset="">
 </div>
+
 

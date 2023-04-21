@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Dokter;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class DokterDataTable extends DataTable
 {
@@ -18,6 +19,10 @@ class DokterDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
+        $dataTable->addColumn('user', function(Dokter $dokter){
+            return $dokter->user->full_name . " (" . $dokter->user_id .")";
+        });
+
         return $dataTable->addColumn('action', 'dokter.datatables_actions');
     }
 
@@ -29,7 +34,7 @@ class DokterDataTable extends DataTable
      */
     public function query(Dokter $model)
     {
-        return $model->newQuery();
+        return $model::with('user');
     }
 
     /**
@@ -65,12 +70,32 @@ class DokterDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $jenis_kelamin = Column::make('jenis_kelamin')
+            ->title('Jenis Kelamin')
+            ->searchable(false)
+            ->orderable(false);
 
+        
+        $nip = Column::make('nip')
+            ->title('NIP')
+            ->searchable(false)
+            ->orderable(false);
+
+        
+        $spesialis = Column::make('spesialis')
+            ->title('Spesialis')
+            ->searchable(false)
+            ->orderable(false);
+
+        $user = Column::make('user')->title('User')->name('user.full_name');
+
+        
         return [
-            'user_id',
-            'spesialis',
-            'nip',
-            'jenis_kelamin',
+            'id',
+            $user,
+            $spesialis,
+            $nip,
+            $jenis_kelamin,
         ];
     }
 

@@ -1,3 +1,4 @@
+{{$id}}
 {!! Form::open(['route' => ['pasien.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
     <a href="{{ route('pasien.show', $id) }}" class='btn btn-default btn-xs'>

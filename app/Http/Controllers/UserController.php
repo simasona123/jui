@@ -37,8 +37,7 @@ class UserController extends AppBaseController
     public function create()
     {
         $roles = Role::all();
-        $role = [];
-        return view('users.create', ['roles' => $roles, 'role' => $role]);
+        return view('users.create', ['roles' => $roles]);
     }
 
     /**
@@ -82,6 +81,7 @@ class UserController extends AppBaseController
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
+        $roles = Role::all();
         $role = $user->getRoleNames();
 
         if (empty($user)) {
@@ -92,6 +92,7 @@ class UserController extends AppBaseController
         return view('users.edit', [
             'user' => $user,
             'role' => $role,
+            'roles' => $roles,
         ]);
     }
 

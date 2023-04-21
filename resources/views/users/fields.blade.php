@@ -30,16 +30,10 @@
     {!! Form::text('address', null, ['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-4">
     <label for="role">Role</label>
     <select class="custom-select" id="inputGroupSelect02" name="role">
-        @if (count($role) == 0)
-            <option 
-                @if (count($role) == 0)
-                    selected
-                @endif style="color: gray;">
-                Pilih
-            </option>
+        @if (isset($role))
             @foreach ($roles as $item)
                 <option 
                     @if (count($role) > 0)
@@ -50,14 +44,15 @@
                 </option>
             @endforeach
         @else
-            <option selected style="color: gray;">
-                {{$role[0]}}
-            </option>
+            <option selected style="color: gray;">Pilih</option>
+            @foreach ($roles as $item)
+                <option value="{{$item->id}}"> {{ucwords($item->name)}} </option>
+            @endforeach
         @endif
     </select>
 </div>
 
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-4">
     <label for="verification">Verifikasi</label>
     <select class="custom-select" id="inputGroupSelect02" name="verification">
         @if (isset($user))
@@ -75,7 +70,7 @@
     </select>
 </div>
 
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-4">
     <label for="blocked">Status</label>
     <select class="custom-select" id="inputGroupSelect02" name="blocked">
         @if (isset($user))
