@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Packages\CaptchaController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,5 @@ Route::get('/dokter', function(Request $request){
         'data' => $dokter
     ]);
 });
+
+Route::get('/reload-captcha', [CaptchaController::class, 'reloadCaptcha']);

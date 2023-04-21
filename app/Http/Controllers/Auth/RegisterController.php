@@ -41,22 +41,12 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        
+        $this->middleware('guest');
     }
 
     public function showRegistrationForm()
     {
-        $user = Auth::user();
-        if($user == null){
-            $roles = [Role::find(2)]; // Klien
-        }else{
-            if($user->hasRole('administrator') || $user->hasRole('manajer')){
-                $roles = Role::all();
-            }else{
-                $roles = [Role::find(4)]; // Dokter Hewan
-            }
-        }
-        return view('auth.register', ['roles' => $roles]);
+        return view('auth.register');
     }
     /**
      * Get a validator for an incoming registration request.
@@ -67,10 +57,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['required', 'numeric'],
+            'captcha' => ['required', 'captcha',],
+            'terms' => 'accepted',
+        ], [
+            'captcha' => 'Wrong captcha',
         ]);
     }
 
@@ -82,19 +75,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-        if($data['role'] == 6 || $data['role'] == 7){
-            Gate::authorize('create-administrator-manager');
-        }
-
         $user = User::create([
-            'name' => $data['name'],
+            'full_name' => $data['full_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'verification' => false,
         ]);
 
-        $user->assignRole($data['role']);
+        $user->assignRole('klien');
 
         return $user;
     }

@@ -1,5 +1,4 @@
 <x-laravel-ui-adminlte::adminlte-layout>
-
     <body class="hold-transition register-page">
         <div class="register-box">
             <div class="register-logo">
@@ -14,13 +13,13 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" name="name"
-                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                            <input type="text" name="full_name"
+                                class="form-control @error('full_name') is-invalid @enderror" value="{{ old('full_name') }}"
                                 placeholder="Full name">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
-                            @error('name')
+                            @error('full_name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -62,29 +61,33 @@
                         </div>
                         
                         <div class="input-group mb-3">
-                            <select class="custom-select" id="inputGroupSelect02" name="role">
-                                @if (count($roles) == 1)
-                                    <option selected style="color: gray;" value="{{$roles[0]->id}}">{{ucwords($roles[0]->name)}}</option>
-                                @else
-                                    <option selected style="color: gray;">Pilih</option>
-                                    @foreach ($roles as $item)
-                                        <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                            <div class="input-group-append">
-                              <label class="input-group-text" for="inputGroupSelect02">Role</label>
+                            <div class="captcha d-flex flex-row">
+                                <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" style="margin-right: 10px; border-right: 1px solid #ced4da;" placeholder="Enter Captcha" name="captcha">
+                                <span>{!! captcha_img() !!}</span>
+                                <button type="button" class="btn btn-danger" class="reload" id="reload" style="margin-left: 5px;">
+                                    &#x21bb;
+                                </button>
                             </div>
-                          </div>
+                            @error('captcha')
+                                <div class="error-feed" style="position: initial!important;" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                            @enderror
+                        </div>
 
                         <div class="row">
                             <div class="col-8">
                                 <div class="icheck-primary">
-                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                    <input type="checkbox" id="agreeTerms" name="terms">
                                     <label for="agreeTerms">
                                         I agree to the <a href="#">terms</a>
                                     </label>
                                 </div>
+                                @error('terms')
+                                <span class="error-feed" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
@@ -102,5 +105,27 @@
             <!-- /.form-box -->
         </div>
         <!-- /.register-box -->
+
+        <script>
+            $('#reload').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/reload-captcha',
+                    success: function (data) {
+                        $(".captcha span").html(data.captcha);
+                    }
+                });
+            });
+        </script>
+        <style>
+            .error-feed{
+                width: 100%;
+                margin-top: 0.25rem;
+                font-size: 80%;
+                color: #dc3545;
+                position: relative !important;
+                top: -12px;
+            }
+        </style>
     </body>
 </x-laravel-ui-adminlte::adminlte-layout>
