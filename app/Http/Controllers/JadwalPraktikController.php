@@ -6,6 +6,8 @@ use App\DataTables\JadwalPraktikDataTable;
 use App\Http\Requests\CreateJadwalPraktikRequest;
 use App\Http\Requests\UpdateJadwalPraktikRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Dokter;
+use App\Models\User;
 use App\Repositories\JadwalPraktikRepository;
 use Flash;
 
@@ -72,6 +74,7 @@ class JadwalPraktikController extends AppBaseController
     public function edit($id)
     {
         $jadwalPraktik = $this->jadwalPraktikRepository->find($id);
+        $user = Dokter::find($jadwalPraktik->dokter_id)->user;
 
         if (empty($jadwalPraktik)) {
             Flash::error('Jadwal Praktik not found');
@@ -79,7 +82,10 @@ class JadwalPraktikController extends AppBaseController
             return redirect(route('jadwal-praktik.index'));
         }
 
-        return view('jadwal_praktik.edit')->with('jadwalPraktik', $jadwalPraktik);
+        return view('jadwal_praktik.edit', [
+            'jadwalPraktik' => $jadwalPraktik,
+            'user' => $user,
+        ]);
     }
 
     /**

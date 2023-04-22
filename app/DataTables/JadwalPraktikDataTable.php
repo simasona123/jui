@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\JadwalPraktik;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Html\Column;
 
 class JadwalPraktikDataTable extends DataTable
 {
@@ -18,7 +19,7 @@ class JadwalPraktikDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        return $dataTable->addColumn('action', 'jadwal_praktiks.datatables_actions');
+        return $dataTable->addColumn('action', 'jadwal_praktik.datatables_actions');
     }
 
     /**
@@ -65,10 +66,30 @@ class JadwalPraktikDataTable extends DataTable
      */
     protected function getColumns()
     {
+        $tanggal_masuk = Column::make('tanggal_masuk')
+            ->title('Tanggal Masuk')
+            ->searchable(false)
+            ->orderable(false)
+            ->render("function(){
+                data = new Date(data);
+                return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()} 
+                \${String(data.getHours()).padStart(2, '0')}:\${String(data.getMinutes()).padStart(2, '0')}:00 WIB`;
+            }");
+        
+        $tanggal_selesai = Column::make('tanggal_selesai')
+            ->title('Tanggal Selesai')
+            ->searchable(false)
+            ->orderable(false)
+            ->render("function(){
+                data = new Date(data);
+                return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()} 
+                \${String(data.getHours()).padStart(2, '0')}:\${String(data.getMinutes()).padStart(2, '0')}:00 WIB`;
+            }");
+        
         return [
             'dokter_id',
-            'tanggal_masuk',
-            'tanggal_selesai',
+            $tanggal_masuk,
+            $tanggal_selesai,
             'ketersediaan',
             'keterangan'
         ];

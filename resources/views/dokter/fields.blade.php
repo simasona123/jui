@@ -26,7 +26,7 @@
 
 }" class="form-group col-sm-6">
     {!! Form::label('user_id', 'Email User') !!}
-    <input x-model="search" @input.debounce.1000ms="getUser" class="form-control" name="" type="text" id="user_id">
+    <input x-model="search" @input.debounce.1000ms="getUser" class="form-control required" name="" type="text" id="user_id">
     <input x-model="value" class="form-control" name="user_id" type="text" id="user_id" hidden>
     <div class="" x-show="keterangan != ''" x-text="keterangan"></div>
     <template x-for="item in dokter">

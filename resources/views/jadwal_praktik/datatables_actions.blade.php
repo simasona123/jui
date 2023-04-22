@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['jadwalPraktiks.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['jadwal-praktik.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('jadwalPraktiks.show', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('jadwal-praktik.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i>
     </a>
-    <a href="{{ route('jadwalPraktiks.edit', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('jadwal-praktik.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i>
     </a>
     {!! Form::button('<i class="fa fa-trash"></i>', [

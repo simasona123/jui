@@ -19,7 +19,7 @@ return new class extends Migration
             $table->datetime('tanggal_masuk');
             $table->datetime('tanggal_selesai');
             $table->integer('ketersediaan');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
             $table->foreign('dokter_id')->references('id')->on('dokter');
         });

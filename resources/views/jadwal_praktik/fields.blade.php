@@ -1,41 +1,79 @@
 <!-- Dokter Id Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('dokter_id', 'Dokter Id:') !!}
-    {!! Form::text('dokter_id', null, ['class' => 'form-control', 'required']) !!}
+<div x-data="
+{
+    @if(isset($user))
+        search: '{{$user->email}}',
+        value: {{$user->id}},
+        keterangan: '{{$user->email}}',
+    @else
+        {{"search: '',"}}
+        {{"value: '',"}}
+    @endif
+    dokter: [],
+    keterangan: '',
+    target: '',
+
+    async getUser(){
+        let url = '/api/dokter?email=' + this.search;
+        const resp = await fetch(url);
+        const json = await resp.json();
+        this.dokter = json['data']
+        this.keterangan = this.dokter.length == 0 ? 'Dokter tidak ditemukan' : '';
+    },
+
+    clickKlien(dokter){
+        this.search = dokter['email']
+        this.target = dokter['email']
+        this.value = dokter['id']
+        this.dokter = []
+    }
+
+}" x-init="$watch('value', value => {
+    if(value != '') document.querySelector('#check').style.display = 'inline'
+    else document.querySelector('#check').style.display = 'none'
+})" class="form-group col-sm-6">
+    {!! Form::label('user_id', 'Email Dokter:') !!}
+    <span x-text='target'></span>
+    <svg id="check" style="margin-left: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        <path fill="green" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+    </svg>
+
+    <input x-model="search" @input.debounce.1000ms="getUser" class="form-control" name="" type="text" id="user_id" placeholder="Cari Dokter">
+    <input x-model="value" class="form-control" name="user_id" type="text" id="user_id" hidden>
+    
+    <div class="" x-show="keterangan != ''" x-text="keterangan"></div>
+    <template x-for="item in dokter">
+        <a @click="clickKlien(item)" href="#"><li x-text="`${item['email']} (${item['full_name']})`"></li></a>
+    </template>
 </div>
 
 <!-- Tanggal Masuk Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tanggal_masuk', 'Tanggal Masuk:') !!}
-    {!! Form::text('tanggal_masuk', null, ['class' => 'form-control','id'=>'tanggal_masuk']) !!}
+    {!! Form::label('tanggal_masuk', 'Tanggal Masuk (WIB):') !!}
+    <input type="datetime-local" class="form-control" required
+       name="tanggal_masuk" value="{{isset($jadwalPraktik)? $jadwalPraktik->tanggal_masuk : ''}}"
+       min="{{date("Y-m-d\T00:00")}}" max="">
 </div>
-
-@push('page_scripts')
-    <script type="text/javascript">
-        $('#tanggal_masuk').datepicker()
-    </script>
-@endpush
 
 <!-- Tanggal Selesai Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tanggal_selesai', 'Tanggal Selesai:') !!}
-    {!! Form::text('tanggal_selesai', null, ['class' => 'form-control','id'=>'tanggal_selesai']) !!}
+    {!! Form::label('tanggal_selesai', 'Tanggal Selesai (WIB):') !!}
+    <input type="datetime-local" class="form-control" required
+        name="tanggal_selesai" value="{{isset($jadwalPraktik)? $jadwalPraktik->tanggal_selesai : ''}}"
+        min="{{date("Y-m-d\T00:00")}}" max="">
 </div>
-
-@push('page_scripts')
-    <script type="text/javascript">
-        $('#tanggal_selesai').datepicker()
-    </script>
-@endpush
 
 <!-- Ketersediaan Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ketersediaan', 'Ketersediaan:') !!}
-    {!! Form::number('ketersediaan', null, ['class' => 'form-control', 'required']) !!}
+    <input type="number" name="ketersediaan" class="form-control" required
+       min="1" max="7" value="{{isset($jadwalPraktik) ? $jadwalPraktik->ketersediaan : ''}}">
+
 </div>
 
 <!-- Keterangan Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('keterangan', 'Keterangan:') !!}
-    {!! Form::text('keterangan', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('keterangan', null, ['class' => 'form-control']) !!}
 </div>

@@ -24,6 +24,12 @@ class CreateJadwalPraktikRequest extends FormRequest
      */
     public function rules()
     {
-        return JadwalPraktik::$rules;
+        return [
+            'user_id' => 'required',
+            'tanggal_masuk' => 'required|date|',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_masuk',
+            'ketersediaan' => 'required',
+            'keterangan' => 'nullable'
+        ];
     }
 }

@@ -22,13 +22,4 @@ class JadwalPraktik extends Model
         'keterangan' => 'string'
     ];
 
-    public static array $rules = [
-        'dokter_id' => 'required',
-        'tanggal_masuk' => 'required',
-        'tanggal_selesai' => 'required',
-        'ketersediaan' => 'required',
-        'keterangan' => 'required'
-    ];
-
-    
 }

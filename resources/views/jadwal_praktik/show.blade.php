@@ -11,7 +11,7 @@ Jadwal Praktik Details
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('jadwalPraktiks.index') }}">
+                       href="{{ route('jadwal-praktik.index') }}">
                                                     Back
                                             </a>
                 </div>
@@ -23,7 +23,7 @@ Jadwal Praktik Details
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @include('jadwal_praktiks.show_fields')
+                    @include('jadwal_praktik.show_fields')
                 </div>
             </div>
         </div>

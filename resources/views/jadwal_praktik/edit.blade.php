@@ -19,17 +19,17 @@
 
         <div class="card">
 
-            {!! Form::model($jadwalPraktik, ['route' => ['jadwalPraktiks.update', $jadwalPraktik->id], 'method' => 'patch']) !!}
+            {!! Form::model($jadwalPraktik, ['route' => ['jadwal-praktik.update', $jadwalPraktik->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('jadwal_praktiks.fields')
+                    @include('jadwal_praktik.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('jadwalPraktiks.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('jadwal-praktik.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}
