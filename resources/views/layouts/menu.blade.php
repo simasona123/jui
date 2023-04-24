@@ -33,3 +33,10 @@
         <p>Jadwal Praktik</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('bookings.index') }}" class="nav-link {{ Request::is('bookings*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Booking</p>
+    </a>
+</li>

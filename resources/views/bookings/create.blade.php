@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                        Edit Dokter
+                    Pengajuan Booking
                     </h1>
                 </div>
             </div>
@@ -19,17 +19,18 @@
 
         <div class="card">
 
-            {!! Form::model($dokter, ['route' => ['dokter.update', $dokter->id], 'method' => 'patch', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => 'bookings.store', 'id' => 'upload']) !!}
 
             <div class="card-body">
+
                 <div class="row">
-                    @include('dokter.fields')
+                    @include('bookings.fields')
                 </div>
+
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('dokter.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('bookings.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

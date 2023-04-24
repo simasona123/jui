@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Packages\CaptchaController;
+use App\Http\Resources\JadwalCollection;
+use App\Models\JadwalPraktik;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +44,19 @@ Route::middleware('cors')->group(function(){
         $dokter = User::role('dokter-hewan')->where('email', 'like', $request->email . "%")->take(10)->get();
         return response()->json([
             'data' => $dokter
+        ]);
+    });
+
+    Route::get('/jadwal-praktik', function(Request $request){
+        $date = $request->date;
+        $jadwal = JadwalCollection::collection(JadwalPraktik::with('dokter')->whereDate('tanggal_masuk', $date)->get());
+
+        if(count($jadwal) == 0) $message = "Jadwal tidak tersedia";
+        else $message = '';
+        
+        return response()->json([
+            'data' => $jadwal,
+            'message' => $message,
         ]);
     });
     

@@ -32,7 +32,7 @@
 
 <div class="form-group col-sm-4">
     <label for="role">Role</label>
-    <select class="custom-select" id="inputGroupSelect02" name="role">
+    <select class="custom-select" id="inputGroupSelect02" name="role" @if(isset($role)) disabled @endif>
         @if (isset($role))
             @foreach ($roles as $item)
                 <option 

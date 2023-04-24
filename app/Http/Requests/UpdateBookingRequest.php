@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Dokter;
+use App\Models\Booking;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CreateDokterRequest extends FormRequest
+class UpdateBookingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +25,8 @@ class CreateDokterRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
-            'spesialis' => 'nullable',
-            'nip' => 'nullable',
-            'jenis_kelamin' => ['required', Rule::in(['pria', 'perempuan'])],
-            'image' => ['nullable', "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
+            'jadwal_praktik_id' => 'required',
+            'pasien_id' => 'required',
         ];
     }
 }

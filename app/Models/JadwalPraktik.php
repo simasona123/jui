@@ -22,4 +22,7 @@ class JadwalPraktik extends Model
         'keterangan' => 'string'
     ];
 
+    public function dokter(){
+        return $this->belongsTo(Dokter::class);
+    }
 }

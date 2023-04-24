@@ -43,6 +43,11 @@ class DokterController extends AppBaseController
     {
         $dokter = $this->dokterRepository->create_with_image($request);
 
+        if(gettype($dokter) == "integer"){
+            Flash::error('Dokter Telah Ada');
+            return redirect(route('dokter.index'));
+        }
+
         Flash::success('Dokter saved successfully.');
 
         return redirect(route('dokter.index'));
@@ -98,7 +103,7 @@ class DokterController extends AppBaseController
             return redirect(route('dokter.index'));
         }
 
-        $dokter = $this->dokterRepository->update($request->all(), $id);
+        $dokter = $this->dokterRepository->update_with_image($request, $id);
 
         Flash::success('Dokter updated successfully.');
 
