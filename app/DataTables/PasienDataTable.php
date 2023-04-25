@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Pasien;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -18,6 +19,7 @@ class PasienDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
+
         $dataTable->addColumn('user', function(Pasien $pasien){
             return $pasien->user->full_name . " (" . $pasien->user_id .")";
         });
@@ -33,7 +35,12 @@ class PasienDataTable extends DataTable
      */
     public function query(Pasien $model)
     {   
-        return $model::with('user');
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        if($role == 'klien'){
+            return $model::with('user')->where('user_id', $user->id)->where('status', true);
+        }
+        return $model::with('user')->where('status', true);
     }
 
     /**

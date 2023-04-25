@@ -28,7 +28,7 @@
     if(value != '') document.querySelector('#check').style.display = 'inline'
     else document.querySelector('#check').style.display = 'none'
 })" class="form-group col-sm-6">
-    {!! Form::label('user_id', 'Email User') !!}
+    {!! Form::label('user_id', 'Email User') !!} <span class="required">*</span>
     <div :class="dokter.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
         <input type="text" x-model="search" @input.debounce.1000ms="getUser" class="form-google" placeholder="Cari User">
         <svg id="check" style="margin-right: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -56,7 +56,7 @@
 
 <!-- Jenis Kelamin Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!}
+    {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!} <span class="required">*</span>
     {!! Form::select('jenis_kelamin', ["pria" => "Pria", "perempuan"=>"Perempuan"], null, ['class' => 'form-control custom-select']) !!}
 </div>
 

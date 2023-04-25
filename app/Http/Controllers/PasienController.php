@@ -128,7 +128,12 @@ class PasienController extends AppBaseController
             return redirect(route('pasien.index'));
         }
 
-        $this->pasienRepository->delete($id);
+        try {
+            $this->pasienRepository->delete($id);
+        } catch (\Throwable $th) {
+            $pasien->status = false;
+            $pasien->save();
+        }
 
         Flash::success('Pasien deleted successfully.');
 

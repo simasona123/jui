@@ -3,6 +3,8 @@
 namespace App\DataTables;
 
 use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -31,6 +33,12 @@ class BookingDataTable extends DataTable
             ];
         });
 
+        $dataTable->addColumn('status_booking', 'bookings.datatables_status');
+
+        $dataTable->addColumn('action', 'bookings.datatables_actions');
+        $dataTable->rawColumns(['action','status_booking'])
+            ->make(true);
+
         return $dataTable->addColumn('action', 'bookings.datatables_actions');
     }
 
@@ -42,7 +50,12 @@ class BookingDataTable extends DataTable
      */
     public function query(Booking $model)
     {
-        return $model->newQuery();
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        if($role == 'klien'){
+            return $model::with(['pasien', 'jadwal_praktik', 'status'])->whereRelation('pasien', 'user_id', $user->id);
+        }
+        return $model::with(['pasien', 'jadwal_praktik', 'status']);
     }
 
     /**
@@ -86,14 +99,16 @@ class BookingDataTable extends DataTable
                 let date = new Date(data[1]);
                 let time = `\${String(date.getDate()).padStart(2, '0')}-\${String(date.getMonth()+1).padStart(2, '0')}-\${date.getFullYear()} \${String(date.getHours()).padStart(2, '0')}:\${String(date.getMinutes()).padStart(2, '0')}:00`;
                 return `<a href='/admin/jadwal-praktik/\${data[0]}'>\${time}</a>`
-            }");   
-
-        
-        
+            }");
+            
+        $status_booking = Column::make('status_booking')
+                ->searchable(false)
+                ->orderable(false);
         return [
             $jadwal_praktik,
             $pasien,
             'kode_booking',
+            $status_booking,
         ];
     }
 

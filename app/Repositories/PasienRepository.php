@@ -31,11 +31,13 @@ class PasienRepository extends BaseRepository
     public function create_with_image(Request $input): Model {
         $model = $this->model->newInstance($input->all());
 
-        $image_name = $model->name.".".$input['image']->extension();
+        if(isset($input->image)){
+            $image_name = $model->name.".".$input['image']->extension();
 
-        $input['image']->move(storage_path('app/pasien'), $image_name);
-
-        $model->addMedia(storage_path('app/pasien/') . $image_name)->toMediaCollection();
+            $input['image']->move(storage_path('app/pasien'), $image_name);
+    
+            $model->addMedia(storage_path('app/pasien/') . $image_name)->toMediaCollection();
+        }
 
         $model->save();
 

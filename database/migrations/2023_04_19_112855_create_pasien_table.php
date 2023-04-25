@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin',['jantan', 'betina']);
             $table->string('ras');
             $table->date('tanggal_lahir');
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

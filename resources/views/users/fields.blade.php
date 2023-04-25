@@ -1,22 +1,22 @@
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('full_name', 'Full Name:') !!}
+    {!! Form::label('full_name', 'Full Name:') !!} <span class="required">*</span>
     {!! Form::text('full_name', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Email Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email', 'Email:') !!}
+<div class="form-group col-sm-6"> 
+    {!! Form::label('email', 'Email:') !!} <span class="required">*</span>
     {!! Form::email('email', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <div class="form-group col-sm-6">
-    {!! Form::label('password', 'Password:') !!}
+    {!! Form::label('password', 'Password:') !!} <span class="required">*</span>
     <input name="password" type="password" id="password" class="form-control required">
 </div>
 
 <div class="form-group col-sm-6">
-    {!! Form::label('password_confirmation', 'Password Confirmation:') !!}
+    {!! Form::label('password_confirmation', 'Password Confirmation:') !!} <span class="required">*</span>
     <input name="password_confirmation" type="password" id="password_cofirmation" class="form-control required">
 </div>
 
@@ -31,7 +31,7 @@
 </div>
 
 <div class="form-group col-sm-4">
-    <label for="role">Role</label>
+    <label for="role">Role</label> <span class="required">*</span>
     <select class="custom-select" id="inputGroupSelect02" name="role" @if(isset($role)) disabled @endif>
         @if (isset($role))
             @foreach ($roles as $item)
@@ -53,7 +53,7 @@
 </div>
 
 <div class="form-group col-sm-4">
-    <label for="verification">Verifikasi</label>
+    <label for="verification">Verifikasi</label> 
     <select class="custom-select" id="inputGroupSelect02" name="verification">
         @if (isset($user))
             <option @if ($user->verification == 1)

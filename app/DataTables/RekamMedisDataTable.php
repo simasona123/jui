@@ -2,13 +2,11 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\RekamMedis;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Facades\DataTables;
-use Yajra\DataTables\Html\Column;
 
-class UserDataTable extends DataTable
+class RekamMedisDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,22 +16,18 @@ class UserDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        $dataTable = DataTables::eloquent($query);
-        $dataTable->addColumn('status', 'users.datatables_status')
-            ->addColumn('action', 'users.datatables_actions')
-            ->rawColumns(['status', 'action'])
-            ->make(true);
+        $dataTable = new EloquentDataTable($query);
 
-        return $dataTable;
+        return $dataTable->addColumn('action', 'rekam_medis.datatables_actions');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Patient $model
+     * @param \App\Models\RekamMedis $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(RekamMedis $model)
     {
         return $model->newQuery();
     }
@@ -71,18 +65,18 @@ class UserDataTable extends DataTable
      */
     protected function getColumns()
     {
-        $status = Column::make('status')
-                ->searchable(false)
-                ->orderable(false);
-        $phone = Column::make('phone')
-                ->searchable(false)
-                ->orderable(false);
-                
         return [
-            'full_name',
-            'email',
-            $phone,
-            $status,
+            'booking_id',
+            'dokter_id',
+            'nomor_rekam_medis',
+            'keluhan',
+            'diagnosis',
+            'prognosa',
+            'tindakan',
+            'suhu',
+            'berat',
+            'tgl_pemeriksaan',
+            'keterangan'
         ];
     }
 
@@ -93,6 +87,6 @@ class UserDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'user_datatable_' . time();
+        return 'rekam_medis_datatable_' . time();
     }
 }

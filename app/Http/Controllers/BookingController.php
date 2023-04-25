@@ -27,7 +27,7 @@ class BookingController extends AppBaseController
      */
     public function index(BookingDataTable $bookingDataTable)
     {
-    return $bookingDataTable->render('bookings.index');
+        return $bookingDataTable->render('bookings.index');
     }
 
 
@@ -38,11 +38,7 @@ class BookingController extends AppBaseController
     {
         $user = Auth::user();
         if($user->hasRole('administrator|manajer')){
-            $jadwal_praktik = JadwalPraktik::orderBy('tanggal_masuk', 'DESC')->first();
-
-            return view('bookings.create', [
-                'jadwal_praktik' => $jadwal_praktik,
-            ]);
+            return view('bookings.create');
         } else{
             return "Belum dibuat untuk klien";
         }
@@ -55,7 +51,7 @@ class BookingController extends AppBaseController
     public function store(CreateBookingRequest $request)
     {
         $input = $request->all();
-        
+
         $booking = $this->bookingRepository->create_booking($input);
 
         if (gettype($booking) == "integer"){

@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                    Create Pasien
+                    Create Rekam Medis
                     </h1>
                 </div>
             </div>
@@ -16,23 +16,22 @@
     <div class="content px-3">
 
         @include('adminlte-templates::common.errors')
-        @include('flash::message')
 
         <div class="card">
 
-            {!! Form::open(['route' => 'pasien.store', 'enctype'=>"multipart/form-data"]) !!}
+            {!! Form::open(['route' => 'rekamMedis.store']) !!}
 
             <div class="card-body">
 
                 <div class="row">
-                    @include('pasien.fields')
+                    @include('rekam_medis.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('pasien.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('rekamMedis.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

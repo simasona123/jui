@@ -3,9 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Notifications\UserVerification;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 
 class UserRepository extends BaseRepository
 {
@@ -38,14 +40,19 @@ class UserRepository extends BaseRepository
         $query = $this->model->newQuery();
 
         $model = $query->findOrFail($id);
+        
+        $verif = $model->verification;
 
         $array = array_filter($input, function($value){
             return !is_null($value);
         });
 
         $model->fill($array);
-
         $model->save();
+
+        if($verif == 0 && $array['verification'] == 1){
+            Notification::send($model, new UserVerification());
+        }
 
         return $model;
     }

@@ -2,7 +2,7 @@
     {
         "name": "id",
         "dbType": "id",
-        "htmlType": "text",
+        "htmlType": "",
         "validations": "",
         "searchable": false,
         "fillable": false,
@@ -12,9 +12,9 @@
         "inView": false
     },
     {
-        "name": "user_id",
-        "dbType": "integer",
-        "htmlType": "select",
+        "name": "booking_id",
+        "dbType": "unsignedBigInterger",
+        "htmlType": "text",
         "validations": "required",
         "searchable": true,
         "fillable": true,
@@ -24,7 +24,19 @@
         "inView": true
     },
     {
-        "name": "nama_hewan",
+        "name": "dokter_id",
+        "dbType": "unsignedBigInterger",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "nomor_rekam_medis",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",
@@ -36,7 +48,7 @@
         "inView": true
     },
     {
-        "name": "jenis_hewan",
+        "name": "keluhan",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",
@@ -48,19 +60,7 @@
         "inView": true
     },
     {
-        "name": "jenis_kelamin",
-        "dbType": "enum",
-        "htmlType": "select",
-        "validations": "required",
-        "searchable": true,
-        "fillable": true,
-        "primary": false,
-        "inForm": true,
-        "inIndex": true,
-        "inView": true
-    },
-    {
-        "name": "ras",
+        "name": "diagnosis",
         "dbType": "string",
         "htmlType": "text",
         "validations": "required",
@@ -72,10 +72,70 @@
         "inView": true
     },
     {
-        "name": "tanggal_lahir",
-        "dbType": "date",
+        "name": "prognosa",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "tindakan",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "suhu",
+        "dbType": "decimal",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "berat",
+        "dbType": "decimal",
+        "htmlType": "number",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "tgl_pemeriksaan",
+        "dbType": "datetime",
         "htmlType": "date",
-        "validations": "",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "keterangan",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -86,7 +146,7 @@
     {
         "name": "created_at",
         "dbType": "timestamp",
-        "htmlType": "text",
+        "htmlType": "",
         "validations": "",
         "searchable": false,
         "fillable": false,
@@ -98,7 +158,7 @@
     {
         "name": "updated_at",
         "dbType": "timestamp",
-        "htmlType": "text",
+        "htmlType": "",
         "validations": "",
         "searchable": false,
         "fillable": false,

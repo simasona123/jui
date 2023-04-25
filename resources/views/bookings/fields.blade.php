@@ -1,11 +1,20 @@
-<!-- Jadwal Id Field -->
+@php
+    $user = Auth::user();
+    $role = $user->getRoleNames()[0];
+
+    if($role == 'klien'){
+        $pasien_id = $booking->pasien_id;
+    }else{
+        $pasien_id = '';
+    }
+@endphp
 
 <div class="row col-sm-12" 
     x-data="{
         data: [],
         @if(isset($booking))
             tanggal: '{{ date('Y-m-d', strtotime($booking->jadwal_praktik->tanggal_masuk))}}',
-            target: {{$booking->jadwal_praktik}},
+            target: {{$booking->jadwal_praktik}}, {{-- Untuk mengecek Centang Date --}}
             jadwal_praktik_id: '{{$booking['jadwal_praktik_id']}}',
         @else
             tanggal: '{{date('Y-m-d')}}',
@@ -20,6 +29,39 @@
             this.data = json;
         },
 
+        clickJadwal(item){
+            this.target = item;
+            this.jadwal_praktik_id = item['id'];
+            this.data = [];
+            if(this.name == ''){
+                alert('Tolong isi kolom pasien terlebih dahulu');
+                this.target = null;
+                this.getJadwal();
+            }else{
+                setTimeout(function(){
+                    document.querySelector('#upload').submit(); 
+                }, 1000);
+            }
+        },
+
+        name: '',
+        data1: [],
+        pasien_id: '{{$pasien_id}}',
+        async getPasien(){
+            let url = '/api/pasien?name=' + this.name;
+            const resp = await fetch(url);
+            const json = await resp.json();
+            this.data1 = json['data'];
+            console.log(this.data1)
+        },
+
+        clickPasien(item){
+            this.pasien_id = item['id'];
+            this.name = item['nama_hewan'];
+            this.data1 = [];
+            console.log(this.pasien_id)
+        },
+
         convertedTanggal(x, y = null){
             let date = new Date(x)
             let result = ` 
@@ -31,17 +73,7 @@
             result += ` 
                 - ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:00 WIB`;
             return result;
-        },
-
-        clickJadwal(item){
-            this.target = item;
-            this.jadwal_praktik_id = item['id'];
-            this.data = [];
-            setTimeout(function(){
-                document.querySelector('#upload').submit(); 
-            }, 1000);
-        }
-        
+        }, 
     }" 
     x-init="
         $watch('target', value => {
@@ -55,11 +87,31 @@
 >
 
     <div class="form-group col-sm-6">
-        {!! Form::label('pasien_id', 'Pasien Id:') !!}
-        {!! Form::text('pasien_id', null, ['class' => 'form-control', 'required']) !!}
+        {!! Form::label('pasien_id', 'Nama Pasien:') !!} <span class="required">*</span>
+        @if ($role == 'klien')
+            <input type="text" hidden x-model="pasien_id" disabled>
+        @else
+            <div :class="data1.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
+                <input type="text" hidden x-model="pasien_id" name="pasien_id">
+                {!! Form::text('pasien_name', null, ['class' => 'form-google', 'required', 'x-model' => 'name', '@input.debounce.1000ms'=>"getPasien"]) !!}
+                <svg id="check" style="margin-right: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                    <path fill="green" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                </svg>
+                <i class="fas fa-search"></i>
+            </div>
+        @endif
+        <div class="ajax-request">
+            <div :class="data1.length != 0 ? 'ajax-items form-control' : 'ajax-items-initial'">
+                <template x-for="item in data1">
+                    <a @click="clickPasien(item)" href="#"><li x-text="`${item['nama_hewan']} (${item['user_id']})`"></li></a>
+                </template>
+            </div>
+        </div>
     </div>
+
     <div class="col-sm-6">
-        {!! Form::label('jadwal_praktik_id', 'Jadwal:') !!}
+        {!! Form::label('jadwal_praktik_id', 'Jadwal:') !!} <span class="required">*</span>
         <span x-text="target == null ? '' : convertedTanggal(target['tanggal_masuk'], target['tanggal_selesai'])" x-show="target"></span>
         <svg id="check" style="margin-left: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
             <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

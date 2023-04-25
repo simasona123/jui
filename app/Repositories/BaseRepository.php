@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Dokter;
 use Illuminate\Container\Container as Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;

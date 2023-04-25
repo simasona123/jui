@@ -13,7 +13,6 @@
 .form-google{
     border: 0;
     width: 100%;
-    padding: 5px;
 }
 
 .form-google:focus{
@@ -55,4 +54,11 @@
 
 li{
     list-style-type: none;
+}
+
+.required{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
 }

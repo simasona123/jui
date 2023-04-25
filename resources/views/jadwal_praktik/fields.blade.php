@@ -35,7 +35,7 @@
     else document.querySelector('#check').style.display = 'none'
 })" class="form-group col-sm-6">
 
-    {!! Form::label('user_id', 'Email Dokter:') !!}
+    {!! Form::label('user_id', 'Email Dokter:') !!} <span class="required">*</span>
     <div :class="dokter.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
         <input type="text" x-model="search" @input.debounce.1000ms="getUser" class="form-google" placeholder="Cari Dokter">
         <svg id="check" style="margin-right: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -61,7 +61,7 @@
 
 <!-- Tanggal Masuk Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tanggal_masuk', 'Tanggal Masuk (WIB):') !!}
+    {!! Form::label('tanggal_masuk', 'Tanggal Masuk (WIB):') !!} <span class="required">*</span>
     <input type="datetime-local" class="form-control" required
        name="tanggal_masuk" value="{{isset($jadwalPraktik)? $jadwalPraktik->tanggal_masuk : ''}}"
        min="{{date("Y-m-d\T00:00")}}" max="">
@@ -69,7 +69,7 @@
 
 <!-- Tanggal Selesai Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tanggal_selesai', 'Tanggal Selesai (WIB):') !!}
+    {!! Form::label('tanggal_selesai', 'Tanggal Selesai (WIB):') !!} <span class="required">*</span>
     <input type="datetime-local" class="form-control" required
         name="tanggal_selesai" value="{{isset($jadwalPraktik)? $jadwalPraktik->tanggal_selesai : ''}}"
         min="{{date("Y-m-d\T00:00")}}" max="">
@@ -77,7 +77,7 @@
 
 <!-- Ketersediaan Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('ketersediaan', 'Ketersediaan:') !!}
+    {!! Form::label('ketersediaan', 'Ketersediaan:') !!} <span class="required">*</span>
     <input type="number" name="ketersediaan" class="form-control" required
        min="1" max="7" value="{{isset($jadwalPraktik) ? $jadwalPraktik->ketersediaan : ''}}">
 

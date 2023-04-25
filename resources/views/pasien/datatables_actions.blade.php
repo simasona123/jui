@@ -1,4 +1,3 @@
-{{$id}}
 {!! Form::open(['route' => ['pasien.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
     <a href="{{ route('pasien.show', $id) }}" class='btn btn-default btn-xs'>
@@ -10,7 +9,7 @@
     {!! Form::button('<i class="fa fa-trash"></i>', [
         'type' => 'submit',
         'class' => 'btn btn-danger btn-xs',
-        'onclick' => 'return confirm("'.__('crud.are_you_sure').'")'
+        'onclick' => 'return confirm("'.__('Yakin Menghapus Pasien?').'")'
     ]) !!}
 </div>
 {!! Form::close() !!}

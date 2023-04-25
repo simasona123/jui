@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Packages\CaptchaController;
 use App\Http\Resources\JadwalCollection;
+use App\Models\Booking;
 use App\Models\JadwalPraktik;
+use App\Models\Pasien;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +60,30 @@ Route::middleware('cors')->group(function(){
             'data' => $jadwal,
             'message' => $message,
         ]);
+    });
+
+    Route::get('/booking', function(Request $request){
+        $kode_booking = $request->kode;
+
+        $data = Booking::select('id', 'kode_booking')->where('kode_booking', $kode_booking)->where('status_id', 2)->get(); //2 Sudah Dibayar
+        return response()->json([
+            'data' => $data,
+        ]);
+    });
+    
+    Route::get('/pasien', function(Request $request){
+        $name = $request->name;
+
+        if($name==''){
+            return response()->json([
+                'data' => []
+            ]);
+        }
+        $data = Pasien::where('nama_hewan', 'like', $name . '%')->get(); //2 Sudah Dibayar
+        return response()->json([
+            'data' => $data,
+        ]);
+
     });
     
     Route::get('/reload-captcha', [CaptchaController::class, 'reloadCaptcha']);

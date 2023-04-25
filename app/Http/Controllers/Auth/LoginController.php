@@ -55,22 +55,29 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
-            if($this->guard()->user()->blocked == 1){
-                $this->guard()->logout();
 
-                $request->session()->invalidate();
-        
-                $request->session()->regenerateToken();
-        
-                return  throw ValidationException::withMessages([
-                    $this->username() => ['Akun anda Terblokir, Silahkan hubungi administrator'],
-                ]);
-            }
-            if ($request->hasSession()) {
-                $request->session()->put('auth.password_confirmed_at', time());
-            }
+            $blocked = $this->guard()->user()->blocked;
+            $verif = $this->guard()->user()->verification;
 
-            return $this->sendLoginResponse($request);
+            if(!($blocked == 1 || $verif == 0)){
+                if ($request->hasSession()) {
+                    $request->session()->put('auth.password_confirmed_at', time());
+                }
+                return $this->sendLoginResponse($request);
+            }
+            
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+    
+            $request->session()->regenerateToken();
+            if($blocked == 1 ) return  throw ValidationException::withMessages([
+                $this->username() => ['Akun anda Terblokir, Silahkan hubungi administrator'],
+            ]);
+            return  throw ValidationException::withMessages([
+                $this->username() => ['Akun anda Belum Terverifikasi, Silahkan hubungi administrator'],
+            ]);
+            
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

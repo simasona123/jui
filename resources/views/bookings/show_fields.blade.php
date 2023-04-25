@@ -27,4 +27,6 @@
     {!! Form::label('updated_at', 'Updated At:') !!}
     <p>{{ $booking->updated_at }}</p>
 </div>
-
+@if (isset($booking->rekam_medis))
+    <a href="/admin/rekam-medis/{{$booking->rekam_medis->id}}">Lihat Rekam Medis</a>
+@endif

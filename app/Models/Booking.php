@@ -31,4 +31,11 @@ class Booking extends Model
         return $this->belongsTo(JadwalPraktik::class);
     }
 
+    public function rekam_medis(){
+        return $this->hasOne(RekamMedis::class);
+    }
+
+    public function status(){
+        return $this->belongsTo(StatusBooking::class);
+    }
 }
