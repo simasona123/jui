@@ -26,7 +26,7 @@ class JadwalPraktikController extends AppBaseController
      */
     public function index(JadwalPraktikDataTable $jadwalPraktikDataTable)
     {
-    return $jadwalPraktikDataTable->render('jadwal_praktik.index');
+        return $jadwalPraktikDataTable->render('jadwal_praktik.index');
     }
 
 

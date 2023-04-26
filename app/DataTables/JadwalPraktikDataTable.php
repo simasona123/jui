@@ -2,7 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\Dokter;
 use App\Models\JadwalPraktik;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -30,6 +32,12 @@ class JadwalPraktikDataTable extends DataTable
      */
     public function query(JadwalPraktik $model)
     {
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        if($role == 'dokter-hewan'){
+            $dokter_id = Dokter::where('user_id', $user->id)->first()->id;
+            return $model::where('dokter_id', $dokter_id);
+        }
         return $model->newQuery();
     }
 
@@ -87,7 +95,7 @@ class JadwalPraktikDataTable extends DataTable
             }");
         
         return [
-            'dokter_id',
+            'id',
             $tanggal_masuk,
             $tanggal_selesai,
             'ketersediaan',

@@ -78,18 +78,16 @@ Route::middleware('auth')->group(function(){
     });
 }); //Dokter
 
-Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
+Route::middleware(['auth', 'role:administrator|manajer|dokter-hewan'])->group(function(){
     Route::prefix('/admin/jadwal-praktik')->name('jadwal-praktik.')->group(function(){
         Route::controller(JadwalPraktikController::class)->group(function(){
             Route::get('/', 'index')->name('index');
-            Route::get('/create', "create")->name("create");
-            Route::post('/', "store")->name("store");
+            Route::get('/create', "create")->name("create")->middleware('role:administrator|manajer');
+            Route::post('/', "store")->name("store")->middleware('role:administrator|manajer');
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit");
-            Route::patch('/{user}', "update")->name("update");
-            Route::delete('/{user}', "destroy")->name("destroy");
-            Route::get('/edit/profil', "profil")->name('profil');
-            Route::put('/edit/profil', "profil_update")->name('profil_update');
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware('role:administrator|manajer');
+            Route::patch('/{user}', "update")->name("update")->middleware('role:administrator|manajer');
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware('role:administrator|manajer');
         });
     });
 }); //Jadwal Praktik
@@ -104,8 +102,6 @@ Route::middleware('auth')->group(function(){
             Route::get('/{user}/edit', "edit")->name("edit");
             Route::patch('/{user}', "update")->name("update");
             Route::delete('/{user}', "destroy")->name("destroy");
-            Route::get('/edit/profil', "profil")->name('profil');
-            Route::put('/edit/profil', "profil_update")->name('profil_update');
         });
     });
 }); //Booking
@@ -120,8 +116,6 @@ Route::middleware('auth')->group(function(){
             Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer']);
             Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer']);
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
-            Route::get('/edit/profil', "profil")->name('profil');
-            Route::put('/edit/profil', "profil_update")->name('profil_update');
         });
     });
 }); //Rekam Medis

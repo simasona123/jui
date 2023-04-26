@@ -27,8 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $role = $user->getRoleNames()[0];
         $pasien = Pasien::where('user_id', $user->id)->get();
-        if(count($pasien) == 0){
+        if(count($pasien) == 0 && $role == 'klien'){
             Flash::success('Silahkan daftarkan hewan peliharaan terlebih dahulu');
             return redirect()->route('pasien.create');
         }

@@ -26,7 +26,7 @@
 @endrole
 
 
-@role('administrator|manajer')
+@role('administrator|manajer|dokter-hewan')
 <li class="nav-item">
     <a href="{{ route('jadwal-praktik.index') }}" class="nav-link {{ Request::is('jadwal-praktik*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>

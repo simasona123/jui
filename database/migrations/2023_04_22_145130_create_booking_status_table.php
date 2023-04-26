@@ -18,7 +18,7 @@ return new class extends Migration
         });
 
         DB::table('booking_status')->insert(
-            ["string" => "Belum Dibayar"]
+            ["name" => "Belum Dibayar"]
         );
     }
 
