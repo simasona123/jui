@@ -3,7 +3,9 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JadwalPraktikController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -119,3 +121,26 @@ Route::middleware('auth')->group(function(){
         });
     });
 }); //Rekam Medis
+
+Route::middleware('auth')->group(function(){
+    Route::prefix('/admin/pembayaran')->name('pembayarans.')->group(function(){
+        Route::controller(PembayaranController::class)->group(function(){
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', "create")->name("create");
+            Route::post('/', "store")->name("store");
+            Route::get('/{user}', "show")->name("show");
+            Route::get('/{user}/edit', "edit")->name("edit");
+            Route::patch('/{user}', "update")->name("update");
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
+        });
+    });
+}); //Rekam Medis
+
+//Coba CHat
+Route::middleware('auth')->group(function(){
+    // Route::get('/', [MessageController::class, 'index']);
+    Route::get('/messages', [MessageController::class, 'fetchMessages']);
+    Route::post('/messages', [MessageController::class, 'sendMessage']);
+});
+
+

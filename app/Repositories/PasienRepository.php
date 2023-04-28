@@ -36,7 +36,9 @@ class PasienRepository extends BaseRepository
 
             $input['image']->move(storage_path('app/pasien'), $image_name);
     
-            $model->addMedia(storage_path('app/pasien/') . $image_name)->toMediaCollection();
+            $model->addMedia(storage_path('app/pasien/') . $image_name)
+                ->usingName($image_name)
+                ->toMediaCollection();
         }
 
         $model->save();

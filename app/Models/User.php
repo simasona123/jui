@@ -51,6 +51,10 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this
@@ -58,4 +62,5 @@ class User extends Authenticatable implements HasMedia
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }
+
 }

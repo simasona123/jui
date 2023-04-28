@@ -70,6 +70,8 @@ class DokterRepository extends BaseRepository
 
         $input['image']->move(storage_path('app/dokter'), $image_name);
 
-        $model->addMedia(storage_path('app/dokter/') . $image_name)->toMediaCollection();
+        $model->addMedia(storage_path('app/dokter/') . $image_name)
+            ->usingName($image_name)
+            ->toMediaCollection();
     }
 }

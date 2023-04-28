@@ -49,7 +49,7 @@
                     </li>
                 </ul>
             </nav>
-
+            @include('chat')
             <!-- Left side column. contains the logo and sidebar -->
             @include('layouts.sidebar')
 

@@ -50,3 +50,10 @@
     </a>
 </li>
 @endrole
+
+<li class="nav-item">
+    <a href="{{ route('pembayarans.index') }}" class="nav-link {{ Request::is('pembayarans*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Pembayaran</p>
+    </a>
+</li>

@@ -1,6 +1,6 @@
 <!-- User Id Field -->
 @php
-    $media = Auth::user()->getMedia();
+    $media = $pasien->getMedia();
     $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
 @endphp
 

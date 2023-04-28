@@ -64,11 +64,19 @@ Route::middleware('cors')->group(function(){
 
     Route::get('/booking', function(Request $request){
         $kode_booking = $request->kode;
-
-        $data = Booking::select('id', 'kode_booking')->where('kode_booking', $kode_booking)->where('status_id', 2)->get(); //2 Sudah Dibayar
-        return response()->json([
-            'data' => $data,
-        ]);
+        $user_id = $request->id;
+        $role = $request->role;
+        if($role == 'administrator' || $role == 'manajer'){
+            $data = Booking::select('id', 'kode_booking')->where('kode_booking', 'like', $kode_booking . '%')
+                ->take(10)
+                ->get();
+            return response()->json([
+                'data' => $data,
+            ]);
+        }
+        $pasien = Pasien::select(['id', 'user_id'])->where('user_id', $user_id)->get();
+        dd($pasien);
+       
     });
     
     Route::get('/pasien', function(Request $request){
@@ -79,7 +87,7 @@ Route::middleware('cors')->group(function(){
                 'data' => []
             ]);
         }
-        $data = Pasien::where('nama_hewan', 'like', $name . '%')->get(); //2 Sudah Dibayar
+        $data = Pasien::where('nama_hewan', 'like', $name . '%')->get(); 
         return response()->json([
             'data' => $data,
         ]);
