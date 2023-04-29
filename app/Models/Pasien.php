@@ -38,7 +38,10 @@ class Pasien extends Model implements HasMedia
     public function user(): BelongsTo{
         return $this->belongsTo(User::class);
     }
-    
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

@@ -17,7 +17,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>Manage Users</p>
                     </a>
                 </li>

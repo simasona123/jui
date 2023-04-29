@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                    Pembayaran
+                        Edit Reminder
                     </h1>
                 </div>
             </div>
@@ -19,17 +19,17 @@
 
         <div class="card">
 
-            {!! Form::open(['route' => 'pembayarans.store', 'enctype'=>"multipart/form-data"]) !!}
+            {!! Form::model($reminder, ['route' => ['reminders.update', $reminder->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
-
-                @include('pembayarans.fields')
-
+                <div class="row">
+                    @include('reminders.fields')
+                </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('pembayarans.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('reminders.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
             {!! Form::close() !!}

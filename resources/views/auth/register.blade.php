@@ -1,4 +1,6 @@
 <x-laravel-ui-adminlte::adminlte-layout>
+<script src="/jquery.min.js"></script>
+    
     <body class="hold-transition register-page">
         <div class="register-box">
             <div class="register-logo">
@@ -7,6 +9,12 @@
 
             <div class="card">
                 <div class="card-body register-card-body">
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>	
+                                <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
                     <p class="login-box-msg">Register a new membership</p>
 
                     <form method="post" action="{{ route('register') }}">

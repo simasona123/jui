@@ -2,12 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Pembayaran;
+use App\Models\Reminder;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
 
-class PembayaranDataTable extends DataTable
+class ReminderDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -19,26 +19,30 @@ class PembayaranDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
 
-        $dataTable = $dataTable
-            ->addColumn('kode_booking', function($pembayaran){
-                return $pembayaran->booking->kode_booking;
-            })
-            ->addColumn('status', 'pembayarans.datatables_status')
-            ->addColumn('aksi', 'pembayarans.datatables_actions')
-            ->rawColumns(['status', 'aksi']);
+        $dataTable->addColumn('dokter', function($reminder){
+            return $reminder->dokter->user->full_name . ' (' . $reminder->dokter->nip . ')';
+        });
+
+        $dataTable->addColumn('pasien', function($reminder){
+            return $reminder->pasien->user->full_name;
+        });
+
+        $dataTable->addColumn('status', 'reminders.datatables_status');
+        $dataTable->addColumn('action', 'reminders.datatables_actions');
         
-        return $dataTable;
+
+        return $dataTable->rawColumns(['status', 'action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Pembayaran $model
+     * @param \App\Models\Reminder $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Pembayaran $model)
+    public function query(Reminder $model)
     {
-        return $model::with('booking');
+        return $model::with(['dokter', 'pasien']);
     }
 
     /**
@@ -51,7 +55,7 @@ class PembayaranDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            // ->addAction(['width' => '120px', 'printable' => false])
+            ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -74,20 +78,7 @@ class PembayaranDataTable extends DataTable
      */
     protected function getColumns()
     {
-        $status = Column::make('status')
-                ->searchable(false)
-                ->orderable(false);
-
-        $aksi = Column::make('aksi')
-                ->searchable(false)
-                ->orderable(false);
-
-        $kode_booking = Column::make('kode_booking');
-
-        $id = Column::make('id')
-            ->visible(false);
-
-        $tanggal_bayar= Column::make('tanggal_bayar')
+        $tanggal = Column::make('tanggal')
             ->title('Tanggal Masuk')
             ->searchable(false)
             ->orderable(false)
@@ -96,15 +87,19 @@ class PembayaranDataTable extends DataTable
                 return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()} 
                 \${String(data.getHours()).padStart(2, '0')}:\${String(data.getMinutes()).padStart(2, '0')}:00 WIB`;
             }");
-            
+        
+        $dokter = Column::make('dokter');
+        $pasien = Column::make('pasien');
+
+        $status = Column::make('status')
+            ->title('Status');
 
         return [
-            $id,
-            $kode_booking,
-            $tanggal_bayar,
-            'jumlah_transaksi',
+            $dokter,
+            $pasien,
+            'keterangan',
+            $tanggal,
             $status,
-            $aksi,
         ];
     }
 
@@ -115,6 +110,6 @@ class PembayaranDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'pembayarans_datatable_' . time();
+        return 'reminders_datatable_' . time();
     }
 }

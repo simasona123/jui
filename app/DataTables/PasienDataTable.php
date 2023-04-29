@@ -19,10 +19,13 @@ class PasienDataTable extends DataTable
     public function dataTable($query)
     {
         $dataTable = new EloquentDataTable($query);
-
-        $dataTable->addColumn('user', function(Pasien $pasien){
-            return $pasien->user->full_name . " (" . $pasien->user_id .")";
-        });
+        
+        if(Auth::user()->getRoleNames()[0] != 'klien'){
+            $dataTable->addColumn('user', function(Pasien $pasien){
+                return $pasien->user->full_name;
+            });
+        }
+        
         $dataTable->addColumn('action', 'pasien.datatables_actions');
         return $dataTable;
     }
@@ -84,9 +87,7 @@ class PasienDataTable extends DataTable
                 data = new Date(data);
                 return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()}`;
             }");
-        
-        $user = Column::make('user')->searchable(true)->name('user.full_name');
-        
+    
         $jenis_kelamin = Column::make('jenis_kelamin')
             ->title('Jenis Kelamin')
             ->searchable(false)
@@ -96,16 +97,30 @@ class PasienDataTable extends DataTable
             ->title('Ras')
             ->searchable(false)
             ->orderable(false);
-
-        return [
+        
+        $result = [
             'id',
-            $user,
             'nama_hewan',
             'jenis_hewan',
             $jenis_kelamin,
             $ras,
             $tanggal_lahir,
         ];
+
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        
+        if($role != 'klien'){
+            $user = Column::make('user')
+            ->title('Pemilik')
+            ->searchable(false)
+            ->orderable(false);
+
+            array_splice($result, 1, 0, $user);
+        }
+
+        return $result;
+        
     }
 
     /**

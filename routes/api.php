@@ -3,10 +3,12 @@
 use App\Http\Controllers\Packages\CaptchaController;
 use App\Http\Resources\JadwalCollection;
 use App\Models\Booking;
+use App\Models\Dokter;
 use App\Models\JadwalPraktik;
 use App\Models\Pasien;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +28,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('cors')->group(function(){
     Route::get('/klien', function(Request $request){ //Mencari Klien
-        if($request->email==''){
-            return response()->json([
-                'data' => []
-            ]);
-        }
         $klien = User::role('klien')->where('email', 'like', $request->email . "%")->take(10)->get();
         return response()->json([
             'data' => $klien
@@ -38,11 +35,6 @@ Route::middleware('cors')->group(function(){
     });
     
     Route::get('/dokter', function(Request $request){ //Mencari Dokter
-        if($request->email==''){
-            return response()->json([
-                'data' => []
-            ]);
-        }
         $dokter = User::role('dokter-hewan')->where('email', 'like', $request->email . "%")->take(10)->get();
         return response()->json([
             'data' => $dokter
@@ -81,19 +73,19 @@ Route::middleware('cors')->group(function(){
     
     Route::get('/pasien', function(Request $request){
         $name = $request->name;
-
-        if($name==''){
-            return response()->json([
-                'data' => []
-            ]);
+        if(isset($request->klien)){
+            $data = Pasien::where('nama_hewan', 'like', $name . '%')->where('user_id', $request->klien)->get();
+        }else{
+            $data = Pasien::with('user')->where('nama_hewan', 'like', $name . '%')->take(10)->get(); 
         }
-        $data = Pasien::where('nama_hewan', 'like', $name . '%')->get(); 
         return response()->json([
             'data' => $data,
         ]);
 
     });
     
+    
+
     Route::get('/reload-captcha', [CaptchaController::class, 'reloadCaptcha']);
 });
 

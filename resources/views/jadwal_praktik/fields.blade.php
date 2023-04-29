@@ -4,14 +4,12 @@
     @if(isset($user))
         search: '{{$user->email}}',
         value: {{$user->id}},
-        keterangan: '{{$user->email}}',
     @else
         {{"search: '',"}}
         {{"value: '',"}}
     @endif
     dokter: [],
     keterangan: '',
-    target: '',
 
     async getUser(){
         let url = '/api/dokter?email=' + this.search;
@@ -19,21 +17,22 @@
         const json = await resp.json();
         this.dokter = json['data'];
         this.keterangan = this.dokter.length == 0 ? 'Dokter tidak ditemukan' : '';
-        this.target = '';
         this.value = ''
     },
 
-    clickKlien(dokter){
+    clickDokter(dokter){
         this.search = dokter['email']
-        this.target = dokter['email']
         this.value = dokter['id']
         this.dokter = []
     }
 
-}" x-init="$watch('value', value => {
-    if(value != '') document.querySelector('#check').style.display = 'inline'
-    else document.querySelector('#check').style.display = 'none'
-})" class="form-group col-sm-6">
+}" x-init="
+    $watch('value', value => {
+        if(value != '') document.querySelector('#check').style.display = 'inline'
+        else document.querySelector('#check').style.display = 'none'
+    })
+    getUser();
+" class="form-group col-sm-6">
 
     {!! Form::label('user_id', 'Email Dokter:') !!} <span class="required">*</span>
     <div :class="dokter.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
@@ -52,7 +51,7 @@
     <div class="ajax-request">
         <div :class="dokter.length != 0 ? 'ajax-items col-sm-12' : 'ajax-items-initial'">
             <template x-for="item in dokter">
-                <a @click="clickKlien(item)" href="#"><li x-text="`${item['email']} (${item['full_name']})`"></li></a>
+                <a @click="clickDokter(item)" href="#"><li x-text="`${item['email']} (${item['full_name']})`"></li></a>
             </template>
         </div>
     </div>

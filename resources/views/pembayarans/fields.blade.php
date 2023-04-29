@@ -92,7 +92,7 @@
 
     <div class="form-group col-sm-6">
         <label for="image">Bukti Pembayaran</label> <br>
-        <input type="file" name="image" required> {{$media[0]->name}}
+        <input type="file" name="image" required> {{count($media) > 0 ? $media[0]->name : ''}}
     </div> 
     @endrole
 

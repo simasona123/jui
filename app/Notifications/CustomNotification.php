@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Reminder;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,12 +12,14 @@ class CustomNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    private $reminder;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Reminder $reminder)
     {
-        //
+        $this->reminder = $reminder;
     }
 
     /**
@@ -35,9 +38,9 @@ class CustomNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Pemberitahuan')
+                    ->line($this->reminder->tanggal)
+                    ->line($this->reminder->keterangan);
     }
 
     /**
@@ -48,7 +51,8 @@ class CustomNotification extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'tanggal' => $this->reminder->tanggal,
+            'keterangan' => $this->reminder->keterangan,
         ];
     }
 }

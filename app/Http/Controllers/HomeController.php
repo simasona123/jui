@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Packages\MyModules;
 use App\Models\Pasien;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Flash;
 
 class HomeController extends Controller
 {
@@ -28,11 +27,20 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $role = $user->getRoleNames()[0];
-        $pasien = Pasien::where('user_id', $user->id)->get();
-        if(count($pasien) == 0 && $role == 'klien'){
-            Flash::success('Silahkan daftarkan hewan peliharaan terlebih dahulu');
-            return redirect()->route('pasien.create');
-        }
-        return view('home');
+        if(MyModules::cek_pasien_pertama($user, $role) == -1)return redirect()->route('pasien.create');
+        $pasiens = Pasien::with('bookings')->where('user_id', $user->id)->get();
+        dd($pasiens);
+        return view('home', [
+            "user" => $user,
+        ]);
     }
+
+    public function pemberitahuan(){
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        $user->unreadNotifications->markAsRead();
+        return redirect(route('home'));
+    }
+
+   
 }

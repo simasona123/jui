@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalPraktikController;
+use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RekamMedisController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +40,7 @@ Route::middleware('auth')->group(function (){
 }); //Profil
 
 Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
-    Route::prefix('/admin/users')->name('users.')->group(function(){
+    Route::prefix('/users')->name('users.')->group(function(){
         Route::controller(UserController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create");
@@ -51,7 +54,7 @@ Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
 }); //User
 
 Route::middleware(['auth'])->group(function(){
-    Route::prefix('/admin/pasien')->name('pasien.')->group(function(){
+    Route::prefix('/pasien')->name('pasien.')->group(function(){
         Route::controller(PasienController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create");
@@ -65,7 +68,7 @@ Route::middleware(['auth'])->group(function(){
 }); //Pasien
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('/admin/dokter')->name('dokter.')->group(function(){
+    Route::prefix('/dokter')->name('dokter.')->group(function(){
         Route::controller(DokterController::class)->group(function(){
             Route::get('/', 'index')->name('index')->middleware(['role:administrator|manajer']);
             Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
@@ -81,7 +84,7 @@ Route::middleware('auth')->group(function(){
 }); //Dokter
 
 Route::middleware(['auth', 'role:administrator|manajer|dokter-hewan'])->group(function(){
-    Route::prefix('/admin/jadwal-praktik')->name('jadwal-praktik.')->group(function(){
+    Route::prefix('/jadwal-praktik')->name('jadwal-praktik.')->group(function(){
         Route::controller(JadwalPraktikController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create")->middleware('role:administrator|manajer');
@@ -95,7 +98,7 @@ Route::middleware(['auth', 'role:administrator|manajer|dokter-hewan'])->group(fu
 }); //Jadwal Praktik
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('/admin/booking')->name('bookings.')->group(function(){
+    Route::prefix('/booking')->name('bookings.')->group(function(){
         Route::controller(BookingController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create");
@@ -109,7 +112,7 @@ Route::middleware('auth')->group(function(){
 }); //Booking
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('/admin/rekam-medis')->name('rekamMedis.')->group(function(){
+    Route::prefix('/rekam-medis')->name('rekamMedis.')->group(function(){
         Route::controller(RekamMedisController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
@@ -123,7 +126,7 @@ Route::middleware('auth')->group(function(){
 }); //Rekam Medis
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('/admin/pembayaran')->name('pembayarans.')->group(function(){
+    Route::prefix('/pembayaran')->name('pembayarans.')->group(function(){
         Route::controller(PembayaranController::class)->group(function(){
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create");
@@ -134,6 +137,25 @@ Route::middleware('auth')->group(function(){
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
         });
     });
+}); //Rekam Medis
+
+Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
+    Route::prefix('/reminders')->name('reminders.')->group(function(){
+        Route::controller(ReminderController::class)->group(function(){
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', "create")->name("create");
+            Route::post('/', "store")->name("store");
+            Route::get('/{user}', "show")->name("show");
+            Route::delete('/{user}', "destroy")->name("destroy");
+            Route::get('/kirim/{user}', "kirim")->name("kirim");
+        });
+    });
+}); //Rekam Medis
+
+
+//Pemberitahuan
+Route::middleware([ 'auth'])->group(function(){
+    Route::get('/pemberitahuan', [HomeController::class, 'pemberitahuan']);
 }); //Rekam Medis
 
 //Coba CHat

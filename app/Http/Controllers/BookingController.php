@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DataTables\BookingDataTable;
 use App\Http\Requests\CreateBookingRequest;
-use App\Http\Requests\UpdateBookingRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Models\JadwalPraktik;
+use App\Http\Controllers\Packages\MyModules;
 use App\Repositories\BookingRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -27,6 +26,9 @@ class BookingController extends AppBaseController
      */
     public function index(BookingDataTable $bookingDataTable)
     {
+        $user = Auth::user();
+        $role = $user->getRoleNames()[0];
+        if(MyModules::cek_pasien_pertama($user, $role) == -1)return redirect()->route('pasien.create');
         return $bookingDataTable->render('bookings.index');
     }
 
@@ -40,7 +42,7 @@ class BookingController extends AppBaseController
         if($user->hasRole('administrator|manajer')){
             return view('bookings.create');
         } else{
-            return "Belum dibuat untuk klien";
+            return view('bookings.create');
         }
         
     }

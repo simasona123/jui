@@ -51,10 +51,6 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function messages(){
-        return $this->hasMany(Message::class);
-    }
-
     public function registerMediaConversions(Media $media = null): void
     {
         $this
