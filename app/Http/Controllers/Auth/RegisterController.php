@@ -5,12 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\UserVerification;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
-use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -83,6 +82,8 @@ class RegisterController extends Controller
         ]);
 
         $user->assignRole('klien');
+
+        Notification::send($user, new UserVerification(2, $user));
 
         return $user;
     }

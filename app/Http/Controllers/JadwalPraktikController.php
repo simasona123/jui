@@ -45,6 +45,8 @@ class JadwalPraktikController extends AppBaseController
     {
         $input = $request->all();
 
+        dd($input);
+
         $jadwalPraktik = $this->jadwalPraktikRepository->create($input);
 
         Flash::success('Jadwal Praktik saved successfully.');

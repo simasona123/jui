@@ -11,7 +11,13 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
+use App\Notifications\UserVerification;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -154,10 +160,38 @@ Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
 }); //reminders
 
 
-//Pemberitahuan
-Route::middleware([ 'auth'])->group(function(){
+//Pemberitahuan dan konfirmasi
+Route::middleware(['auth'])->group(function(){
     Route::get('/pemberitahuan', [HomeController::class, 'pemberitahuan']);
+    Route::get('/email-konfirmasi/{user_id}', function($user_id){
+        $user = Auth::user();
+        $user1 =  User::find($user_id);
+        $email = $user->email;
+
+        if($email != $user1->email){
+            Session::flush();
+        
+            Auth::logout();
+            return "Gagal Verfikasi";
+        }
+
+        $user1->verification = true;
+        $user1->email_verified_at = Carbon::now();
+        $user1->save();
+
+        Session::flush();
+        
+        Auth::logout();
+
+        Notification::send($user1, new UserVerification(1));
+
+        return $email . " Telah Diverifikasi ";
+    });
 }); //Rekam Medis
+
+
+
+
 
 //Coba CHat
 Route::middleware('auth')->group(function(){

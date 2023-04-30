@@ -63,9 +63,9 @@
                 selected
             @endif value="0">Belum diverifikasi</option>
         @else
-            <option selected style="color: gray;">Pilih</option>
-            <option value="1">Benar</option>
-            <option selected value="0">Salah</option>
+            <option style="color: gray;">Pilih</option>
+            <option selected  value="1">Benar</option>
+            <option value="0">Salah</option>
         @endif
     </select>
 </div>
