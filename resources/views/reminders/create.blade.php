@@ -24,11 +24,12 @@
             <div class="card-body">
 
                 @include('reminders.fields')
+                
 
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Simpan', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('reminders.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 

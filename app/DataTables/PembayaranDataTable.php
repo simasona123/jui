@@ -25,8 +25,8 @@ class PembayaranDataTable extends DataTable
                 return $pembayaran->booking->kode_booking;
             })
             ->addColumn('status', 'pembayarans.datatables_status')
-            ->addColumn('aksi', 'pembayarans.datatables_actions')
-            ->rawColumns(['status', 'aksi']);
+            ->addColumn('action', 'pembayarans.datatables_actions')
+            ->rawColumns(['status', 'action']);
         
         return $dataTable;
     }
@@ -56,7 +56,7 @@ class PembayaranDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            // ->addAction(['width' => '120px', 'printable' => false])
+            ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
                 'dom'       => 'Bfrtip',
                 'stateSave' => true,
@@ -83,10 +83,6 @@ class PembayaranDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false);
 
-        $aksi = Column::make('aksi')
-                ->searchable(false)
-                ->orderable(false);
-
         $kode_booking = Column::make('kode_booking');
 
         $id = Column::make('id')
@@ -109,7 +105,6 @@ class PembayaranDataTable extends DataTable
             $tanggal_bayar,
             'jumlah_transaksi',
             $status,
-            $aksi,
         ];
     }
 

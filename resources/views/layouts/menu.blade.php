@@ -44,7 +44,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="{{ route('rekamMedis.index') }}" class="nav-link {{ Request::is('rekamMedis*') ? 'active' : '' }}">
+    <a href="{{ route('rekamMedis.index') }}" class="nav-link {{ Request::is('rekam-medis*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-notes-medical"></i>
         <p>Rekam Medis</p>
     </a>

@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-12">
                     <h1>
-                        Edit Jadwal Praktik
+                        Ubah Jadwal Praktik
                     </h1>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Simpan', ['class' => 'btn btn-primary']) !!}
                 <a href="{{ route('jadwal-praktik.index') }}" class="btn btn-default"> Cancel </a>
             </div>
 
