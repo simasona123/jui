@@ -51,6 +51,10 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
+    public function dokter(){
+        return $this->hasOne(Dokter::class);
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this

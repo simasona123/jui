@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-Pasien Details
+                        Detail Hewan
                     </h1>
                 </div>
                 <div class="col-sm-6">
@@ -20,12 +20,8 @@ Pasien Details
     </section>
 
     <div class="content px-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    @include('pasien.show_fields')
-                </div>
-            </div>
+        <div class="row">
+            @include('pasien.show_fields')
         </div>
     </div>
 @endsection

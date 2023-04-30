@@ -72,12 +72,14 @@ class PembayaranRepository extends BaseRepository
                     ->usingName($image_name)
                     ->toMediaCollection();
             }
+
+            $input['verifikasi'] = 2; //Sudah diubah oleh klien
         }
 
         else{
             if($input['verifikasi'] == 1 ){
                 $booking = $model->booking;
-                $booking->status_id = 2; // 2 == sudahdibayar
+                $booking->status_id = 2; // 2 == sudahdibayar dan terverifikasi
                 $booking->save();
             }
         }

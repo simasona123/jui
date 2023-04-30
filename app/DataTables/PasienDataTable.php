@@ -25,7 +25,7 @@ class PasienDataTable extends DataTable
                 return $pasien->user->full_name;
             });
         }
-        
+
         $dataTable->addColumn('action', 'pasien.datatables_actions');
         return $dataTable;
     }
@@ -115,7 +115,6 @@ class PasienDataTable extends DataTable
             ->title('Pemilik')
             ->searchable(false)
             ->orderable(false);
-
             array_splice($result, 1, 0, $user);
         }
 

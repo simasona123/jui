@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -21,25 +20,26 @@ class BookingDataTable extends DataTable
     {
         $dataTable = new EloquentDataTable($query);
         
-        $dataTable->addColumn('pasien', function(Booking $booking){
+        $dataTable
+            ->addColumn('pasien', function(Booking $booking){
             return [
                 $booking->pasien->id, $booking->pasien->nama_hewan, $booking->pasien->jenis_hewan,
             ];
-        });
-
-        $dataTable->addColumn('jadwal_praktik', function(Booking $booking){
-            return [
-                $booking->jadwal_praktik->id, $booking->jadwal_praktik->tanggal_masuk
-            ];
-        });
-
-        $dataTable->addColumn('status_booking', 'bookings.datatables_status');
-
-        $dataTable->addColumn('action', 'bookings.datatables_actions');
-        $dataTable->rawColumns(['action','status_booking'])
+            })
+            ->addColumn('jadwal_praktik', function(Booking $booking){
+                return [
+                    $booking->jadwal_praktik->id, $booking->jadwal_praktik->tanggal_masuk
+                ];
+            })
+            ->orderColumn('jadwal_praktik', function($query, $tanggal_masuk){
+                return $query->orderBy('tanggal_masuk', $tanggal_masuk);
+            })
+            ->addColumn('status_booking', 'bookings.datatables_status')
+            ->addColumn('action', 'bookings.datatables_actions')
+            ->rawColumns(['action','status_booking'])
             ->make(true);
 
-        return $dataTable->addColumn('action', 'bookings.datatables_actions');
+        return $dataTable;
     }
 
     /**
@@ -52,10 +52,18 @@ class BookingDataTable extends DataTable
     {
         $user = Auth::user();
         $role = $user->getRoleNames()[0];
+        $dokter = $user->dokter;
         if($role == 'klien'){
-            return $model::with(['pasien', 'jadwal_praktik', 'status'])->whereRelation('pasien', 'user_id', $user->id);
+            return $model::with(['pasien', 'jadwal_praktik', 'status'])
+            ->whereRelation('pasien', 'user_id', $user->id)
+            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id');
+        }if($role == 'dokter-hewan'){
+            return $model::with(['pasien', 'jadwal_praktik', 'status'])
+            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id')
+            ->where('jadwal_praktik.dokter_id', $dokter->id);
         }
-        return $model::with(['pasien', 'jadwal_praktik', 'status']);
+        return $model::with(['pasien', 'jadwal_praktik', 'status'])
+            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id');
     }
 
     /**
@@ -92,9 +100,11 @@ class BookingDataTable extends DataTable
     protected function getColumns()
     {
         $pasien = Column::make('pasien')
+            ->orderable(false)
             ->render("`<a href='/admin/pasien/\${data[0]}'>\${data[1]} \${data[2]}</a>`");
 
         $jadwal_praktik = Column::make('jadwal_praktik')
+            ->orderable(true)
             ->render(" function (){
                 let date = new Date(data[1]);
                 let time = `\${String(date.getDate()).padStart(2, '0')}-\${String(date.getMonth()+1).padStart(2, '0')}-\${date.getFullYear()} \${String(date.getHours()).padStart(2, '0')}:\${String(date.getMinutes()).padStart(2, '0')}:00`;

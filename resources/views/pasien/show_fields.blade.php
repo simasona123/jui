@@ -3,53 +3,46 @@
     $media = $pasien->getMedia();
     $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
 @endphp
-
-<div class="col-sm-12">
-    {!! Form::label('user_id', 'Klien:') !!}
-    <p>{{$klien->full_name}} ({{ $pasien->user_id }})</p>
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-12 col-xl-4">
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="mt-3 mb-4">
+            <img src="{{$image_url}}"
+                class="img-fluid" style="width: 100px;" />
+            </div>
+            <h4 class="mb-2">
+                @if ($pasien->jenis_kelamin == 'betina')
+                    <i class="fas fa-venus" style="margin-right: 2px;"></i>
+                @else
+                    <i class="fas fa-mars" style="margin-right: 2px;"></i>
+                @endif
+                {{ $pasien->nama_hewan }} 
+            </h4>
+            <p class="text-muted">{{$klien->full_name}} ({{ $klien->email }})</p>
+            <div class="d-flex justify-content-around text-center">
+                <div>
+                    <p class="text-muted mb-0">Jenis Hewan</p>
+                    <p class="mb-2 ">{{ $pasien->jenis_hewan }}</p>
+                </div>
+                <div class="px-3">
+                    <p class="text-muted mb-0">Ras</p>
+                    <p class="mb-2 ">{{ $pasien->ras }}</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around text-center">
+                <div>
+                    <p class="text-muted mb-0">Dibuat</p>
+                    <p class="mb-2 ">{{ $pasien->created_at }} WIB</p>
+                </div>
+                <div class="px-3">
+                    <p class="text-muted mb-0">Diupdate</p>
+                    <p class="mb-2 ">{{ $pasien->updated_at }} WIB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
 </div>
-
-<!-- Nama Hewan Field -->
-<div class="col-sm-12">
-    {!! Form::label('nama_hewan', 'Nama Hewan:') !!}
-    <p>{{ $pasien->nama_hewan }}</p>
-</div>
-
-<!-- Jenis Hewan Field -->
-<div class="col-sm-12">
-    {!! Form::label('jenis_hewan', 'Jenis Hewan:') !!}
-    <p>{{ $pasien->jenis_hewan }}</p>
-</div>
-
-<!-- Jenis Kelamin Field -->
-<div class="col-sm-12">
-    {!! Form::label('jenis_kelamin', 'Jenis Kelamin:') !!}
-    <p>{{ ucwords($pasien->jenis_kelamin) }}</p>
-</div>
-
-<!-- Ras Field -->
-<div class="col-sm-12">
-    {!! Form::label('ras', 'Ras:') !!}
-    <p>{{ $pasien->ras }}</p>
-</div>
-
-<!-- Umur Field -->
-<div class="col-sm-12">
-    {!! Form::label('tanggal_lahir', 'Tanggal Lahir:') !!}
-    <p>{{date_format(date_create($pasien->tanggal_lahir), "d-m-Y") }}</p>
-</div>
-
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $pasien->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $pasien->updated_at }}</p>
-    <img src="{{$image_url}}" alt="" srcset="">
-</div>
-
-

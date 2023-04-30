@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Booking;
 use App\Models\Dokter;
 use App\Models\RekamMedis;
 use App\Repositories\BaseRepository;
@@ -37,8 +38,7 @@ class RekamMedisRepository extends BaseRepository
 
     public function update(array $input, int $id)
     {
-        // dd($input);
-        $input['dokter_id'] = Dokter::where('user_id', $input['user_id'])->first()->id;
+        // dd($input)
 
         $query = $this->model->newQuery();
 
@@ -55,8 +55,8 @@ class RekamMedisRepository extends BaseRepository
     {
         $input['dokter_id'] = Dokter::where('user_id', $input['user_id'])->first()->id;
 
-        $input['nomor_rekam_medis'] = $this->generate_rekam_medis();
-        
+        $input['nomor_rekam_medis'] = $this->generate_rekam_medis($input['booking_id']);
+
         $model = $this->model->newInstance($input);
 
         $model->save();
@@ -64,11 +64,12 @@ class RekamMedisRepository extends BaseRepository
         return $model;
     }
 
-    private function generate_rekam_medis(){
-        $tz = 'Asia/Jakarta';
-        $timestamp = time();
-        $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
-        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
-        return $dt->format('Ymdhis');
+    private function generate_rekam_medis($booking_id){
+        // $tz = 'Asia/Jakarta';
+        // $timestamp = time();
+        // $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+        // $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+        // return $dt->format('Ymdhis');
+        return Booking::find($booking_id)->kode_booking;
     }
 }

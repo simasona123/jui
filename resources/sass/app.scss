@@ -26,6 +26,9 @@
 
 .ajax-request{
     position: relative;
+    .form-control{
+        height: auto;
+    }
 }
 
 .ajax-items{

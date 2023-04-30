@@ -6,9 +6,16 @@ use App\DataTables\PembayaranDataTable;
 use App\Http\Requests\CreatePembayaranRequest;
 use App\Http\Requests\UpdatePembayaranRequest;
 use App\Http\Controllers\AppBaseController;
+use App\Models\Booking;
+use App\Models\Pasien;
+use App\Models\Reminder;
+use App\Models\User;
+use App\Notifications\CustomNotification;
 use App\Repositories\PembayaranRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 
 class PembayaranController extends AppBaseController
 {
@@ -42,7 +49,25 @@ class PembayaranController extends AppBaseController
      */
     public function store(CreatePembayaranRequest $request)
     {
-        $pembayaran = $this->pembayaranRepository->create($request->all());
+        $input = $request->all();
+        $booking = Booking::find($request->booking_id);
+        $pasien = $booking->pasien;
+        $input['user_id']= $pasien->user_id;
+
+        $pembayaran = $this->pembayaranRepository->create($input);
+
+        $user = User::find($input['user_id']);
+
+        $reminder = Reminder::create([
+            'pasien_id' => $pasien->id,
+            'keterangan' => "Silahkan lakukan konfirmasi pembayaran untuk kode booking " . 
+                $booking->kode_booking . " sebesar "  . $pembayaran->jumlah_transaksi . ". Terima kasih",
+            "tanggal" => date('Y-m-d')
+        ]);
+
+        $reminder->save();
+
+        $user->notify(new CustomNotification($reminder));
 
         Flash::success('Pembayaran saved successfully.');
 
