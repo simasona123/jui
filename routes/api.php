@@ -66,9 +66,20 @@ Route::middleware('cors')->group(function(){
                 'data' => $data,
             ]);
         }
-        $pasien = Pasien::select(['id', 'user_id'])->where('user_id', $user_id)->get();
-        dd($pasien);
-       
+    });
+
+    Route::get('/booking-rekam', function(Request $request){
+        $kode_booking = $request->kode;
+        $user_id = $request->id;
+        $role = $request->role;
+        if($role == 'administrator' || $role == 'manajer'){
+            $data = Booking::with('jadwal_praktik')->select('id', 'kode_booking', 'jadwal_praktik_id')->has('rekam_medis', 0)->where('kode_booking', 'like', $kode_booking . '%')
+                ->take(10)
+                ->get();
+            return response()->json([
+                'data' => $data,
+            ]);
+        }
     });
     
     Route::get('/pasien', function(Request $request){

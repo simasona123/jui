@@ -26,7 +26,7 @@ class CreateRekamMedisRequest extends FormRequest
     {
         return [
             'booking_id' => 'required|numeric',
-            'user_id' => 'required|numeric',
+            'dokter_id' => 'required|numeric',
             // 'nomor_rekam_medis' => 'required', //Generate Otomatis
             'keluhan' => 'required',
             'diagnosis' => 'required',
