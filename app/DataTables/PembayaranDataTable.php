@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Pembayaran;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Column;
@@ -38,6 +39,10 @@ class PembayaranDataTable extends DataTable
      */
     public function query(Pembayaran $model)
     {
+        $user = Auth::user();
+        if($user->getRoleNames()[0] == 'klien'){
+            return $model::with('booking')->where('user_id', $user->id);
+        }
         return $model::with('booking');
     }
 

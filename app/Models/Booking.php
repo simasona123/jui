@@ -38,4 +38,8 @@ class Booking extends Model
     public function status(){
         return $this->belongsTo(StatusBooking::class);
     }
+
+    public function pembayaran(){
+        return $this->hasOne(Pembayaran::class);
+    }
 }

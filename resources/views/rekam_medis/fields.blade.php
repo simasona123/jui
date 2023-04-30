@@ -6,10 +6,10 @@
             search:'{{$rekamMedis->dokter->user->email}}',
             value:{{$rekamMedis->dokter->user->id}},
         @else
-            kode_booking:'',
-            booking_id: 0,
-            search:'',
-            value:'',
+            kode_booking:'{{$booking->kode_booking}}',
+            booking_id: {{$booking->id}},
+            search:'{{$booking->jadwal_praktik->dokter->user->email}}',
+            value:'{{$booking->jadwal_praktik->dokter->user->id}}',
         @endif
         dataBooking: [],
         keteranganBooking: '',
@@ -25,7 +25,6 @@
             this.booking_id = booking['id']
             this.dataBooking = []
         },
-
         dokter: [],
         keterangan: '',
         async getUser(){
@@ -43,13 +42,15 @@
         }
     }"
     x-init="
+        if(booking_id > 0) document.querySelector('#check').style.display = 'inline';
+        if(value != '0')document.querySelector('#check1').style.display = 'inline';
         $watch('booking_id', value => {
-            if(value != 0) document.querySelector('#check').style.display = 'inline'
-            else document.querySelector('#check').style.display = 'none'
+            if(value > 0) document.querySelector('#check').style.display = 'inline';
+            else document.querySelector('#check').style.display = 'none';
         })
         $watch('value', value => {
-            if(value != '') document.querySelector('#check1').style.display = 'inline'
-            else document.querySelector('#check1').style.display = 'none'
+            if(value != '0') document.querySelector('#check1').style.display = 'inline';
+            else document.querySelector('#check1').style.display = 'none';
         })
     "
 >
@@ -58,7 +59,7 @@
     <div class="form-group col-sm-6">
         {!! Form::label('booking_id', 'Booking Id:') !!} <span class="required">*</span>
         <div :class="dataBooking.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
-            <input type="text" @input.debounce.2000ms="getBooking" x-model="kode_booking" class="form-google" required placeholder="Masukan Kode Booking">
+            <input type="text" @input.debounce.2000ms="getBooking" x-model="kode_booking" class="form-google" required placeholder="Masukan Kode Booking" disabled>
             <svg id="check" style="margin-right: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                 <path fill="green" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
@@ -82,7 +83,7 @@
     <div class="form-group col-sm-6">
         {!! Form::label('user_id', 'Dokter Pemeriksa') !!} <span class="required">*</span>
         <div :class="dokter.length != 0 ? 'form-control-custom' :'form-control'" class="d-flex justify-content-between align-items-center">
-            <input type="text" x-model="search" @input.debounce.1000ms="getUser" class="form-google" placeholder="Cari Email Dokter">
+            <input type="text" x-model="search" @input.debounce.1000ms="getUser" class="form-google" placeholder="Cari Email Dokter" disabled>
             <svg id="check1" style="margin-right: 10px; display: none;" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                 <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                 <path fill="green" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>

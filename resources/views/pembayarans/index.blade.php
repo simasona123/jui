@@ -7,12 +7,14 @@
                 <div class="col-sm-6">
                     <h1>Daftar Tagihan</h1>
                 </div>
+                @role('administrator|manajer')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('pembayarans.create') }}">
                         Add New
                     </a>
                 </div>
+                @endrole
             </div>
         </div>
     </section>

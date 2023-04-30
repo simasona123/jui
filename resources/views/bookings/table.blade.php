@@ -10,3 +10,9 @@
     @include('layouts.datatables_js')
     {!! $dataTable->scripts() !!}
 @endpush
+
+<style>
+    #dataTableBuilder_filter{
+        display: none !important;
+    }
+</style>

@@ -47,6 +47,8 @@ class UserRepository extends BaseRepository
             return !is_null($value);
         });
 
+        $array['password'] = Hash::make($array['password']);
+
         $model->fill($array);
         $model->save();
 

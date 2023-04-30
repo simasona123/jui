@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRekamMedisRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Booking;
 use App\Models\Dokter;
+use App\Models\RekamMedis;
 use App\Repositories\RekamMedisRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -34,7 +35,7 @@ class RekamMedisController extends AppBaseController
     /**
      * Show the form for creating a new RekamMedis.
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('rekam_medis.create');
     }
@@ -124,5 +125,15 @@ class RekamMedisController extends AppBaseController
         Flash::success('Rekam Medis deleted successfully.');
 
         return redirect(route('rekamMedis.index'));
+    }
+
+    public function redirect(Request $request){
+        $booking = Booking::where('kode_booking', $request->kode_booking)->first();
+        $rekam_medis = RekamMedis::where('booking_id', (int)$booking->id)->first();
+        if($rekam_medis == null){
+            return view('rekam_medis.create', [
+                'booking' => $booking
+            ]);
+        } return view('rekam_medis.edit', ["rekamMedis" => $rekam_medis]);
     }
 }

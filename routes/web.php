@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
@@ -114,13 +114,14 @@ Route::middleware('auth')->group(function(){
 Route::middleware('auth')->group(function(){
     Route::prefix('/rekam-medis')->name('rekamMedis.')->group(function(){
         Route::controller(RekamMedisController::class)->group(function(){
+            Route::get('/jadwal', "redirect")->name("redirect");
             Route::get('/', 'index')->name('index');
-            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
-            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
+            Route::get('/create', "create")->name("create");
+            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer|dokter-hewan']);
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer']);
-            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer']);
-            Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer|dokter-hewan']);
+            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer|dokter-hewan']);
+            Route::delete('/{user}', "destroy")->name("destroy");
         });
     });
 }); //Rekam Medis
@@ -129,15 +130,15 @@ Route::middleware('auth')->group(function(){
     Route::prefix('/pembayaran')->name('pembayarans.')->group(function(){
         Route::controller(PembayaranController::class)->group(function(){
             Route::get('/', 'index')->name('index');
-            Route::get('/create', "create")->name("create");
-            Route::post('/', "store")->name("store");
+            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
+            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
             Route::get('/{user}', "show")->name("show");
             Route::get('/{user}/edit', "edit")->name("edit");
             Route::patch('/{user}', "update")->name("update");
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
         });
     });
-}); //Rekam Medis
+}); //pembayaran
 
 Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
     Route::prefix('/reminders')->name('reminders.')->group(function(){
@@ -150,7 +151,7 @@ Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
             Route::get('/kirim/{user}', "kirim")->name("kirim");
         });
     });
-}); //Rekam Medis
+}); //reminders
 
 
 //Pemberitahuan

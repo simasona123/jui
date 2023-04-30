@@ -29,7 +29,6 @@ class HomeController extends Controller
         $role = $user->getRoleNames()[0];
         if(MyModules::cek_pasien_pertama($user, $role) == -1)return redirect()->route('pasien.create');
         $pasiens = Pasien::with('bookings')->where('user_id', $user->id)->get();
-        dd($pasiens);
         return view('home', [
             "user" => $user,
         ]);

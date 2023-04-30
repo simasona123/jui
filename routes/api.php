@@ -59,7 +59,7 @@ Route::middleware('cors')->group(function(){
         $user_id = $request->id;
         $role = $request->role;
         if($role == 'administrator' || $role == 'manajer'){
-            $data = Booking::select('id', 'kode_booking')->where('kode_booking', 'like', $kode_booking . '%')
+            $data = Booking::select('id', 'kode_booking')->has('pembayaran', 0)->where('kode_booking', 'like', $kode_booking . '%')
                 ->take(10)
                 ->get();
             return response()->json([
