@@ -101,8 +101,8 @@
                                 Services</b></p>
                         <div class="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown"
                             data-group="page-title-buttons" data-delay="900">
-                            <span><a href="#" class="btn btn-lg btn-white rounded-pill me-2">Login</a></span>
-                            <span><a href="#"
+                            <span><a href="/login" class="btn btn-lg btn-white rounded-pill me-2">Login</a></span>
+                            <span><a href="/register"
                                     class="btn btn-lg btn-outline-white rounded-pill">Register</a></span>
                         </div>
                     </div>

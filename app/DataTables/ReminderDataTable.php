@@ -20,11 +20,15 @@ class ReminderDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         $dataTable->addColumn('dokter', function($reminder){
-            return $reminder->dokter->user->full_name . ' (' . $reminder->dokter->nip . ')';
+            if(isset($reminder->dokter)){
+                return $reminder->dokter->user->full_name . ' (' . $reminder->dokter->nip . ')';
+            } return 'Tidak ada';
         });
 
         $dataTable->addColumn('pasien', function($reminder){
-            return $reminder->pasien->user->full_name;
+            if(isset($reminder->pasien)){
+                return $reminder->pasien->user->full_name;
+            } return 'Tidak ada';
         });
 
         $dataTable->addColumn('status', 'reminders.datatables_status');

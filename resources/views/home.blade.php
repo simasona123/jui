@@ -27,6 +27,8 @@
                                 </td>
                                 <td style="text-align: right;">
                                     {{ date("Y-m-d H:i:s", strtotime($item->created_at."+7 hours"))}} WIB
+                                    <br>
+                                    
                                 </td>
                             </tr>
                         @endforeach
