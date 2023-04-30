@@ -21,12 +21,12 @@
 </div>
 
 <div class="form-group col-sm-6">
-    {!! Form::label('phone', 'Phone:') !!}
+    {!! Form::label('phone', 'Phone:') !!} <span class="required">*</span>
     {!! Form::text('phone', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group col-sm-6">
-    {!! Form::label('address', 'Address:') !!}
+    {!! Form::label('address', 'Address:') !!} <span class="required">*</span>
     {!! Form::text('address', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -53,7 +53,7 @@
 </div>
 
 <div class="form-group col-sm-4">
-    <label for="verification">Verifikasi</label> 
+    <label for="verification">Verifikasi</label> <span class="required">*</span>
     <select class="custom-select" id="inputGroupSelect02" name="verification">
         @if (isset($user))
             <option @if ($user->verification == 1)
@@ -65,13 +65,13 @@
         @else
             <option selected style="color: gray;">Pilih</option>
             <option value="1">Benar</option>
-            <option value="0">Salah</option>
+            <option selected value="0">Salah</option>
         @endif
     </select>
 </div>
 
 <div class="form-group col-sm-4">
-    <label for="blocked">Status</label>
+    <label for="blocked">Status</label> <span class="required">*</span>
     <select class="custom-select" id="inputGroupSelect02" name="blocked">
         @if (isset($user))
             <option @if ($user->blocked == 1)
@@ -83,7 +83,7 @@
         @else
             <option selected style="color: gray;">Pilih</option>
             <option value="1">Blokir</option>
-            <option value="0">Aktif</option>
+            <option selected value="0">Aktif</option>
         @endif
     </select>
 </div>

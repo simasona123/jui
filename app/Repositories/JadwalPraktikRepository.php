@@ -30,6 +30,7 @@ class JadwalPraktikRepository extends BaseRepository
     public function create(array $input): Model
     {
         $input['dokter_id'] = Dokter::where('user_id', $input['user_id'])->first()->id;
+
         $model = $this->model->newInstance($input);
 
         $model->save();

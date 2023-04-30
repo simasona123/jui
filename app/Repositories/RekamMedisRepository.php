@@ -53,8 +53,6 @@ class RekamMedisRepository extends BaseRepository
 
     public function create(array $input): Model
     {
-        $input['dokter_id'] = Dokter::where('user_id', $input['user_id'])->first()->id;
-
         $input['nomor_rekam_medis'] = $this->generate_rekam_medis($input['booking_id']);
 
         $model = $this->model->newInstance($input);

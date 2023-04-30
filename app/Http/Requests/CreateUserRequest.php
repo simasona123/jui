@@ -24,12 +24,20 @@ class CreateUserRequest extends FormRequest
         return [
             'full_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', 'string', 'size:8'],
+            'password' => ['required', 'confirmed', 'string', 'min:6', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/'],
             'role' => ['required', 'numeric'],
             'verification' => ['required', 'numeric'],
-            'address' => ['nullable',],
-            'phone' => ['nullable', 'regex:/(^[0-9]+$)/i'],
+            'address' => ['required',],
+            'phone' => ['required', 'regex:/(^[0-9]+$)/i', 'min:10'],
+            'blocked' => ['required']
+        ];  
+    }
+
+    public function messages(){
+        return [
+            'password' => 'Kata sandi harus terdiri satu huruf kapital, satu angka, dan minimal 6 karakter',
+            'role' => 'Silahkan pilih role',
+            'verification' => 'Silahkan pilih verifikasi',
         ];
-       
     }
 }

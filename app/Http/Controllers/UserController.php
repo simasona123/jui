@@ -46,11 +46,14 @@ class UserController extends AppBaseController
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
-        $this->userRepository->create($input);
-
+        try {
+            $this->userRepository->create($input);
+        } catch (\Throwable $th) {
+            Flash::error('Email telah terdaftar');
+            return redirect(route('users.create'));
+        }
+        
         Flash::success('User saved successfully.');
-
         return redirect(route('users.index'));
     }
 
