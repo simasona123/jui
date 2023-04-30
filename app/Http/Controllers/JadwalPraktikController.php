@@ -123,7 +123,14 @@ class JadwalPraktikController extends AppBaseController
             return redirect(route('jadwal-praktik.index'));
         }
 
-        $this->jadwalPraktikRepository->delete($id);
+        try {
+            $this->jadwalPraktikRepository->delete($id);
+        } catch (\Throwable $th) {
+            Flash::error('Jadwal Praktik tidak dapat dihapus 
+                karena berkaitan dengan booking yang telah dibuat');
+
+            return redirect(route('jadwal-praktik.index'));
+        }
 
         Flash::success('Jadwal Praktik deleted successfully.');
 
