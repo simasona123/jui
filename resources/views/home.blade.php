@@ -71,9 +71,11 @@
                                         @endif
                                         @isset($booking->pembayaran)
                                             @if ($booking->pembayaran->verifikasi == 0)
-                                                <span class="badge badge-warning">Pembayaran Belum</span>
+                                                <span class="badge badge-warning">User Belum Membayar</span>
+                                            @elseif ($booking->pembayaran->verifikasi == 1)
+                                                <span class="badge badge-success">Terverifikasi Admin</span>
                                             @else
-                                                <span class="badge badge-success">Pembayaran Sudah</span>
+                                                <span class="badge badge-info">Menunggu konfirmasi Admin</span>
                                             @endif
                                         @else
                                             <span class="badge badge-secondary">Belum ada pembayaran</span>

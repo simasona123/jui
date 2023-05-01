@@ -37,13 +37,13 @@
                     </div>
 
                     <div class="form-group col-sm-6">
-                        <label for="phone">Nomor HP:</label>
-                        <input class="form-control" name="phone" type="phone" id="phone" value="{{$user->phone}}">
+                        <label for="phone">Nomor HP:</label> <span class="required">*</span>
+                        <input class="form-control" name="phone" type="phone" id="phone" value="{{$user->phone}}" required>
                     </div>
 
-                    <div class="form-group col-sm-6">
-                        <label for="address">Alamat Rumah:</label>
-                        <input class="form-control" name="address" type="address" id="address" value="{{$user->address}}">
+                    <div class="form-group col-sm-6"> 
+                        <label for="address">Alamat Rumah:</label> <span class="required">*</span>
+                        <input class="form-control" name="address" type="address" id="address" value="{{$user->address}}" required>
                         <div class="warning" style="">Ket: Alamat yang akan dituju saat pemeriksaan</div>
                     </div>
 

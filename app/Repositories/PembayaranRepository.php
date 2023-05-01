@@ -47,18 +47,23 @@ class PembayaranRepository extends BaseRepository
     }
 
     public function update_custom($input, $id){
-
-        $role = Auth::user()->getRoleNames()[0];
-        $name = Auth::user()->full_name;
+        //Status 1 Terverifikasi (Sudah dibayar dan dikonfirmasi oleh admin)
+        //Status 2 USer upload pembayaran
+        //status 0 Belum terverifikasi dan user belum upload 
 
         $query = $this->model->newQuery();
         $model = $query->findOrFail($id);
 
-        if($role == 'klien'){
+        $role = Auth::user()->getRoleNames()[0];
+        $name = Auth::user()->full_name;
+
+        if($role == 'klien' ){
             $media = $model->getMedia();
+
             foreach ($media as $item) {
                 $item->delete();
             }
+
             $whitelist = array('image', 'tanggal_bayar');
             $input = array_intersect_key($input, array_flip($whitelist));
             
@@ -70,8 +75,9 @@ class PembayaranRepository extends BaseRepository
                 $model->addMedia(storage_path('app/pembayaran/') . $image_name)
                     ->usingName($image_name)
                     ->toMediaCollection();
-            }
-            $input['verifikasi'] = 2; //Sudah diubah oleh klien
+            } //Upload image
+
+            $input['verifikasi'] = 2; //Sudah diubah oleh klien menunggu konfirmasi admin
         }
 
         else{
@@ -79,6 +85,7 @@ class PembayaranRepository extends BaseRepository
                 $booking = $model->booking;
                 $booking->status_id = 2; // 2 == sudahdibayar dan terverifikasi
                 $booking->save();
+                dd($booking);
             }
         }
 

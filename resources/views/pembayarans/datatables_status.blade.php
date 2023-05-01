@@ -1,6 +1,6 @@
 @php
     $status = [
-        'Belum Terverifikasi', 'Telah Terverifikasi', 'Menunggu Verifikasi',
+        'Menunggu Pembayaran', 'Telah Terverifikasi', 'Menunggu Verifikasi',
 ];
 @endphp
 <div class="form-group d-flex flex-row align-items-center justify-content-left" style="margin-bottom: 0px;">
