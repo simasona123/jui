@@ -133,15 +133,23 @@ class ReminderController extends AppBaseController
     }
 
     public function kirim($id){
+
         $reminder = Reminder::find($id);
         if($reminder->status != -1){
             return redirect(route('reminders.index'));
         }
+
         $user_ids = [$reminder->dokter_id, $reminder->pasien_id];
-        $user_ids[0] = Dokter::find($user_ids[0])->user_id;
-        $user_ids[1] = Pasien::find($user_ids[1])->user_id;
+        $users = [];
+
+        if($user_ids[0] != null){
+            array_push($users, Dokter::find($user_ids[0])->user_id);
+        }
+        if($user_ids[1] != null){
+            array_push($users, Pasien::find($user_ids[1])->user_id);
+        }
         
-        $users = User::whereIn('id', $user_ids)->get();
+        $users = User::whereIn('id', $users)->get();
         Notification::send($users, new CustomNotification($reminder));
         $reminder->status = 1;
         $reminder->save();
