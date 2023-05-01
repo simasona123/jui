@@ -13,38 +13,78 @@
                 </div>
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>Nama Hewan</th>
-                            <th>Dokter</th>
-                            <th>Status</th>
-                            <th>Jadwal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pasiens as $pasien)
-                            @if(isset($pasien->bookings))
-                                @foreach($pasien->bookings as $booking)
+                        @isset($pasien)
+                            <tr>
+                                <th>Nama Hewan</th>
+                                <th>Dokter</th>
+                                <th>Status</th>
+                                <th>Jadwal</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($pasiens as $pasien)
+                                @if(isset($pasien->bookings))
+                                    @foreach($pasien->bookings as $booking)
+                                    <tr>
+                                        <td>
+                                            {{$pasien->nama_hewan}}
+                                        </td>
+                                        <td>
+                                            {{$booking->jadwal_praktik->dokter->user->full_name}}
+                                        </td>
+                                        <td>
+                                            @if ($booking->completed == 0)
+                                            <span class="badge badge-warning">Belum Selesai</span>
+                                        @else
+                                            <span class="badge badge-success">Selesai</span>
+                                        @endif
+                                        </td>
+                                        <td style="">
+                                            {{ date("Y-m-d H:i:s", strtotime($booking->jadwal_praktik->tanggal_masuk."+7 hours"))}} WIB
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                        @endisset
+                        @isset($jadwal_praktiks)
                                 <tr>
-                                    <td>
-                                        {{$pasien->nama_hewan}}
-                                    </td>
-                                    <td>
-                                        {{$booking->jadwal_praktik->dokter->user->full_name}}
-                                    </td>
-                                    <td>
+                                    <th>User</th>
+                                    <th>Dokter</th>
+                                    <th>Kode Booking</th>
+                                    <th>Status</th>
+                                    <th>Jadwal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($jadwal_praktiks as $jadwal_praktik)
+                                @foreach ($jadwal_praktik->bookings as $booking)
+                                <tr>
+                                    <td>{{$booking->pasien->user->full_name}}</td>
+                                    <td>{{$jadwal_praktik->dokter->user->full_name}} ({{$jadwal_praktik->dokter->user->email}})</td>
+                                    <td>{{$booking->kode_booking}}</td>
+                                    <td> 
                                         @if ($booking->completed == 0)
-                                        <span class="badge badge-warning">Belum Selesai</span>
-                                    @else
-                                        <span class="badge badge-success">Selesai</span>
-                                    @endif
+                                            <span class="badge badge-warning">Belum Selesai</span>
+                                        @else
+                                            <span class="badge badge-success">Selesai</span>
+                                        @endif
+                                        @isset($booking->pembayaran)
+                                            @if ($booking->pembayaran->verifikasi == 0)
+                                                <span class="badge badge-warning">Pembayaran Belum</span>
+                                            @else
+                                                <span class="badge badge-success">Pembayaran Sudah</span>
+                                            @endif
+                                        @else
+                                            <span class="badge badge-secondary">Belum ada pembayaran</span>
+                                        @endisset
+                                        
                                     </td>
-                                    <td style="">
-                                        {{ date("Y-m-d H:i:s", strtotime($booking->jadwal_praktik->tanggal_masuk."+7 hours"))}} WIB
-                                    </td>
+                                    <td>{{$jadwal_praktik->tanggal_masuk}} WIB</td>
                                 </tr>
                                 @endforeach
-                            @endif
-                        @endforeach
+                            @endforeach
+                        @endisset
                     </tbody>
                 </table>
 

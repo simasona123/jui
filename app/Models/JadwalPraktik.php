@@ -25,4 +25,8 @@ class JadwalPraktik extends Model
     public function dokter(){
         return $this->belongsTo(Dokter::class);
     }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }
