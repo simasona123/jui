@@ -119,7 +119,7 @@ class BookingDataTable extends DataTable
     {
         $pasien = Column::make('pasien')
             ->orderable(false)
-            ->render("`<a href='/admin/pasien/\${data[0]}'>\${data[1]} \${data[2]}</a>`");
+            ->render("`<a href='/pasien/\${data[0]}'>\${data[1]} \${data[2]}</a>`");
 
         $jadwal_praktik = Column::make('jadwal_praktik')
             ->orderable(true)

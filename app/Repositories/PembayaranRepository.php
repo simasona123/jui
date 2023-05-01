@@ -47,11 +47,11 @@ class PembayaranRepository extends BaseRepository
     }
 
     public function update_custom($input, $id){
+
         $role = Auth::user()->getRoleNames()[0];
         $name = Auth::user()->full_name;
 
         $query = $this->model->newQuery();
-
         $model = $query->findOrFail($id);
 
         if($role == 'klien'){
@@ -59,7 +59,6 @@ class PembayaranRepository extends BaseRepository
             foreach ($media as $item) {
                 $item->delete();
             }
-
             $whitelist = array('image', 'tanggal_bayar');
             $input = array_intersect_key($input, array_flip($whitelist));
             
@@ -72,7 +71,6 @@ class PembayaranRepository extends BaseRepository
                     ->usingName($image_name)
                     ->toMediaCollection();
             }
-
             $input['verifikasi'] = 2; //Sudah diubah oleh klien
         }
 
