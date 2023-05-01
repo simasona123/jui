@@ -50,7 +50,7 @@ class UserController extends AppBaseController
             $this->userRepository->create($input);
         } catch (\Throwable $th) {
             Flash::error('Email telah terdaftar');
-            return redirect(route('users.create'));
+            return redirect(route('users.index'));
         }
         
         Flash::success('User saved successfully.');
@@ -133,7 +133,13 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        $this->userRepository->delete($id);
+        try {
+            $this->userRepository->delete($id);
+        } catch (\Throwable $th) {
+            Flash::error('User tidak bisa dihapus karena memiliki jadwal praktik, booking, dan data lainnya');
+
+            return redirect(route('users.index'));
+        }
 
         Flash::success('User deleted successfully.');
 

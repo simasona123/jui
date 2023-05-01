@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Dokter;
 use App\Models\User;
 use App\Notifications\UserVerification;
 use App\Repositories\BaseRepository;
@@ -32,6 +33,22 @@ class UserRepository extends BaseRepository
         $model = $this->model->newInstance($input);
         $model->assignRole($input['role']);
         $model->save();
+
+        Notification::send($model, new UserVerification(2, $model));
+
+        if($model->verification == 1){
+            Notification::send($model, new UserVerification(1));
+        }
+
+        if($input['role'] == 4){
+            Dokter::create([
+                "user_id" => $model->id,
+                "spesialis" => "Belum ada",
+                "jenis_kelamin" => "pria",
+                "nip" => "Belum ada",
+            ]);
+        }
+
         return $model;
     }
 
@@ -47,13 +64,13 @@ class UserRepository extends BaseRepository
             return !is_null($value);
         });
 
-        $array['password'] = Hash::make($array['password']);
+        if(isset($input['password'])) $array['password'] = Hash::make($array['password']);
 
         $model->fill($array);
         $model->save();
 
         if($verif == 0 && $array['verification'] == 1){
-            Notification::send($model, new UserVerification());
+            Notification::send($model, new UserVerification(1, $model));
         }
 
         return $model;
