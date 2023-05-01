@@ -1,9 +1,9 @@
-{!! Form::open(['route' => ['bookings.destroy', $id], 'method' => 'delete']) !!}
+{!! Form::open(['route' => ['bookings.destroy', $booking_id], 'method' => 'delete']) !!}
 <div class='btn-group' style="">
-    <a href="{{ route('bookings.show', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('bookings.show', $booking_id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i><br>Lihat
     </a>
-    <a href="{{ route('bookings.edit', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('bookings.edit', $booking_id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i><br>Ubah
     </a>
     @role('dokter-hewan|manajer')

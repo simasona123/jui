@@ -56,14 +56,32 @@ class BookingDataTable extends DataTable
         if($role == 'klien'){
             return $model::with(['pasien', 'jadwal_praktik', 'status'])
             ->whereRelation('pasien', 'user_id', $user->id)
-            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id');
+            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id')
+            ->select(
+                'booking.*',
+                'jadwal_praktik.*',
+                'booking.id as booking_id',
+                'jadwal_praktik.id as jadwal_praktik_id'
+            );
         }if($role == 'dokter-hewan'){
             return $model::with(['pasien', 'jadwal_praktik', 'status'])
             ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id')
-            ->where('jadwal_praktik.dokter_id', $dokter->id);
+            ->where('jadwal_praktik.dokter_id', $dokter->id)
+            ->select(
+                'booking.*',
+                'jadwal_praktik.*',
+                'booking.id as booking_id',
+                'jadwal_praktik.id as jadwal_praktik_id'
+            );
         }
         return $model::with(['pasien', 'jadwal_praktik', 'status'])
-            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id');
+            ->leftJoin('jadwal_praktik', 'booking.jadwal_praktik_id', '=', 'jadwal_praktik.id')
+            ->select(
+                'booking.*',
+                'jadwal_praktik.*',
+                'booking.id as booking_id',
+                'jadwal_praktik.id as jadwal_praktik_id'
+            );
     }
 
     /**
@@ -108,7 +126,7 @@ class BookingDataTable extends DataTable
             ->render(" function (){
                 let date = new Date(data[1]);
                 let time = `\${String(date.getDate()).padStart(2, '0')}-\${String(date.getMonth()+1).padStart(2, '0')}-\${date.getFullYear()} \${String(date.getHours()).padStart(2, '0')}:\${String(date.getMinutes()).padStart(2, '0')}:00`;
-                return `<a href='/admin/jadwal-praktik/\${data[0]}'>\${time}</a>`
+                return `<a href='/jadwal-praktik/\${data[0]}'>\${time}</a>`
             }");
             
         $status_booking = Column::make('status_booking')
