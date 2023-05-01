@@ -13,8 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::drop('reminders');
-
         Schema::create('reminders', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('dokter_id')->nullable();
