@@ -161,8 +161,8 @@ class UserController extends AppBaseController
             'full_name' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['nullable', 'confirmed'],
-            'address' => ['nullable',],
-            'phone' => ['nullable', 'regex:/(^[0-9]+$)/i'],
+            'address' => ['required',],
+            'phone' => ['required', 'regex:/(^[0-9]+$)/i'],
             'image' => ["nullable", "image", "mimes:jpeg,png,jpg,gif,svg", "max:2048"],
         ]);
 

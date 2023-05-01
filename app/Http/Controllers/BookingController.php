@@ -39,12 +39,12 @@ class BookingController extends AppBaseController
     public function create()
     {
         $user = Auth::user();
-        if($user->hasRole('administrator|manajer')){
-            return view('bookings.create');
-        } else{
-            return view('bookings.create');
+        if($user->hasRole('klien')){
+            if($user->address == '' || $user->phone==''){
+                return redirect(route('home.profil'));
+            }
         }
-        
+        return view('bookings.create');
     }
 
     /**

@@ -15,6 +15,7 @@ class Booking extends Model
         'pembayaran',
         'expired',
         'completed',
+        'status_id'
     ];
 
     protected $casts = [

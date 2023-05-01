@@ -163,31 +163,23 @@ Route::middleware(['auth', 'role:administrator|manajer'])->group(function(){
 //Pemberitahuan dan konfirmasi
 Route::middleware(['auth'])->group(function(){
     Route::get('/pemberitahuan', [HomeController::class, 'pemberitahuan']);
-    Route::get('/email-konfirmasi/{user_id}', function($user_id){
-        $user = Auth::user();
-        $user1 =  User::find($user_id);
-        $email = $user->email;
-
-        if($email != $user1->email){
-            Session::flush();
-        
-            Auth::logout();
-            return "Gagal Verfikasi";
-        }
-
-        $user1->verification = true;
-        $user1->email_verified_at = Carbon::now();
-        $user1->save();
-
-        Session::flush();
-        
-        Auth::logout();
-
-        Notification::send($user1, new UserVerification(1));
-
-        return $email . " Telah Diverifikasi ";
-    });
 }); //Rekam Medis
+
+Route::get('/email-konfirmasi/{user_id}', function($user_id){
+    $user1 =  User::find($user_id);
+
+    $user1->verification = true;
+    $user1->email_verified_at = Carbon::now();
+    $user1->save();
+
+    Session::flush();
+    
+    Auth::logout();
+
+    Notification::send($user1, new UserVerification(1));
+
+    return $user1->email . " Telah Diverifikasi ";
+});
 
 
 

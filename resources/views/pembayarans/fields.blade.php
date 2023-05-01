@@ -1,7 +1,7 @@
 @php
     if (isset($pembayaran)) {
         $media = $pembayaran->getMedia();
-        $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+        $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl();
     }
 @endphp
 <div class="row"
@@ -92,11 +92,17 @@
 
     <div class="form-group col-sm-6">
         <label for="image">Bukti Pembayaran</label> <br>
-        <input type="file" name="image" required> {{count($media) > 0 ? $media[0]->name : ''}}
+        <input type="file" name="image" required>
+        @if (count($media) > 0)
+        <div class="col-sm-12" style="height: 100px;">
+            <img src="{{$image_url}}" alt="" class="img-profil" style="object-fit: contain;">
+            <div class="text-center">{{$media[0]->name }}</div>
+        </div>
+        @endif
     </div> 
     @endrole
 
-    @role('administrator|manajre')
+    @role('administrator|manajer')
     <div class="form-group col-sm-6" x-show='edit'>
         <label for="verifikasi">Verifikasi</label> <br>
         <select class="custom-select" x-model='verifikasi' name="verifikasi" id="">
