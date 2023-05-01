@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\UserVerification;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
@@ -63,6 +65,7 @@ class RegisterController extends Controller
             'terms' => 'accepted',
         ], [
             'captcha' => 'Gambar captca Salah',
+            'password' => 'Kata Sandi harus minimal 6 karakter dan terdiri dari satu huruf kapital dan satu angka',
         ]);
     }
 
@@ -86,5 +89,39 @@ class RegisterController extends Controller
         Notification::send($user, new UserVerification(2, $user));
 
         return $user;
+    }
+
+    public function register(Request $request){
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
+    }
+
+      /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+
+        return "Konfirmasi email telah dikirim";
     }
 }

@@ -6,14 +6,12 @@ use App\DataTables\ReminderDataTable;
 use App\Http\Requests\CreateReminderRequest;
 use App\Http\Requests\UpdateReminderRequest;
 use App\Http\Controllers\AppBaseController;
-use App\Http\Resources\ReminderCollection;
 use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\Reminder;
 use App\Models\User;
 use App\Notifications\CustomNotification;
 use App\Repositories\ReminderRepository;
-use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Notification;
 
@@ -148,7 +146,7 @@ class ReminderController extends AppBaseController
         if($user_ids[1] != null){
             array_push($users, Pasien::find($user_ids[1])->user_id);
         }
-        
+
         $users = User::whereIn('id', $users)->get();
         Notification::send($users, new CustomNotification($reminder));
         $reminder->status = 1;
