@@ -20,12 +20,6 @@ Dokter Details
     </section>
 
     <div class="content px-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    @include('dokter.show_fields')
-                </div>
-            </div>
-        </div>
+        @include('dokter.show_fields')
     </div>
 @endsection

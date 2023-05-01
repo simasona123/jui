@@ -20,7 +20,7 @@ class DokterDataTable extends DataTable
         $dataTable = new EloquentDataTable($query);
 
         $dataTable->addColumn('user', function(Dokter $dokter){
-            return $dokter->user->full_name . " (" . $dokter->user_id .")";
+            return $dokter->user->full_name;
         });
 
         return $dataTable->addColumn('action', 'dokter.datatables_actions');
@@ -34,7 +34,12 @@ class DokterDataTable extends DataTable
      */
     public function query(Dokter $model)
     {
-        return $model::with('user');
+        return $model::with('user')->select(
+            'dokter.*',
+            'users.*',
+            'dokter.id as dokter_id',
+            'users.id as user_id',
+        );
     }
 
     /**
@@ -87,11 +92,10 @@ class DokterDataTable extends DataTable
             ->searchable(false)
             ->orderable(false);
 
-        $user = Column::make('user')->title('User')->name('user.full_name');
+        $user = Column::make('user')->title('Nama Dokter')->name('user.full_name');
 
         
         return [
-            'id',
             $user,
             $spesialis,
             $nip,
