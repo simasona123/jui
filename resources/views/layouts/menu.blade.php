@@ -70,6 +70,13 @@
 </li>
 @endrole
 
+<li class="nav-item">
+    <a href="/konsultasi" class="nav-link {{ Request::is('pembayaran*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-comments"></i>
+        <p>Konsultasi</p>
+    </a>
+</li>
+
 
 
 

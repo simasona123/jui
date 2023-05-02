@@ -20,6 +20,10 @@ return new class extends Migration
         DB::table('booking_status')->insert(
             ["name" => "Belum Dibayar"]
         );
+        
+        DB::table('booking_status')->insert(
+            ["name" => "Sudah Dibayar"]
+        );
     }
 
     /**

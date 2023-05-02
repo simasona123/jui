@@ -85,7 +85,6 @@ class PembayaranRepository extends BaseRepository
                 $booking = $model->booking;
                 $booking->status_id = 2; // 2 == sudahdibayar dan terverifikasi
                 $booking->save();
-                dd($booking);
             }
         }
 

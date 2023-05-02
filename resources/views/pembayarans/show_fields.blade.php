@@ -39,3 +39,7 @@
     <p>{{ $pembayaran->updated_at }}</p>
 </div>
 
+@isset($pembayaran->booking->rekam_medis)
+    <a href="{{route('print.invoice', $pembayaran->id)}}">Print Invoice</a>
+@endisset
+
