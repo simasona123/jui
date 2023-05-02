@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\MessageSent;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -51,6 +52,14 @@ class MessageController extends Controller
             'status' => 'Message Sent!',
             'message_id' => $message->id,
         ];
+    }
+
+    public function cometChat()
+    {
+        $user = Auth::user();
+        return view('konsultasi', [
+            'user' => $user,
+        ]);
     }
 }
 

@@ -11,8 +11,10 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\RekamMedisController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\UserController;
+use App\Models\Pembayaran;
 use App\Models\User;
 use App\Notifications\UserVerification;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -182,14 +184,22 @@ Route::get('/email-konfirmasi/{user_id}', function($user_id){
 });
 
 
-
-
-
 //Coba CHat
 Route::middleware('auth')->group(function(){
     // Route::get('/', [MessageController::class, 'index']);
     Route::get('/messages', [MessageController::class, 'fetchMessages']);
     Route::post('/messages', [MessageController::class, 'sendMessage']);
+    Route::get('/konsultasi', [MessageController::class, 'cometChat']);
 });
 
-
+//PDF
+Route::get('/print-invoice/{id}', function($id){
+    $data = Pembayaran::find($id);
+    if($data->booking->rekam_medis == null){
+        return "Belum ada rekam medis";
+    }
+    $pdf = Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+    $pdf->loadView('invoice-pdf', ['pembayaran' => $data]);
+    return $pdf->stream();
+    // return view('invoice-pdf', ['pembayaran'=>$data]);
+})->name('print.invoice');
