@@ -31,7 +31,7 @@
 
             <div class="card-footer">
                 {!! Form::submit('Simpan', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('jadwal-praktik.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('jadwal-praktik.index') }}" class="btn btn-default">Batal</a>
             </div>
 
             {!! Form::close() !!}

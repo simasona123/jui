@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
                        href="{{ route('pasien.index') }}">
-                                                    Back
+                                                    Kembali
                                             </a>
                 </div>
             </div>

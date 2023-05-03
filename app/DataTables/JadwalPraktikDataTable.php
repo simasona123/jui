@@ -95,7 +95,7 @@ class JadwalPraktikDataTable extends DataTable
             }");
         
         return [
-            'id',
+            // 'id',
             $tanggal_masuk,
             $tanggal_selesai,
             'ketersediaan',
