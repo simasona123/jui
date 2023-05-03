@@ -73,7 +73,7 @@
             function logoutClicked(){
                 event.preventDefault(); 
                 console.log('sss')
-                document.querySelector('#chat-logout').click();
+                if(document.querySelector('#chat-logout')!=null) document.querySelector('#chat-logout').click();
                 document.getElementById('logout-form').submit();
             }
             document.querySelector("#logoutAkun").onclick = function(){

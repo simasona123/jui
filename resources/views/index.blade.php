@@ -10,10 +10,10 @@
         content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     <title>Jui Housecall Vet Services</title>
-    <link rel="shortcut icon" href="./assets/img/logo-jui-ig.webp">
-    <link rel="stylesheet" href="./assets/css/plugins.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/colors/purple.css">
+    <link rel="shortcut icon" href="/assets/img/logo-jui-ig.webp">
+    <link rel="stylesheet" href="/assets/css/plugins.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/colors/purple.css">
 </head>
 
 <body>
@@ -22,11 +22,11 @@
             <nav class="navbar navbar-expand-lg classic transparent position-absolute navbar-dark">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
-                        <a href="./index.html">
-                            <img class="logo-dark" src="./assets/img/logo-hitam.png"
-                                srcset="./assets/img/logo-hitam@2x.png 2x" alt="" />
-                            <img class="logo-light" src="./assets/img/logo-putih.png"
-                                srcset="./assets/img/logo-putih@2x.png 2x" alt="" />
+                        <a href="/index.html">
+                            <img class="logo-dark" src="/assets/img/logo-hitam.png"
+                                srcset="/assets/img/logo-hitam@2x.png 2x" alt="" />
+                            <img class="logo-light" src="/assets/img/logo-putih.png"
+                                srcset="/assets/img/logo-putih@2x.png 2x" alt="" />
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -38,19 +38,19 @@
                         <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Home</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Beranda</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Service</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Layanan</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Our Team</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Tim Kami</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Contact Us</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Hubungi Kami</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Service Area</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Daerah Layanan</a>
                                 </li>
 
                             </ul>
@@ -91,7 +91,7 @@
         </header>
         <!-- /header -->
         <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 bg-content text-white"
-            data-image-src="./assets/img/photos/bg4.jpg">
+            data-image-src="/assets/img/photos/bg4.jpg">
             <div class="container pt-18 pb-16" style="z-index: 5; position:relative">
                 <div class="row gx-0 gy-12 align-items-center">
                     <div class="col-md-10 offset-md-1 offset-lg-0 col-lg-6 content text-center text-lg-start"
@@ -112,14 +112,14 @@
                             data-dots="true">
                             <div class="swiper">
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide"><img src="./assets/img/photos/kucing1.jpeg"
-                                            srcset="./assets/img/photos/kucing1@2x.jpeg 2x" class="rounded"
+                                    <div class="swiper-slide"><img src="/assets/img/photos/kucing1.jpeg"
+                                            srcset="/assets/img/photos/kucing1@2x.jpeg 2x" class="rounded"
                                             alt="" /></div>
-                                    <div class="swiper-slide"><img src="./assets/img/photos/kucing2.jpeg"
-                                            srcset="./assets/img/photos/kucing2@2x.jpeg 2x" class="rounded"
+                                    <div class="swiper-slide"><img src="/assets/img/photos/kucing2.jpeg"
+                                            srcset="/assets/img/photos/kucing2@2x.jpeg 2x" class="rounded"
                                             alt="" /></div>
-                                    <div class="swiper-slide"><img src="./assets/img/photos/kucing3.jpeg"
-                                            srcset="./assets/img/photos/kucing3@2x.jpeg 2x" class="rounded"
+                                    <div class="swiper-slide"><img src="/assets/img/photos/kucing3.jpeg"
+                                            srcset="/assets/img/photos/kucing3@2x.jpeg 2x" class="rounded"
                                             alt="" /></div>
 
                                 </div>
@@ -238,7 +238,7 @@
                 <!-- /.position-relative -->
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
                     <div class="col-lg-7">
-                        <figure><img class="rounded" src="./assets/img/cat.jpeg" srcset="./assets/img/cat@2x.jpeg 2x"
+                        <figure><img class="rounded" src="/assets/img/cat.jpeg" srcset="/assets/img/cat@2x.jpeg 2x"
                                 alt="" /></figure>
                     </div>
                     <!--/column -->
@@ -258,8 +258,8 @@
                 <!--/.row -->
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-md-15">
                     <div class="col-lg-7 order-lg-2">
-                        <figure><img class="w-auto" src="./assets/img/logo-jui.png"
-                                srcset="./assets/img/logo-jui@2x.png 2x" alt="" /></figure>
+                        <figure><img class="w-auto" src="/assets/img/logo-jui.png"
+                                srcset="/assets/img/logo-jui@2x.png 2x" alt="" /></figure>
                     </div>
                     <!--/column -->
                     <div class="col-lg-5">
@@ -357,8 +357,8 @@
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
     </div>
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/theme.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/theme.js"></script>
 </body>
 
 </html>

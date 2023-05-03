@@ -74,7 +74,7 @@
 <div class="text-center" style="margin-top: 90px;">
     <p class="text-center mb-5" style="font-size: 30px;">Terima Kasih Atas Kepercayaannya</p>
     @isset($pembayaran->booking->rekam_medis)
-        <a style="" href="{{route('print.invoice', $pembayaran->id)}}">Print Invoice</a>
+        <a style="" href="{{route('print.invoice', $pembayaran->id)}}">Print Kwitansi</a>
     @endisset
 </div>
 

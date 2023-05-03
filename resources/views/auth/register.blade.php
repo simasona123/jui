@@ -15,7 +15,7 @@
                                 <strong>{{ $message }}</strong>
                         </div>
                     @endif
-                    <p class="login-box-msg">Register a new membership</p>
+                    <p class="login-box-msg">Daftar akun baru</p>
 
                     <form method="post" action="{{ route('register') }}">
                         @csrf
@@ -23,7 +23,7 @@
                         <div class="input-group mb-3">
                             <input type="text" name="full_name"
                                 class="form-control @error('full_name') is-invalid @enderror" value="{{ old('full_name') }}"
-                                placeholder="Full name">
+                                placeholder="Nama Lengkap">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-user"></span></div>
                             </div>
@@ -49,7 +49,7 @@
 
                         <div class="input-group mb-3">
                             <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                class="form-control @error('password') is-invalid @enderror" placeholder="Kata Sandi">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-lock"></span></div>
                             </div>
@@ -62,7 +62,7 @@
 
                         <div class="input-group mb-3">
                             <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="Retype password">
+                                placeholder="Ulangi kata sandi">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-lock"></span></div>
                             </div>
@@ -88,7 +88,7 @@
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="agreeTerms" name="terms">
                                     <label for="agreeTerms">
-                                        I agree to the <a href="#">terms</a>
+                                        Setuju dengan <a href="#">aturan</a>
                                     </label>
                                 </div>
                                 @error('terms')
@@ -99,13 +99,13 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                <button type="submit" class="btn btn-primary btn-block">Daftar</button>
                             </div>
                             <!-- /.col -->
                         </div>
                     </form>
 
-                    <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+                    <a href="{{ route('login') }}" class="text-center">Sudah punya akun</a>
                 </div>
                 <!-- /.form-box -->
             </div><!-- /.card -->
