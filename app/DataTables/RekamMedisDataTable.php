@@ -94,9 +94,9 @@ class RekamMedisDataTable extends DataTable
             'keterangan'
         ];
         
-        if(Auth::user()->getRoleNames()[0] != 'dokter-hewan'){
-            array_splice( $result, 3, 0, 'dokter_id'); 
-        }
+        // if(Auth::user()->getRoleNames()[0] != 'dokter-hewan'){
+        //     array_splice( $result, 3, 0, 'dokter_id'); 
+        // }
 
         return $result;
     }

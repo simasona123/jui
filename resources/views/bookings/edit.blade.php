@@ -28,7 +28,7 @@
             </div>
 
             <div class="card-footer">
-                <a href="{{ route('bookings.index') }}" class="btn btn-default"> Cancel </a>
+                <a href="{{ route('bookings.index') }}" class="btn btn-default">Batal</a>
             </div>
 
             {!! Form::close() !!}

@@ -1,78 +1,58 @@
-<!-- Booking Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('booking_id', 'Booking Id:') !!}
-    <p>{{ $rekamMedis->booking_id }}</p>
-</div>
-
-<!-- Dokter Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('dokter_id', 'Dokter Id:') !!}
-    <p>{{ $rekamMedis->dokter_id }}</p>
-</div>
-
-<!-- Nomor Rekam Medis Field -->
-<div class="col-sm-12">
-    {!! Form::label('nomor_rekam_medis', 'Nomor Rekam Medis:') !!}
-    <p>{{ $rekamMedis->nomor_rekam_medis }}</p>
-</div>
-
-<!-- Keluhan Field -->
-<div class="col-sm-12">
-    {!! Form::label('keluhan', 'Keluhan:') !!}
-    <p>{{ $rekamMedis->keluhan }}</p>
-</div>
-
-<!-- Diagnosis Field -->
-<div class="col-sm-12">
-    {!! Form::label('diagnosis', 'Diagnosis:') !!}
-    <p>{{ $rekamMedis->diagnosis }}</p>
-</div>
-
-<!-- Prognosa Field -->
-<div class="col-sm-12">
-    {!! Form::label('prognosa', 'Prognosa:') !!}
-    <p>{{ $rekamMedis->prognosa }}</p>
-</div>
-
-<!-- Tindakan Field -->
-<div class="col-sm-12">
-    {!! Form::label('tindakan', 'Tindakan:') !!}
-    <p>{{ $rekamMedis->tindakan }}</p>
-</div>
-
-<!-- Suhu Field -->
-<div class="col-sm-12">
-    {!! Form::label('suhu', 'Suhu:') !!}
-    <p>{{ $rekamMedis->suhu }}</p>
-</div>
-
-<!-- Berat Field -->
-<div class="col-sm-12">
-    {!! Form::label('berat', 'Berat:') !!}
-    <p>{{ $rekamMedis->berat }}</p>
-</div>
-
-<!-- Tgl Pemeriksaan Field -->
-<div class="col-sm-12">
-    {!! Form::label('tgl_pemeriksaan', 'Tgl Pemeriksaan:') !!}
-    <p>{{ $rekamMedis->tgl_pemeriksaan }}</p>
-</div>
-
-<!-- Keterangan Field -->
-<div class="col-sm-12">
-    {!! Form::label('keterangan', 'Keterangan:') !!}
-    <p>{{ $rekamMedis->keterangan }}</p>
-</div>
-
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $rekamMedis->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $rekamMedis->updated_at }}</p>
-</div>
-
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col"></th>
+        <th scope="col">Keterangan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Kode Booking</td>
+        <td>{{ $rekamMedis->booking->kode_booking }}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Dokter</td>
+        <td>{{ $rekamMedis->dokter->user->full_name }} | {{ $rekamMedis->dokter->nip }}</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Keluhan</td>
+        <td>{{ $rekamMedis->keluhan }}</td>
+      </tr><tr>
+        <th scope="row">4</th>
+        <td>Diagnosis</td>
+        <td>{{ $rekamMedis->diagnosis }}</td>
+      </tr><tr>
+        <th scope="row">5</th>
+        <td>Prognosa</td>
+        <td>{{ $rekamMedis->prognosa }}</td>
+      </tr><tr>
+        <th scope="row">6</th>
+        <td>Tindakan</td>
+        <td>{{ $rekamMedis->Tindakan }}</td>
+      </tr><tr>
+        <th scope="row">7</th>
+        <td>Suhu</td>
+        <td>{{ $rekamMedis->suhu}}</td>
+      </tr><tr>
+        <th scope="row">8</th>
+        <td>Berat</td>
+        <td>{{ $rekamMedis->berat}}</td>
+      </tr><tr>
+        <th scope="row">9</th>
+        <td>Tanggal Pemeriksaan</td>
+        <td>{{ $rekamMedis->tgl_pemeriksaan}}</td>
+      </tr><tr>
+        <th scope="row">10</th>
+        <td>Keterangan</td>
+        <td>{{ $rekamMedis->keterangan}}</td>
+      </tr><tr>
+        <th scope="row">11</th>
+        <td>Dibuat dan Diubah</td>
+        <td>{{ $rekamMedis->created_at}} dan {{ $rekamMedis->updated_at}}</td>
+      </tr>
+    </tbody>
+  </table>

@@ -38,7 +38,7 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <a href={{route('home.profil')}} class="btn btn-default btn-flat">Profile</a>
+                                <a href={{route('home.profil')}} class="btn btn-default btn-flat">Profil</a>
                                 <a href="#" class="btn btn-default btn-flat float-right" id="logoutAkun">
                                     Sign out
                                 </a>

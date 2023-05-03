@@ -99,7 +99,7 @@ class PasienDataTable extends DataTable
             ->orderable(false);
         
         $result = [
-            'id',
+            // 'id',
             'nama_hewan',
             'jenis_hewan',
             $jenis_kelamin,
