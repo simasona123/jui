@@ -24,9 +24,9 @@
                     <div class="navbar-brand w-100">
                         <a href="./index.html">
                             <img class="logo-dark" src="./assets/img/logo-hitam.png"
-                                srcset="./assets/img/logo-hitam@2x.png 2x" alt="" />
+                                 alt="" />
                             <img class="logo-light" src="./assets/img/logo-putih.png"
-                                srcset="./assets/img/logo-putih@2x.png 2x" alt="" />
+                                 alt="" />
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -41,16 +41,16 @@
                                     <a class="nav-link" href="" data-bs-toggle="dropdown">Home</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Service</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Layanan</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Our Team</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Tim Kami</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Contact Us</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Hubungi Kami</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Service Area</a>
+                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Daerah Layanan</a>
                                 </li>
 
                             </ul>
@@ -113,13 +113,13 @@
                             <div class="swiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing1.jpeg"
-                                            srcset="./assets/img/photos/kucing1@2x.jpeg 2x" class="rounded"
+                                             class="rounded"
                                             alt="" /></div>
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing2.jpeg"
-                                            srcset="./assets/img/photos/kucing2@2x.jpeg 2x" class="rounded"
+                                             class="rounded"
                                             alt="" /></div>
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing3.jpeg"
-                                            srcset="./assets/img/photos/kucing3@2x.jpeg 2x" class="rounded"
+                                             class="rounded"
                                             alt="" /></div>
 
                                 </div>
@@ -238,8 +238,7 @@
                 <!-- /.position-relative -->
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
                     <div class="col-lg-7">
-                        <figure><img class="rounded" src="./assets/img/cat.jpeg" srcset="./assets/img/cat@2x.jpeg 2x"
-                                alt="" /></figure>
+                        <figure><img class="rounded" src="./assets/img/cat.jpeg" ="" /></figure>
                     </div>
                     <!--/column -->
                     <div class="col-lg-5">
@@ -259,7 +258,7 @@
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-md-15">
                     <div class="col-lg-7 order-lg-2">
                         <figure><img class="w-auto" src="./assets/img/logo-jui.png"
-                                srcset="./assets/img/logo-jui@2x.png 2x" alt="" /></figure>
+                                 alt="" /></figure>
                     </div>
                     <!--/column -->
                     <div class="col-lg-5">

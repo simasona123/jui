@@ -65,7 +65,7 @@
 <li class="nav-item">
     <a href="{{ route('reminders.index') }}" class="nav-link {{ Request::is('reminders*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-exclamation"></i>
-        <p>Reminders</p>
+        <p>Pengingat</p>
     </a>
 </li>
 @endrole

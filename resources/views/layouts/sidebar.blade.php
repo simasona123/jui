@@ -18,7 +18,7 @@
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>Manage Users</p>
+                        <p>Pengaturan Pengguna</p>
                     </a>
                 </li>
             </ul>

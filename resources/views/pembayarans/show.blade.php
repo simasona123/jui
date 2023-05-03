@@ -6,7 +6,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>
-Pembayaran Details
+                        Pembayaran Details
                     </h1>
                 </div>
                 <div class="col-sm-6">
@@ -22,9 +22,7 @@ Pembayaran Details
     <div class="content px-3">
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    @include('pembayarans.show_fields')
-                </div>
+                @include('pembayarans.show_fields')
             </div>
         </div>
     </div>
