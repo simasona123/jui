@@ -4,7 +4,7 @@
         <i class="fa fa-eye"></i><br>Lihat
     </a>
     <a href="{{ route('users.edit', $id) }}" class='btn btn-default btn-xs'>
-        <i class="fa fa-edit"></i><br>Edit
+        <i class="fa fa-edit"></i><br>Ubah
     </a>
     {!! Form::button('<i class="fa fa-trash"></i><br>Hapus', [
         'type' => 'submit',
