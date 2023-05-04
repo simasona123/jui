@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password" name="password" placeholder="Password"
+                            <input type="password" name="password" placeholder="Kata Sandi"
                                 class="form-control @error('password') is-invalid @enderror">
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -56,7 +56,7 @@
                     </form>
 
                     <p class="mb-1">
-                        <a href="{{ route('password.request') }}">Lupa Password</a>
+                        <a href="{{ route('password.request') }}">Lupa Kata Sandi</a>
                     </p>
                     <p class="mb-0">
                         <a href="{{ route('register') }}" class="text-center">Daftar Akun</a>

@@ -75,11 +75,14 @@ class UserDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false);
         $phone = Column::make('phone')
+                ->title('No. Telepon')
                 ->searchable(false)
                 ->orderable(false);
+        $nama = Column::make('full_name')
+                ->title('Nama Lengkap');
                 
         return [
-            'full_name',
+            $nama,
             'email',
             $phone,
             $status,
