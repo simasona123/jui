@@ -4,7 +4,6 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JadwalPraktikController;
-use App\Http\Controllers\KonsultasiController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PembayaranController;
@@ -141,8 +140,8 @@ Route::middleware('auth')->group(function(){
             Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
             Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit");
-            Route::patch('/{user}', "update")->name("update");
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer|klien']);
+            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer|klien']);
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
         });
     });

@@ -51,15 +51,12 @@
 </li>
 @endrole
 
-@role('dokter-hewan')
-@else
 <li class="nav-item">
     <a href="{{ route('pembayarans.index') }}" class="nav-link {{ Request::is('pembayaran*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-money-check-alt"></i>
         <p>Pembayaran</p>
     </a>
 </li>
-@endrole
 
 @role('administrator|manajer')
 <li class="nav-item">

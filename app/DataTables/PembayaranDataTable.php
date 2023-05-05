@@ -2,6 +2,9 @@
 
 namespace App\DataTables;
 
+use App\Models\Booking;
+use App\Models\Dokter;
+use App\Models\JadwalPraktik;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Services\DataTable;
@@ -42,6 +45,15 @@ class PembayaranDataTable extends DataTable
         $user = Auth::user();
         if($user->getRoleNames()[0] == 'klien'){
             return $model::with('booking')->where('user_id', $user->id);
+        }
+        else if($user->getRoleNames()[0] == 'dokter-hewan'){
+            $dokter_id = Dokter::where('user_id', $user->id)->first()->id;
+            $jadwal_praktik = JadwalPraktik::where('dokter_id', $dokter_id)->pluck('id');
+            $booking = Booking::whereIn('jadwal_praktik_id', $jadwal_praktik)->pluck('id');
+
+            return $model::with(['booking' => function($q) use ($jadwal_praktik) {
+                return $q->whereIn('jadwal_praktik_id', $jadwal_praktik);
+            }])->whereIn('booking_id', $booking);
         }
         return $model::with('booking');
     }
