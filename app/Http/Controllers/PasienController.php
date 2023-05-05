@@ -108,6 +108,22 @@ class PasienController extends AppBaseController
 
         $pasien = $this->pasienRepository->update($request->all(), $id);
 
+        $request = $request->all();
+
+        $media = $pasien->getMedia();
+
+            foreach ($media as $item) {
+                $item->delete();
+            }
+
+        if(isset($request['image'])){
+            $image_name = $pasien->nama_hewan.".".$request['image']->extension();
+            $request['image']->move(storage_path('app/pasien'), $image_name);
+            $pasien->addMedia(storage_path('app/pasien/') . $image_name)
+                ->usingName($image_name)
+                ->toMediaCollection();
+        }
+
         Flash::success('Pasien updated successfully.');
 
         return redirect(route('pasien.index'));
