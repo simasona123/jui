@@ -7,7 +7,10 @@ use App\Http\Requests\CreatePembayaranRequest;
 use App\Http\Requests\UpdatePembayaranRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Booking;
+use App\Models\Dokter;
+use App\Models\JadwalPraktik;
 use App\Models\Pasien;
+use App\Models\Pembayaran;
 use App\Models\Reminder;
 use App\Models\User;
 use App\Notifications\CustomNotification;
@@ -31,8 +34,8 @@ class PembayaranController extends AppBaseController
      * Display a listing of the Pembayaran.
      */
     public function index(PembayaranDataTable $pembayaranDataTable)
-    {
-    return $pembayaranDataTable->render('pembayarans.index');
+    {  
+        return $pembayaranDataTable->render('pembayarans.index');
     }
 
 
