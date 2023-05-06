@@ -137,11 +137,11 @@ Route::middleware('auth')->group(function(){
     Route::prefix('/pembayaran')->name('pembayarans.')->group(function(){
         Route::controller(PembayaranController::class)->group(function(){
             Route::get('/', 'index')->name('index');
-            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer']);
-            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer']);
+            Route::get('/create', "create")->name("create")->middleware(['role:administrator|manajer|dokter-hewan']);
+            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer|dokter-hewan']);
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer|klien']);
-            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer|klien']);
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer|klien|dokter-hewan']);
+            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer|klien|dokter-hewan']);
             Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:administrator|manajer']);
         });
     });

@@ -56,12 +56,20 @@ Route::middleware('cors')->group(function(){
 
     Route::get('/booking', function(Request $request){
         $kode_booking = $request->kode;
-        $user_id = $request->id;
+        $id = $request->id;
         $role = $request->role;
         if($role == 'administrator' || $role == 'manajer'){
             $data = Booking::select('id', 'kode_booking')->has('pembayaran', 0)->where('kode_booking', 'like', $kode_booking . '%')
                 ->take(10)
                 ->get();
+            return response()->json([
+                'data' => $data,
+            ]);
+        }else if($role == 'dokter-hewan'){
+            $dokter = Dokter::where('user_id', $id)->first();
+            $data = Booking::whereRelation('jadwal_praktik', 'dokter_id', $dokter->id)->select('id', 'kode_booking')->has('pembayaran', 0)
+            ->where('kode_booking', 'like', $kode_booking . '%')->get();
+            // dd($data);
             return response()->json([
                 'data' => $data,
             ]);
