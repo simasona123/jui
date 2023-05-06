@@ -59,6 +59,9 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="text-muted" style="font-size: .7rem; top:-11px; position: relative;">
+                            Minimal 6 karakter dengan satu huruf kapital dan satu angka
+                        </div>
 
                         <div class="input-group mb-3">
                             <input type="password" name="password_confirmation" class="form-control"

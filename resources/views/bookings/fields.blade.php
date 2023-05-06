@@ -147,7 +147,7 @@
                 <div class="row">
                     <div class="col-sm-12 row align-items-center">
                         <div class="col-sm-1">
-                            <img class="img-profil" :src="item['dokter']['img']" alt="" srcset="" style="border-radius: 50%;">
+                            <img class="img-profil" :src="item['dokter']['img']" alt="" style="border-radius: 50%;">
                         </div>
                         <div class="col-sm-11">
                             <span x-text="item['dokter']['user']['full_name']"></span> (<span x-text="item['dokter']['user']['email']"></span>) | <span x-text="item['dokter']['spesialis']"></span>

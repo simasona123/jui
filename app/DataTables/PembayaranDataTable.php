@@ -27,6 +27,9 @@ class PembayaranDataTable extends DataTable
             ->addColumn('kode_booking', function($pembayaran){
                 return $pembayaran->booking->kode_booking;
             })
+            ->orderColumn('kode_booking', function($query, $tanggal_bayar){
+                $query->orderBy('tanggal_bayar', $tanggal_bayar);
+            })
             ->addColumn('status', 'pembayarans.datatables_status')
             ->addColumn('action', 'pembayarans.datatables_actions')
             ->rawColumns(['status', 'action']);
@@ -95,13 +98,14 @@ class PembayaranDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false);
 
-        $kode_booking = Column::make('kode_booking');
+        $kode_booking = Column::make('kode_booking')
+            ->orderable(true);
 
         $id = Column::make('id')
             ->visible(false);
 
         $tanggal_bayar= Column::make('tanggal_bayar')
-            ->title('Tanggal Masuk')
+            ->title('Tanggal Pembayaran')
             ->searchable(false)
             ->orderable(false)
             ->render("function(){
@@ -109,13 +113,18 @@ class PembayaranDataTable extends DataTable
                 return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()} 
                 \${String(data.getHours()).padStart(2, '0')}:\${String(data.getMinutes()).padStart(2, '0')}:00 WIB`;
             }");
+
+        $jumlah_transaksi = Column::make('jumlah_transaksi')
+            ->title('Jumlah Transaksi')
+            ->searchable(false)
+            ->orderable(false);
             
 
         return [
             $id,
             $kode_booking,
             $tanggal_bayar,
-            'jumlah_transaksi',
+            $jumlah_transaksi,
             $status,
         ];
     }
