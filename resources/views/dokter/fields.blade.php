@@ -73,7 +73,10 @@
 @endphp
 <div class="form-group col-sm-6">
     <label for="image">Foto Dokter</label> <br>
-    <input type="file" name="image">
+    <input type="file" name="image"> <br>
+    <span class="text-muted">
+        Maks. 2MB
+    </span>
     @if (isset($dokter))
         <img src="{{$image_url}}" alt="">
     @endif

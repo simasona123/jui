@@ -59,9 +59,9 @@
 
                     <div class="form-group col-sm-6">
                         <label for="image">Foto Profil</label> <br>
-                        <input type="file" name="image">
+                        <input type="file" name="image"> <br>
+                        <span class="text-muted">Maks. 2MB</span>
                     </div> 
-
                 </div>
             </div>
 
