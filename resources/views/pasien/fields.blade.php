@@ -66,7 +66,12 @@
 <!-- Jenis Hewan Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('jenis_hewan', 'Jenis Hewan:') !!} <span class="required">*</span>
-    {!! Form::text('jenis_hewan', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::select('jenis_hewan', 
+    [
+        "Kucing"=>'Kucing', 
+        "Anjing"=>'Anjing',
+        "Kelinci"=>'Kelinci',
+    ], null, ['class' => 'form-control custom-select']) !!}
 </div>
 
 <!-- Jenis Kelamin Field -->

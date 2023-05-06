@@ -82,7 +82,7 @@
                                         @endisset
                                         
                                     </td>
-                                    <td>{{$jadwal_praktik->tanggal_masuk}} WIB</td>
+                                    <td>{{$jadwal_praktik->tanggal_masuk->addHours(7)}} WIB</td>
                                 </tr>
                                 @endforeach
                             @endforeach

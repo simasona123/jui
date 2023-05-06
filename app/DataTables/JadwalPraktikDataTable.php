@@ -77,7 +77,7 @@ class JadwalPraktikDataTable extends DataTable
         $tanggal_masuk = Column::make('tanggal_masuk')
             ->title('Tanggal Masuk')
             ->searchable(false)
-            ->orderable(false)
+            ->orderable(true)
             ->render("function(){
                 data = new Date(data);
                 return `\${String(data.getDate()).padStart(2, '0')}-\${String(data.getMonth()+1).padStart(2, '0')}-\${data.getFullYear()} 

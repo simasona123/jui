@@ -77,7 +77,7 @@
     <!-- Jumlah Transaksi Field -->
     <div class="form-group col-sm-6">
         {!! Form::label('jumlah_transaksi', 'Jumlah Transaksi:') !!}
-        <input @role('klien') disabled @endrole class="form-control" required="" name="jumlah_transaksi" type="text" value="100000" id="jumlah_transaksi">
+        <input @role('klien') disabled @endrole class="form-control" required="" name="jumlah_transaksi" type="text" x-model="jumlah_transaksi" id="jumlah_transaksi">
     </div>
    
 
