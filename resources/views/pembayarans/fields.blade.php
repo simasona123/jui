@@ -87,7 +87,7 @@
     {!! Form::label('tanggal_bayar', 'Tanggal Pembayaran:') !!} <span class="required">*</span>
     <input type="datetime-local" class="form-control" required
         name="tanggal_bayar" value="{{isset($pembayaran)? $pembayaran->tanggal_bayar : ''}}"
-        min="{{date("Y-m-d\T00:00")}}" max="">
+        min="" max="">
     </div>
 
     <div class="form-group col-sm-6">

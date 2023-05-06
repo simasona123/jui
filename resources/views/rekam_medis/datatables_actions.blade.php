@@ -3,6 +3,7 @@
     <a href="{{ route('rekamMedis.show', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-eye"></i><br>Lihat
     </a>
+    @role('manajer|dokter-hewan')
     <a href="{{ route('rekamMedis.edit', $id) }}" class='btn btn-default btn-xs'>
         <i class="fa fa-edit"></i><br>Edit
     </a>
@@ -12,5 +13,6 @@
         'onclick' => 'return confirm("'.__('crud.are_you_sure').'")'
 
     ]) !!}
+    @endrole
 </div>
 {!! Form::close() !!}

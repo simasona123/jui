@@ -17,16 +17,14 @@
 </head>
 
 <body>
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="top">
         <header class="wrapper bg-soft-primary">
             <nav class="navbar navbar-expand-lg classic transparent position-absolute navbar-dark">
                 <div class="container flex-lg-row flex-nowrap align-items-center">
                     <div class="navbar-brand w-100">
                         <a href="./index.html">
-                            <img class="logo-dark" src="./assets/img/logo-hitam.png"
-                                 alt="" />
-                            <img class="logo-light" src="./assets/img/logo-putih.png"
-                                 alt="" />
+                            <img class="logo-dark" src="./assets/img/logo-hitam.png" alt="" />
+                            <img class="logo-light" src="./assets/img/logo-putih.png" alt="" />
                         </a>
                     </div>
                     <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -38,19 +36,16 @@
                         <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Home</a>
+                                    <a class="nav-link" href="#top">Home</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Layanan</a>
+                                    <a class="nav-link" href="#layanan">Layanan</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Tim Kami</a>
+                                    <a class="nav-link" href="#tim-kami">Tim Kami</a>
                                 </li>
                                 <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Hubungi Kami</a>
-                                </li>
-                                <li class="nav-item dropdown dropdown-mega">
-                                    <a class="nav-link" href="" data-bs-toggle="dropdown">Daerah Layanan</a>
+                                    <a class="nav-link" href="#footer">Hubungi Kami</a>
                                 </li>
 
                             </ul>
@@ -113,14 +108,11 @@
                             <div class="swiper">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing1.jpeg"
-                                             class="rounded"
-                                            alt="" /></div>
+                                            class="rounded" alt="" /></div>
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing2.jpeg"
-                                             class="rounded"
-                                            alt="" /></div>
+                                            class="rounded" alt="" /></div>
                                     <div class="swiper-slide"><img src="./assets/img/photos/kucing3.jpeg"
-                                             class="rounded"
-                                            alt="" /></div>
+                                            class="rounded" alt="" /></div>
 
                                 </div>
                                 <!--/.swiper-wrapper -->
@@ -136,7 +128,7 @@
             <!-- /.container -->
         </section>
         <!-- /section -->
-        <section class="wrapper bg-light">
+        <section class="wrapper bg-light" id="layanan">
             <div class="container py-14 py-md-17">
                 <div class="row text-center">
                     <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
@@ -238,7 +230,7 @@
                 <!-- /.position-relative -->
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
                     <div class="col-lg-7">
-                        <figure><img class="rounded" src="./assets/img/cat.jpeg" ="" /></figure>
+                        <figure><img class="rounded" src="./assets/img/cat.jpeg"="" /></figure>
                     </div>
                     <!--/column -->
                     <div class="col-lg-5">
@@ -257,8 +249,7 @@
                 <!--/.row -->
                 <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-md-15">
                     <div class="col-lg-7 order-lg-2">
-                        <figure><img class="w-auto" src="./assets/img/logo-jui.png"
-                                 alt="" /></figure>
+                        <figure><img class="w-auto" src="./assets/img/logo-jui.png" alt="" /></figure>
                     </div>
                     <!--/column -->
                     <div class="col-lg-5">
@@ -278,14 +269,91 @@
                     <!--/column -->
                 </div>
                 <!--/.row -->
+                <div id="tim-kami">
+                    <h3 class="display-4 mb-5 text-center">Tim Kami</h3>
+                    <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
+                        <div class="col-lg-5">
+                            <figure><img class="rounded" src="./assets/img/dokter1.webp" /></figure>
+                        </div>
+                        <!--/column -->
+                        <div class="col-lg-7">
+                            <!-- <h2 class="fs-15 text-uppercase text-primary mb-3">Why Choose Us?</h2> -->
+                            <h3 class="display-4 mb-7">1. Drh. Bramantyo</h3>
+                            <p>Dokter Bramantyo merupakan salah satu dokter senior yang aktif melaksanakan pelayanan
+                                kesehatan hewan di Jui
+                                Housecall vet Services. Dokter Bramantyo juga sering dipanggil dengan panggilan Dokter
+                                Tyo. Dokter Tyo sudah sangat berpengalaman dalam pelayanan kesehatan Anjing serta kuda
+                                dan juga hewan kesayangan lainnya.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
+                        <div class="col-lg-7">
+                            <!-- <h2 class="fs-15 text-uppercase text-primary mb-3">Why Choose Us?</h2> -->
+                            <h3 class="display-4 mb-7">2. Drh. Galih</h3>
+                            <p>Dokter Galih merupakan dokter yang aktif di Jui Housecall vet. Dokter Galih juga memiliki pengalaman dalam bidang kesehatan hewan besar atau hewan ternak. Selain itu, dokter galih juga memiliki pengalaman dalam dunia Bedah.
+                            </p>
+                        </div>
+                        <div class="col-lg-5">
+                            <figure><img class="rounded" src="./assets/img/dokter2.webp" /></figure>
+                        </div>
+                        <!--/column -->
+                    </div>
+                </div>
+                <div>
+                    <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
+                        <div class="col-lg-5">
+                            <figure><img class="rounded" src="./assets/img/dokter3.webp" /></figure>
+                        </div>
+                        <div class="col-lg-7">
+                            <!-- <h2 class="fs-15 text-uppercase text-primary mb-3">Why Choose Us?</h2> -->
+                            <h3 class="display-4 mb-7">3. Drh. Najma Hayati</h3>
+                            <p>Dokter Najma hayati atau sering dipanggil dokter najma merupakan salah seorang dari 2 orang dokter hewan wanita yang aktif di Jui Housecall vet services. Dokter najma memiliki pengalaman lebih dibidang bedah. Dokter Najma merupakan salah satu dokter yang juga aktif dibidang kesehatan hewan ternak.
+                            </p>
+                        </div>
+                        <!--/column -->
+                    </div>
+                </div>
+                <div>
+                    <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
+                        <div class="col-lg-7">
+                            <!-- <h2 class="fs-15 text-uppercase text-primary mb-3">Why Choose Us?</h2> -->
+                            <h3 class="display-4 mb-7">4. Drh. Syarif Sultoni Harahap</h3>
+                            <p>Dokter Syarif atau juga sering dipanggil Dokter Toni merupakan dokter yang memiliki minat berlebih dalam dunia bedah. Memiliki pengalaman berlebih di bidang patologi forensik udang.
+                            </p>
+                        </div>
+                        <!--/column -->
+                        <div class="col-lg-5">
+                            <figure><img class="rounded" src="./assets/img/dokter4.webp" /></figure>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center mb-14 mb-md-17">
+                        <!--/column -->
+                        <div class="col-lg-5">
+                            <figure><img class="rounded" src="./assets/img/dokter5.webp" /></figure>
+                        </div>
+                        <div class="col-lg-7">
+                            <!-- <h2 class="fs-15 text-uppercase text-primary mb-3">Why Choose Us?</h2> -->
+                            <h3 class="display-4 mb-7">5. Drh Suryaningtyas Kusumadewi</h3>
+                            <p>Dokter Suryaningtyas atau dipanggil dokter Aning merupakan dokter wanita kami lainnya. Beliau memiliki kemampuan yang baik dalam bidang penyakit dalam. Dokter Aning juga memiliki pengetahuan lebih dalam hal parasitologi terutama endoparasit yang dikarenakan penelitian yang beliau laksanakan merupakan penelitian tentang hal tersebut.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.container -->
         </section>
 
+        <section class="wrapper bg-light" id="layanan"></section>
+
         <!-- /section -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="bg-navy text-inverse">
+    <footer class="bg-navy text-inverse" id="footer">
         <div class="container py-8 py-md-10">
             <div class="row gx-lg-0 gy-6">
                 <div class="col-lg-4">
@@ -308,7 +376,7 @@
                                 </div>
                             </div>
                             <div>
-                                <h5 class="mb-1" style="color: white">Phone</h5>
+                                <h5 class="mb-1" style="color: white">No. Telepon</h5>
                                 <p class="mb-0">+62 856 0107 2186</p>
                             </div>
                         </div>
