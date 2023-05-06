@@ -103,7 +103,7 @@
     </div> 
     @endrole
 
-    @role('administrator|manajer')
+    @role('administrator|manajer|dokter-hewan')
     <div class="form-group col-sm-6" x-show='edit'>
         <label for="verifikasi">Verifikasi</label> <br>
         <select class="custom-select" x-model='verifikasi' name="verifikasi" id="">
