@@ -124,11 +124,11 @@ Route::middleware('auth')->group(function(){
             Route::get('/jadwal', "redirect")->name("redirect");
             Route::get('/', 'index')->name('index');
             Route::get('/create', "create")->name("create");
-            Route::post('/', "store")->name("store")->middleware(['role:administrator|manajer|dokter-hewan']);
+            Route::post('/', "store")->name("store")->middleware(['role:manajer|dokter-hewan']);
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:administrator|manajer|dokter-hewan']);
-            Route::patch('/{user}', "update")->name("update")->middleware(['role:administrator|manajer|dokter-hewan']);
-            Route::delete('/{user}', "destroy")->name("destroy");
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware(['role:manajer|dokter-hewan']);
+            Route::patch('/{user}', "update")->name("update")->middleware(['role:manajer|dokter-hewan']);
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware(['role:manajer|dokter-hewan']);;
         });
     });
 }); //Rekam Medis

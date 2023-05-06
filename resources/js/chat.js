@@ -17,7 +17,6 @@ CometChat.init(appID, appSetting).then(
         console.log(user);
         await createUserOnCometChat(user['email'], user['name']);
         setTimeout(logUserInToCometChat(user['email']), 3000);
-        createApp(App).mount("#app");
     },
     error => {
         console.log("Initialization failed with error:", error);
@@ -31,6 +30,7 @@ async function logUserInToCometChat(UID) {
     CometChat.login(UID, AUTH_KEY).then(
         data => {
             console.log(data)
+            createApp(App).mount("#app");
         },
         error => {
             this.showSpinner = false;

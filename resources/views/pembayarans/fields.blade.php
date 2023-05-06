@@ -87,12 +87,13 @@
     {!! Form::label('tanggal_bayar', 'Tanggal Pembayaran:') !!} <span class="required">*</span>
     <input type="datetime-local" class="form-control" required
         name="tanggal_bayar" value="{{isset($pembayaran)? $pembayaran->tanggal_bayar : ''}}"
-        min="{{date("Y-m-d\T00:00")}}" max="">
+        min="" max="">
     </div>
 
     <div class="form-group col-sm-6">
         <label for="image">Bukti Pembayaran</label> <br>
-        <input type="file" name="image" required>
+        <input type="file" name="image" required> <br>
+        <span class="text-muted">Maks. 2MB</span>
         @if (count($media) > 0)
         <div class="col-sm-12" style="height: 100px;">
             <img src="{{$image_url}}" alt="" class="img-profil" style="object-fit: contain;">

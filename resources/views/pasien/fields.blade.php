@@ -95,4 +95,5 @@
 <div class="form-group col-sm-6">
     <label for="image">Foto Pasien</label> <br>
     <input type="file" name="image">
+    <span class="text-muted">Maks. 2MB</span>
 </div> 
