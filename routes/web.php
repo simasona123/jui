@@ -108,12 +108,12 @@ Route::middleware('auth')->group(function(){
     Route::prefix('/booking')->name('bookings.')->group(function(){
         Route::controller(BookingController::class)->group(function(){
             Route::get('/', 'index')->name('index');
-            Route::get('/create', "create")->name("create");
-            Route::post('/', "store")->name("store");
+            Route::get('/create', "create")->name("create")->middleware('role:administrator|manajer|klien');
+            Route::post('/', "store")->name("store")->middleware('role:administrator|manajer|klien');
             Route::get('/{user}', "show")->name("show");
-            Route::get('/{user}/edit', "edit")->name("edit");
-            Route::patch('/{user}', "update")->name("update");
-            Route::delete('/{user}', "destroy")->name("destroy");
+            Route::get('/{user}/edit', "edit")->name("edit")->middleware('role:administrator|manajer|klien');
+            Route::patch('/{user}', "update")->name("update")->middleware('role:administrator|manajer|klien');
+            Route::delete('/{user}', "destroy")->name("destroy")->middleware('role:administrator|manajer|klien');
         });
     });
 }); //Booking

@@ -8,12 +8,15 @@
                 <div class="col-sm-6">
                     <h1>Booking</h1>
                 </div>
+                @role('dokter-hewan')
+                @else
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('bookings.create') }}">
                         Tambah
                     </a>
                 </div>
+                @endrole
             </div>
         </div>
     </section>
