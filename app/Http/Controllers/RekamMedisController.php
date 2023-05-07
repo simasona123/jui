@@ -12,6 +12,7 @@ use App\Models\RekamMedis;
 use App\Repositories\RekamMedisRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 
 class RekamMedisController extends AppBaseController
 {
@@ -60,6 +61,8 @@ class RekamMedisController extends AppBaseController
     public function show($id)
     {
         $rekamMedis = $this->rekamMedisRepository->find($id);
+
+        dd($rekamMedis);
 
         if (empty($rekamMedis)) {
             Flash::error('Rekam Medis not found');
@@ -130,10 +133,19 @@ class RekamMedisController extends AppBaseController
     public function redirect(Request $request){
         $booking = Booking::where('kode_booking', $request->kode_booking)->first();
         $rekam_medis = RekamMedis::where('booking_id', (int)$booking->id)->first();
-        if($rekam_medis == null){
-            return view('rekam_medis.create', [
-                'booking' => $booking
-            ]);
-        } return view('rekam_medis.edit', ["rekamMedis" => $rekam_medis]);
+        $user = Auth::user();
+        if($user->hasRole('dokter-hewan')){
+            if($rekam_medis == null){
+                return view('rekam_medis.create', [
+                    'booking' => $booking
+                ]);
+            } return view('rekam_medis.edit', ["rekamMedis" => $rekam_medis]);
+        }else{
+            if($rekam_medis == null){
+                Flash::success('Rekam Medis Belum dibuat');
+                return redirect(route('bookings.index'));
+            } return view('rekam_medis.show', ["rekamMedis" => $rekam_medis]);
+        }
+        
     }
 }
