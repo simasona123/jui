@@ -62,8 +62,6 @@ class RekamMedisController extends AppBaseController
     {
         $rekamMedis = $this->rekamMedisRepository->find($id);
 
-        dd($rekamMedis);
-
         if (empty($rekamMedis)) {
             Flash::error('Rekam medis tidak ditemukan.');
 
