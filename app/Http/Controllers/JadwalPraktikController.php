@@ -47,7 +47,7 @@ class JadwalPraktikController extends AppBaseController
 
         $jadwalPraktik = $this->jadwalPraktikRepository->create($input);
 
-        Flash::success('Jadwal Praktik saved successfully.');
+        Flash::success('Jadwal Praktik telah disimpan.');
 
         return redirect(route('jadwal-praktik.index'));
     }
@@ -60,7 +60,7 @@ class JadwalPraktikController extends AppBaseController
         $jadwalPraktik = $this->jadwalPraktikRepository->find($id);
 
         if (empty($jadwalPraktik)) {
-            Flash::error('Jadwal Praktik not found');
+            Flash::error('Jadwal praktik tidak ditemukan.');
 
             return redirect(route('jadwal-praktik.index'));
         }
@@ -77,7 +77,7 @@ class JadwalPraktikController extends AppBaseController
         $user = Dokter::find($jadwalPraktik->dokter_id)->user;
 
         if (empty($jadwalPraktik)) {
-            Flash::error('Jadwal Praktik not found');
+            Flash::error('Jadwal praktik tidak ditemukan.');
 
             return redirect(route('jadwal-praktik.index'));
         }
@@ -96,7 +96,7 @@ class JadwalPraktikController extends AppBaseController
         $jadwalPraktik = $this->jadwalPraktikRepository->find($id);
 
         if (empty($jadwalPraktik)) {
-            Flash::error('Jadwal Praktik not found');
+            Flash::error('Jadwal praktik tidak ditemukan.');
 
             return redirect(route('jadwal-praktik.index'));
         }
@@ -118,7 +118,7 @@ class JadwalPraktikController extends AppBaseController
         $jadwalPraktik = $this->jadwalPraktikRepository->find($id);
 
         if (empty($jadwalPraktik)) {
-            Flash::error('Jadwal Praktik not found');
+            Flash::error('Jadwal praktik tidak ditemukan.');
 
             return redirect(route('jadwal-praktik.index'));
         }
@@ -132,7 +132,7 @@ class JadwalPraktikController extends AppBaseController
             return redirect(route('jadwal-praktik.index'));
         }
 
-        Flash::success('Jadwal Praktik deleted successfully.');
+        Flash::success('Jadwal praktik berhasil dihapus.');
 
         return redirect(route('jadwal-praktik.index'));
     }

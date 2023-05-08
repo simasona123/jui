@@ -62,7 +62,7 @@ class BookingController extends AppBaseController
             return redirect(route('bookings.index'));
         }
 
-        Flash::success('Booking saved successfully.');
+        Flash::success('Booking berhasil tersimpan.');
 
         return redirect(route('bookings.index'));
     }
@@ -75,7 +75,7 @@ class BookingController extends AppBaseController
         $booking = $this->bookingRepository->find($id);
         
         if (empty($booking)) {
-            Flash::error('Booking not found');
+            Flash::error('Booking tidak ditemukan');
 
             return redirect(route('bookings.index'));
         }
@@ -91,7 +91,7 @@ class BookingController extends AppBaseController
         $booking = $this->bookingRepository->find($id);
 
         if (empty($booking)) {
-            Flash::error('Booking not found');
+            Flash::error('Booking tidak ditemukan');
 
             return redirect(route('bookings.index'));
         }
@@ -109,7 +109,7 @@ class BookingController extends AppBaseController
         $booking = $this->bookingRepository->find($id);
 
         if (empty($booking)) {
-            Flash::error('Booking not found');
+            Flash::error('Booking tidak ditemukan');
 
             return redirect(route('bookings.index'));
         }
@@ -122,7 +122,7 @@ class BookingController extends AppBaseController
             return redirect(route('bookings.index'));
         }
 
-        Flash::success('Booking updated successfully.');
+        Flash::success('Booking berhasil diubah.');
 
         return redirect(route('bookings.index'));
     }
@@ -137,14 +137,14 @@ class BookingController extends AppBaseController
         $booking = $this->bookingRepository->find($id);
 
         if (empty($booking)) {
-            Flash::error('Booking not found');
+            Flash::error('Booking tidak ditemukan');
 
             return redirect(route('bookings.index'));
         }
 
         $this->bookingRepository->delete($id);
 
-        Flash::success('Booking deleted successfully.');
+        Flash::success('Booking berhasil dihapus.');
 
         return redirect(route('bookings.index'));
     }

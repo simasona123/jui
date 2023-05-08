@@ -72,7 +72,7 @@ class PembayaranController extends AppBaseController
 
         $user->notify(new CustomNotification($reminder));
 
-        Flash::success('Pembayaran saved successfully.');
+        Flash::success('Pembayaran berhasil disimpan.');
 
         return redirect(route('pembayarans.index'));
     }
@@ -85,7 +85,7 @@ class PembayaranController extends AppBaseController
         $pembayaran = $this->pembayaranRepository->find($id);
 
         if (empty($pembayaran)) {
-            Flash::error('Pembayaran not found');
+            Flash::error('Pembayaran tidak ditemukan.');
 
             return redirect(route('pembayarans.index'));
         }
@@ -101,7 +101,7 @@ class PembayaranController extends AppBaseController
         $pembayaran = $this->pembayaranRepository->find($id);
 
         if (empty($pembayaran)) {
-            Flash::error('Pembayaran not found');
+            Flash::error('Pembayaran tidak ditemukan.');
 
             return redirect(route('pembayarans.index'));
         }
@@ -117,14 +117,14 @@ class PembayaranController extends AppBaseController
         $pembayaran = $this->pembayaranRepository->find($id);
 
         if (empty($pembayaran)) {
-            Flash::error('Pembayaran not found');
+            Flash::error('Pembayaran tidak ditemukan.');
 
             return redirect(route('pembayarans.index'));
         }
 
         $pembayaran = $this->pembayaranRepository->update_custom($request->all(), $id);
 
-        Flash::success('Pembayaran updated successfully.');
+        Flash::success('Pembayaran berhasil diubah.');
 
         return redirect(route('pembayarans.index'));
     }
@@ -139,14 +139,14 @@ class PembayaranController extends AppBaseController
         $pembayaran = $this->pembayaranRepository->find($id);
 
         if (empty($pembayaran)) {
-            Flash::error('Pembayaran not found');
+            Flash::error('Pembayaran tidak ditemukan.');
 
             return redirect(route('pembayarans.index'));
         }
 
         $this->pembayaranRepository->delete($id);
 
-        Flash::success('Pembayaran deleted successfully.');
+        Flash::success('Pembayaran bearhasil dihapus.');
 
         return redirect(route('pembayarans.index'));
     }
