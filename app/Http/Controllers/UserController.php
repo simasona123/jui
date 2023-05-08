@@ -53,7 +53,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
         
-        Flash::success('User saved successfully.');
+        Flash::success('Akun berhasil dibuat.');
         return redirect(route('users.index'));
     }
 
@@ -65,7 +65,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Akun tidak ditemukan.');
 
             return redirect(route('users.index'));
         }
@@ -88,7 +88,7 @@ class UserController extends AppBaseController
         $role = $user->getRoleNames();
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Akun tidak ditemukan.');
             return redirect(route('users.index'));
         }
 
@@ -107,13 +107,13 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Akun tidak ditemukan.');
             return redirect(route('users.index'));
         }
 
         $this->userRepository->update($request->all(), $id);
 
-        Flash::success('User updated successfully.');
+        Flash::success('Akun berhasil diubah.');
 
         return redirect(route('users.index'));
     }
@@ -128,7 +128,7 @@ class UserController extends AppBaseController
         $user = $this->userRepository->find($id);
 
         if (empty($user)) {
-            Flash::error('User not found');
+            Flash::error('Akun tidak ditemukan.');
 
             return redirect(route('users.index'));
         }
@@ -141,7 +141,7 @@ class UserController extends AppBaseController
             return redirect(route('users.index'));
         }
 
-        Flash::success('User deleted successfully.');
+        Flash::success('Akun berhasil dihapus.');
 
         return redirect(route('users.index'));
     }
@@ -167,7 +167,8 @@ class UserController extends AppBaseController
         ]);
 
         $this->userRepository->profil_update($user, $validated);
-
+        
+        Flash::success("Profil berhasil diubah");
         return redirect('/home');
     }
 }

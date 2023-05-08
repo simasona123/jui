@@ -50,7 +50,7 @@ class RekamMedisController extends AppBaseController
 
         $rekamMedis = $this->rekamMedisRepository->create($input);
 
-        Flash::success('Rekam Medis saved successfully.');
+        Flash::success('Rekam medis berhasil dibuat.');
 
         return redirect(route('rekamMedis.index'));
     }
@@ -65,7 +65,7 @@ class RekamMedisController extends AppBaseController
         dd($rekamMedis);
 
         if (empty($rekamMedis)) {
-            Flash::error('Rekam Medis not found');
+            Flash::error('Rekam medis tidak ditemukan.');
 
             return redirect(route('rekamMedis.index'));
         }
@@ -81,7 +81,7 @@ class RekamMedisController extends AppBaseController
         $rekamMedis = $this->rekamMedisRepository->find($id);
 
         if (empty($rekamMedis)) {
-            Flash::error('Rekam Medis not found');
+            Flash::error('Rekam medis tidak ditemukan.');
 
             return redirect(route('rekamMedis.index'));
         }
@@ -96,14 +96,14 @@ class RekamMedisController extends AppBaseController
     {
         $rekamMedis = $this->rekamMedisRepository->find($id);
         if (empty($rekamMedis)) {
-            Flash::error('Rekam Medis not found');
+            Flash::error('Rekam medis tidak ditemukan.');
 
             return redirect(route('rekamMedis.index'));
         }
 
         $rekamMedis = $this->rekamMedisRepository->update($request->all(), $id);
 
-        Flash::success('Rekam Medis updated successfully.');
+        Flash::success('Rekam medis berhasil diubah.');
 
         return redirect(route('rekamMedis.index'));
     }
@@ -118,14 +118,14 @@ class RekamMedisController extends AppBaseController
         $rekamMedis = $this->rekamMedisRepository->find($id);
 
         if (empty($rekamMedis)) {
-            Flash::error('Rekam Medis not found');
+            Flash::error('Rekam medis tidak ditemukan.');
 
             return redirect(route('rekamMedis.index'));
         }
 
         $this->rekamMedisRepository->delete($id);
 
-        Flash::success('Rekam Medis deleted successfully.');
+        Flash::success('Rekam berhasil dihapus.');
 
         return redirect(route('rekamMedis.index'));
     }
@@ -142,7 +142,7 @@ class RekamMedisController extends AppBaseController
             } return view('rekam_medis.edit', ["rekamMedis" => $rekam_medis]);
         }else{
             if($rekam_medis == null){
-                Flash::success('Rekam Medis Belum dibuat');
+                Flash::success('Rekam medis Belum dibuat');
                 return redirect(route('bookings.index'));
             } return view('rekam_medis.show', ["rekamMedis" => $rekam_medis]);
         }

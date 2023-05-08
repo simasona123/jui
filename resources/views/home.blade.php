@@ -2,6 +2,9 @@
 @section('content')
     <div class="row" style="padding-top: 20px; margin-left: 10px; margin-right: 10px;">
         <div class="col-sm-12">
+            @include('flash::message')
+        </div>
+        <div class="col-sm-12">
             <div class="card" style="padding: 20px;">
                 <div class="pemberitahuan d-flex flex-row align-items-center card-title justify-content-between" style="margin-bottom: 20px;">
                     <div class="d-flex flex-row align-items-center"><i class="fas fa-bell" style="margin-right: 10px;"></i>

@@ -51,7 +51,7 @@ class ReminderController extends AppBaseController
         
         $reminder = $this->reminderRepository->create($input);
 
-        Flash::success('Reminder saved successfully.');
+        Flash::success('Reminder baru berhasil disimpan.');
 
         return redirect(route('reminders.index'));
     }
@@ -64,7 +64,7 @@ class ReminderController extends AppBaseController
         $reminder = $this->reminderRepository->find($id);
 
         if (empty($reminder)) {
-            Flash::error('Reminder not found');
+            Flash::error('Reminder tidak ditemukan');
 
             return redirect(route('reminders.index'));
         }
@@ -80,7 +80,7 @@ class ReminderController extends AppBaseController
         $reminder = $this->reminderRepository->find($id);
 
         if (empty($reminder)) {
-            Flash::error('Reminder not found');
+            Flash::error('Reminder tidak ditemukan');
 
             return redirect(route('reminders.index'));
         }
@@ -96,14 +96,14 @@ class ReminderController extends AppBaseController
         $reminder = $this->reminderRepository->find($id);
 
         if (empty($reminder)) {
-            Flash::error('Reminder not found');
+            Flash::error('Reminder tidak ditemukan');
 
             return redirect(route('reminders.index'));
         }
 
         $reminder = $this->reminderRepository->update($request->all(), $id);
 
-        Flash::success('Reminder updated successfully.');
+        Flash::success('Reminder berhasil diubah.');
 
         return redirect(route('reminders.index'));
     }
@@ -118,14 +118,14 @@ class ReminderController extends AppBaseController
         $reminder = $this->reminderRepository->find($id);
 
         if (empty($reminder)) {
-            Flash::error('Reminder not found');
+            Flash::error('Reminder tidak ditemukan');
 
             return redirect(route('reminders.index'));
         }
 
         $this->reminderRepository->delete($id);
 
-        Flash::success('Reminder deleted successfully.');
+        Flash::success('Reminder berhasil dihapus.');
 
         return redirect(route('reminders.index'));
     }

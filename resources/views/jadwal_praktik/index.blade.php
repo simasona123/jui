@@ -8,10 +8,12 @@
                     <h1>Jadwal Praktik</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('jadwal-praktik.create') }}">
-                        Tambah
-                    </a>
+                    @role('administrator|manajer')
+                        <a class="btn btn-primary float-right"
+                        href="{{ route('jadwal-praktik.create') }}">
+                            Tambah
+                        </a>
+                    @endrole
                 </div>
             </div>
         </div>

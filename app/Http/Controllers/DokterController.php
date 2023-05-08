@@ -48,7 +48,7 @@ class DokterController extends AppBaseController
             return redirect(route('dokter.index'));
         }
 
-        Flash::success('Dokter saved successfully.');
+        Flash::success('Dokter tersimpan.');
 
         return redirect(route('dokter.index'));
     }
@@ -61,7 +61,7 @@ class DokterController extends AppBaseController
         $dokter = $this->dokterRepository->find($id);
 
         if (empty($dokter)) {
-            Flash::error('Dokter not found');
+            Flash::error('Dokter tidak ditemukan.');
 
             return redirect(route('dokter.index'));
         }
@@ -79,7 +79,7 @@ class DokterController extends AppBaseController
         $user = User::find($dokter->user_id);
 
         if (empty($dokter)) {
-            Flash::error('Dokter not found');
+            Flash::error('Dokter tidak ditemukan.');
 
             return redirect(route('dokter.index'));
         }
@@ -98,14 +98,14 @@ class DokterController extends AppBaseController
         $dokter = $this->dokterRepository->find($id);
 
         if (empty($dokter)) {
-            Flash::error('Dokter not found');
+            Flash::error('Dokter tidak ditemukan.');
 
             return redirect(route('dokter.index'));
         }
 
         $dokter = $this->dokterRepository->update_with_image($request, $id);
 
-        Flash::success('Dokter updated successfully.');
+        Flash::success('Dokter berhasil diubah.');
 
         return redirect(route('dokter.index'));
     }
@@ -120,14 +120,14 @@ class DokterController extends AppBaseController
         $dokter = $this->dokterRepository->find($id);
 
         if (empty($dokter)) {
-            Flash::error('Dokter not found');
+            Flash::error('Dokter tidak ditemukan.');
 
             return redirect(route('dokter.index'));
         }
 
         $this->dokterRepository->delete($id);
 
-        Flash::success('Dokter deleted successfully.');
+        Flash::success('Dokter berhasil dihapus.');
 
         return redirect(route('dokter.index'));
     }

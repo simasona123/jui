@@ -45,7 +45,7 @@ class PasienController extends AppBaseController
 
         $pasien = $this->pasienRepository->create_with_image($input);
 
-        Flash::success('Pasien saved successfully.');
+        Flash::success('Pasien telah disimpan.');
 
         return redirect(route('pasien.index'));
     }
@@ -61,7 +61,7 @@ class PasienController extends AppBaseController
 
 
         if (empty($pasien)) {
-            Flash::error('Pasien not found');
+            Flash::error('Pasien tidak ditemukan.');
 
             return redirect(route('pasien.index'));
         }
@@ -82,7 +82,7 @@ class PasienController extends AppBaseController
         $klien = User::find($pasien->user_id);
 
         if (empty($pasien)) {
-            Flash::error('Pasien not found');
+            Flash::error('Pasien tidak ditemukan.');
 
             return redirect(route('pasien.index'));
         }
@@ -101,7 +101,7 @@ class PasienController extends AppBaseController
         $pasien = $this->pasienRepository->find($id);
 
         if (empty($pasien)) {
-            Flash::error('Pasien not found');
+            Flash::error('Pasien tidak ditemukan.');
 
             return redirect(route('pasien.index'));
         }
@@ -124,7 +124,7 @@ class PasienController extends AppBaseController
                 ->toMediaCollection();
         }
 
-        Flash::success('Pasien updated successfully.');
+        Flash::success('Pasien telah diubah.');
 
         return redirect(route('pasien.index'));
     }
@@ -139,7 +139,7 @@ class PasienController extends AppBaseController
         $pasien = $this->pasienRepository->find($id);
 
         if (empty($pasien)) {
-            Flash::error('Pasien not found');
+            Flash::error('Pasien tidak ditemukan.');
 
             return redirect(route('pasien.index'));
         }
@@ -151,7 +151,7 @@ class PasienController extends AppBaseController
             $pasien->save();
         }
 
-        Flash::success('Pasien deleted successfully.');
+        Flash::success('Pasien berhasil dihapus.');
 
         return redirect(route('pasien.index'));
     }
