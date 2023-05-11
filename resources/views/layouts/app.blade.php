@@ -1,7 +1,7 @@
 <x-laravel-ui-adminlte::adminlte-layout>
     @php
         $media = Auth::user()->getMedia();
-        $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+        $image_url = count($media) == 0 ? "/assets/img/logo-jui-ig.webp" : $media[0]->getUrl('preview');
     @endphp
 
     <script src="https://unpkg.com/alpinejs" defer></script>

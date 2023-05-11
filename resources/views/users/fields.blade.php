@@ -23,6 +23,7 @@
 <div class="form-group col-sm-6">
     {!! Form::label('phone', 'No. Telepon:') !!} <span class="required">*</span>
     {!! Form::text('phone', null, ['class' => 'form-control']) !!}
+    <span class="text-muted">Contoh: 085211909020</span>
 </div>
 
 <div class="form-group col-sm-6">

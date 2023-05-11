@@ -1,7 +1,7 @@
 <!-- User Id Field -->
 @php
     $media = $pasien->getMedia();
-    $image_url = count($media) == 0 ? "http://bmkg.go.id/asset/img/logo/logo-bmkg.png" : $media[0]->getUrl('preview');
+    $image_url = count($media) == 0 ? "/assets/img/pic1.jpeg" : $media[0]->getUrl('preview');
 @endphp
 <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">

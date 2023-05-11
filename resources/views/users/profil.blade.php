@@ -39,6 +39,7 @@
                     <div class="form-group col-sm-6">
                         <label for="phone">Nomor HP:</label> <span class="required">*</span>
                         <input class="form-control" name="phone" type="phone" id="phone" value="{{$user->phone}}" required>
+                        <span class="text-muted">Contoh: 085211909020</span>
                     </div>
 
                     <div class="form-group col-sm-6"> 
