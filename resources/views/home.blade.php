@@ -10,9 +10,6 @@
                     <div class="d-flex flex-row align-items-center"><i class="fas fa-bell" style="margin-right: 10px;"></i>
                         <h5 style="margin-bottom:0px;">Temu Janji Dokter</h5>
                     </div>
-                    <a href="/pemberitahuan">
-                        <button id="tandai-semua" type="button" class="btn btn-primary" style="margin-right: .75rem;">Tandai Semua</button>
-                    </a>
                 </div>
                 <table class="table table-hover">
                     <thead>
