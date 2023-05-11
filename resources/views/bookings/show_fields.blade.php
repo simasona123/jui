@@ -6,8 +6,14 @@
           <h3 class="mb-3">{{ $booking->kode_booking }}</h3>
           <p class="small mb-0"><i class="fas fa-user-md"></i><span class="mx-2">|</span>
             <strong>{{$booking->pasien->nama_hewan}}</strong> Diperiksa oleh
-            <strong>{{$booking->jadwal_praktik->dokter->user->full_name}}</strong> pada {{$booking->jadwal_praktik->tanggal_masuk->format('d-m-Y')}}</p>
-          <hr class="my-4">
+            <strong>{{$booking->jadwal_praktik->dokter->user->full_name}}</strong> pada {{$booking->jadwal_praktik->tanggal_masuk->format('d-m-Y')}}
+          </p>
+          <p class="small mt-2">
+            <strong>{{$booking->pasien->user->full_name}}</strong> ({{$booking->pasien->user->phone}})
+            <br>
+            Alamat: <strong>{{$booking->pasien->user->address}}</strong> 
+          </p>
+          <hr class="my-2">
           <div class="d-flex justify-content-start align-items-center">
             <p class="mb-0 text-uppercase"><i class="fas fa-calendar-check"></i> 
               <span
@@ -27,3 +33,5 @@
     </div>
   </div>
 </div>
+
+{{$booking->pasien->user}}
